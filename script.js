@@ -4,8 +4,32 @@ function playSound() {
     clickSound.play().catch(e => {});
 }
 
-// Authentic BIOS Boot Trigger
-document.getElementById('boot-screen').addEventListener('click', () => {
+// Boot Sequence Animation & Timing
+const bootStatus = document.getElementById('boot-status');
+const heartContainer = document.getElementById('heart-container');
+const clickSound = document.getElementById('click-sound');
+
+function playSound() {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(e => {});
+}
+
+// Animate loading dots for 5 seconds
+let dots = 0;
+const loadingInterval = setInterval(() => {
+    dots = (dots + 1) % 5;
+    bootStatus.innerText = "Booting Windose20" + ".".repeat(dots + 1);
+}, 600);
+
+// After 5 seconds, finish booting and show the interactive heart button
+setTimeout(() => {
+    clearInterval(loadingInterval);
+    bootStatus.innerText = "Booting Windose20...................... [READY]";
+    heartContainer.classList.remove('hidden');
+}, 5000);
+
+// Click heart button to enter desktop
+document.getElementById('enter-heart-btn').addEventListener('click', () => {
     playSound();
     document.getElementById('boot-screen').classList.add('hidden');
     document.getElementById('desktop').classList.remove('hidden');
