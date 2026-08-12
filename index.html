@@ -182,6 +182,264 @@
     </div>
 
     <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
+
+    <!-- INLINE SCRIPT TO GUARANTEE EXECUTION & PREVENT LOADING ERRORS -->
+    <script>
+        const clickSound = document.getElementById('click-sound');
+        function playSound() {
+            if (clickSound) {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => {});
+            }
+        }
+
+        // Automatic 5-second boot sequence animation with bottom-left positioning & dots
+        const bootStatus = document.getElementById('boot-status');
+        let dots = 0;
+        const loadingInterval = setInterval(() => {
+            dots = (dots + 1) % 5;
+            if (bootStatus) {
+                bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
+            }
+        }, 600);
+
+        // After exactly 5 seconds, clear animation and enter desktop automatically
+        setTimeout(() => {
+            clearInterval(loadingInterval);
+            const bootScreen = document.getElementById('boot-screen');
+            const desktop = document.getElementById('desktop');
+            if (bootScreen) bootScreen.classList.add('hidden');
+            if (desktop) desktop.classList.remove('hidden');
+            playSound();
+        }, 5000);
+
+        // Live Clocks
+        setInterval(() => {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            const liveClock = document.getElementById('live-clock');
+            const taskbarClock = document.getElementById('taskbar-clock');
+            const dateText = document.getElementById('date-text');
+
+            if (liveClock) liveClock.innerText = timeStr;
+            if (taskbarClock) taskbarClock.innerText = timeStr;
+            
+            if (dateText) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                dateText.innerText = now.toLocaleDateString('en-US', options);
+            }
+        }, 1000);
+
+        // Open App function
+        function openApp(windowId) {
+            playSound();
+            const win = document.getElementById(windowId);
+            if (win) {
+                win.classList.remove('hidden');
+                win.style.zIndex = String(Date.now());
+            }
+        }
+
+        // Close Window buttons
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                playSound();
+                const target = btn.getAttribute('data-target');
+                const win = document.getElementById(target);
+                if (win) win.classList.add('hidden');
+            });
+        });
+
+        // Window Dragging functionality
+        document.querySelectorAll('.draggable-window').forEach(windowEl => {
+            const titleBar = windowEl.querySelector('.title-bar');
+            if (!titleBar) return;
+            let isDragging = false;
+            let startX, startY;
+
+            titleBar.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX - windowEl.offsetLeft;
+                startY = e.clientY - windowEl.offsetTop;
+                windowEl.style.zIndex = String(Date.now());
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                windowEl.style.left = (e.clientX - startX) + 'px';
+                windowEl.style.top = (e.clientY - startY) + 'px';
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        });
+
+        // JINE Dialogue cycles
+        const dialogueLines = [
+            "\"Apparently with this -credit card- thing we can buy anything we want? Let's give it a spin!\"",
+            "\"Check out my resume and projects window, senpai~\"",
+            "\"Pressing buttons releases happy chemicals!\"",
+            "\"BBA Business Analytics student ready for deployment!\""
+        ];
+
+        setInterval(() => {
+            const jineDialogue = document.getElementById('jine-dialogue');
+            if (jineDialogue) {
+                const line = dialogueLines[Math.floor(Math.random() * dialogueLines.length)];
+                jineDialogue.innerText = line;
+            }
+        }, 8000);
+    </script>
+</body>
+</html>                <div class="calendar-display">
+                    <span id="date-text">November 12, 2007</span>
+                    <h2 id="live-clock">00:00:00</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 2: WEBCAM / VISUAL NOVEL -->
+        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 320px; width: 380px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Webcam // Adhithya Suresh</div>
+                <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
+            </div>
+            <div class="window-body webcam-body">
+                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
+            </div>
+        </div>
+
+        <!-- WINDOW 3: TASK MANAGER (BI Metrics & Resume Quicklinks) -->
+        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; left: 720px; width: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Task Manager // BI Metrics</div>
+                <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
+            </div>
+            <div class="window-body">
+                <div class="stat-row"><span>Analytics Focus</span><strong>Data Automation</strong></div>
+                <hr>
+                <div class="stat-row"><span>ITM University CGPA</span><strong>9.95 / 10</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📄 Resume.txt</span><strong>[OPEN]</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 Projects.exe</span><strong>[OPEN]</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 Certifications</span><strong>[OPEN]</strong></div>
+            </div>
+        </div>
+
+        <!-- WINDOW 4: JINE MESSENGER (Interactive Dialogue) -->
+        <div class="nso-window draggable-window" id="jine-win" style="top: 360px; left: 720px; width: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">JINE // AI Assistant</div>
+                <div class="window-controls"><button class="close-btn" data-target="jine-win">×</button></div>
+            </div>
+            <div class="window-body jine-body">
+                <div class="jine-message-box">
+                    <p id="jine-dialogue">"Welcome to my elite business intelligence portfolio! Click the task manager items or press Ctrl+K to navigate~"</p>
+                </div>
+                <div class="jine-reactions">
+                    <button class="reaction-btn">LOVE</button>
+                    <button class="reaction-btn">OK</button>
+                    <button class="reaction-btn">OMG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- APP WINDOWS -->
+        
+        <!-- RESUME WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 150px; width: 480px; height: 400px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Resume.txt</div>
+                <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>Adhithya Suresh</h3>
+                <p><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
+                <hr>
+                <h4>Academic Credentials</h4>
+                <ul>
+                    <li><strong>Degree:</strong> Bachelor of Business Administration (BBA) - Business Analytics</li>
+                    <li><strong>Institution:</strong> ITM Skills University</li>
+                    <li><strong>CGPA:</strong> 9.95 / 10.0</li>
+                </ul>
+                <h4>Technical Qualifications</h4>
+                <p>Python, MySQL, MS Office, HTML, CSS</p>
+                <h4>Experience / NGO Project</h4>
+                <p><strong>Manapravah Foundation (2026):</strong> Planned donation drives and campus-wide mental health awareness initiatives.</p>
+                <h4>Positions of Responsibility</h4>
+                <p>General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
+            </div>
+        </div>
+
+        <!-- PROJECTS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 200px; width: 450px; height: 360px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Projects.exe</div>
+                <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>GitHub Repositories & BI Workflows</h3>
+                <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
+                    <strong>NeedyWebUI Portfolio Core</strong>
+                    <p>Interactive web UI architecture port.</p>
+                </a>
+                <a href="https://github.com/" target="_blank" class="nso-link-card">
+                    <strong>Business Analytics Data Pipelines</strong>
+                    <p>Python and MySQL automated data analysis tools.</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- CERTIFICATIONS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 250px; width: 440px; height: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Certifications.url</div>
+                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>Verified Credentials</h3>
+                <ul class="cert-list">
+                    <li><a href="https://www.coursera.org" target="_blank">Fintech Olympiad 2025 Module Completion</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank">Python for Everybody - University of Michigan</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank">Introduction to Data Analytics - IBM</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DESKTOP SHORTCUT ICONS -->
+        <div class="desktop-shortcuts">
+            <div class="shortcut-icon" onclick="openApp('resume-win')">
+                <span>📄</span>
+                <label>Resume</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('projects-win')">
+                <span>💻</span>
+                <label>Projects</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('certs-win')">
+                <span>🏆</span>
+                <label>Certificates</label>
+            </div>
+        </div>
+
+        <!-- TASKBAR -->
+        <div class="nso-taskbar">
+            <div class="taskbar-left">
+                <button class="start-menu-btn" onclick="alert('Command Center Ready.')">Start</button>
+                <span class="taskbar-divider">|</span>
+                <span class="active-app-indicator">ACTIVE: BI_ANALYTICS_DESKTOP</span>
+            </div>
+            <div class="taskbar-right">
+                <span id="taskbar-clock">00:00:00</span>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
