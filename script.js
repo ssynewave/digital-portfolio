@@ -4,8 +4,8 @@ function playSound() {
     clickSound.play().catch(e => {});
 }
 
-// Boot sequence
-document.getElementById('start-btn').addEventListener('click', () => {
+// Authentic BIOS Boot Trigger
+document.getElementById('boot-screen').addEventListener('click', () => {
     playSound();
     document.getElementById('boot-screen').classList.add('hidden');
     document.getElementById('desktop').classList.remove('hidden');
