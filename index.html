@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADHI.EXE - Digital Portfolio</title>
-    <!-- NeedyWebUI CSS CDN -->
+    <title>ssynewave.exe</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@main/nso_ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- BOOT / START SCREEN -->
+    <!-- BOOT SCREEN -->
     <div id="boot-screen">
         <div class="boot-content">
             <h1>JINE OS v4.0</h1>
-            <p>INITIALIZING SYSTEM ASSETS...</p>
-            <p>LOADING PROFILE: ADHITHYA SURESH...</p>
+            <p>INITIALIZING DESKTOP ASSETS...</p>
             <button id="start-btn" class="nso-btn">PRESS START TO BOOT</button>
         </div>
     </div>
@@ -23,18 +21,164 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- Taskbar -->
-        <div class="nso-taskbar">
-            <div class="taskbar-left">
-                <button class="nso-start-menu-btn" id="taskbar-start">MENU</button>
-                <span class="taskbar-title">ADHI_OS // LIVE DESKTOP</span>
+        <!-- WINDOW 1: CALENDAR & CLOCK -->
+        <div class="nso-window draggable-window" id="calendar-win" style="top: 20px; left: 20px; width: 280px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Calendar</div>
+                <div class="window-controls"><button class="close-btn" data-target="calendar-win">×</button></div>
             </div>
-            <div class="taskbar-right">
-                <span id="live-clock">00:00:00</span>
+            <div class="window-body">
+                <div class="calendar-display">
+                    <span id="date-text">November 12, 2007</span>
+                    <h2 id="live-clock">00:00:00</h2>
+                </div>
             </div>
         </div>
 
-        <!-- Desktop Icons / Shortcuts -->
+        <!-- WINDOW 2: WEBCAM / VISUAL NOVEL -->
+        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 320px; width: 380px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Webcam</div>
+                <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
+            </div>
+            <div class="window-body webcam-body">
+                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
+            </div>
+        </div>
+
+        <!-- WINDOW 3: TASK MANAGER (Stats & Resume Quicklinks) -->
+        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; left: 720px; width: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Task Manager</div>
+                <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
+            </div>
+            <div class="window-body">
+                <div class="stat-row"><span>Screen Time</span><strong>03:01</strong></div>
+                <hr>
+                <div class="stat-row"><span>BBA Analytics</span><strong>9.95 CGPA</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📄 Resume.txt</span><strong>[OPEN]</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 Projects.exe</span><strong>[OPEN]</strong></div>
+                <hr>
+                <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 Certifications</span><strong>[OPEN]</strong></div>
+            </div>
+        </div>
+
+        <!-- WINDOW 4: JINE MESSENGER (Dialogue / About Me) -->
+        <div class="nso-window draggable-window" id="jine-win" style="top: 360px; left: 720px; width: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">JINE</div>
+                <div class="window-controls"><button class="close-btn" data-target="jine-win">×</button></div>
+            </div>
+            <div class="window-body jine-body">
+                <div class="jine-message-box">
+                    <p id="jine-dialogue">"Welcome to my digital space! Check out my stats or click the task manager items to see my resume~"</p>
+                </div>
+                <div class="jine-reactions">
+                    <button class="reaction-btn">LOVE</button>
+                    <button class="reaction-btn">OK</button>
+                    <button class="reaction-btn">OMG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HIDDEN APP WINDOWS (Opened via Task Manager) -->
+        
+        <!-- RESUME WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 150px; width: 450px; height: 380px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Resume.txt</div>
+                <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>Adhithya Suresh</h3>
+                <p><strong>BBA Business Analytics | ITM Skills University (2025-2028)</strong></p>
+                <hr>
+                <h4>Education</h4>
+                <ul>
+                    <li><strong>BBA:</strong> ITM Skills University (CGPA: 9.95)</li>
+                </ul>
+                <h4>Technical Skills</h4>
+                <p>Python, MySQL, MS Office, HTML, CSS</p>
+                <h4>Experience / NGO Project</h4>
+                <p><strong>Manapravah Foundation Internship (2026):</strong> Planned donation drives, managed campus mental health awareness & event logistics.</p>
+                <h4>Positions of Responsibility</h4>
+                <p>General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
+            </div>
+        </div>
+
+        <!-- PROJECTS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 200px; width: 420px; height: 340px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Projects.exe</div>
+                <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>GitHub Repositories</h3>
+                <p>Explore my active source code and projects:</p>
+                <a href="https://github.com/ArThirtyFour" target="_blank" class="nso-link-card">
+                    <strong>NeedyWebUI Base Project</strong>
+                    <p>Interactive web port framework exploration.</p>
+                </a>
+                <a href="https://github.com/" target="_blank" class="nso-link-card">
+                    <strong>Data Analytics Repository</strong>
+                    <p>Python and MySQL queries and workflow notebooks.</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- CERTIFICATIONS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 250px; width: 420px; height: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Certifications.url</div>
+                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>Coursera & Verified Credentials</h3>
+                <p>Click any title to open the verification link directly:</p>
+                <ul class="cert-list">
+                    <li><a href="https://www.coursera.org" target="_blank">Fintech Olympiad 2025 Module Completion</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank">Python for Everybody - University of Michigan</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank">Introduction to Data Analytics - IBM</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DESKTOP SHORTCUT ICONS -->
+        <div class="desktop-shortcuts">
+            <div class="shortcut-icon" onclick="openApp('resume-win')">
+                <span>📄</span>
+                <label>Resume</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('projects-win')">
+                <span>💻</span>
+                <label>Projects</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('certs-win')">
+                <span>🏆</span>
+                <label>Certificates</label>
+            </div>
+        </div>
+
+        <!-- TASKBAR -->
+        <div class="nso-taskbar">
+            <div class="taskbar-left">
+                <button class="start-menu-btn">Start</button>
+                <span class="taskbar-divider">|</span>
+                <span class="active-app-indicator">ACTIVE: DESKTOP_VIEW</span>
+            </div>
+            <div class="taskbar-right">
+                <span id="taskbar-clock">00:00:00</span>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>        <!-- Desktop Icons / Shortcuts -->
         <div class="desktop-icons">
             <div class="desktop-icon" data-target="resume-window">
                 <div class="icon-img">📄</div>
@@ -60,7 +204,7 @@
                     <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
                 </div>
                 <div class="dialogue-box">
-                    <span id="speaker-name">ADHI-CHAN</span>
+                    <span id="speaker-name">Adi</span>
                     <p id="dialogue-text">"Welcome to my portfolio! Check out my desktop icons, senpai~"</p>
                 </div>
             </div>
@@ -81,8 +225,6 @@
                 <h3>Education</h3>
                 <ul>
                     <li><strong>BBA:</strong> ITM Skills University (CGPA: 9.95 / 2025)</li>
-                    <li><strong>A-Levels:</strong> Dr. Pillai Global Academy (Grade D / 2025)</li>
-                    <li><strong>X:</strong> Mahatma International School (70% / 2023)</li>
                 </ul>
                 <h3>Technical Qualifications</h3>
                 <p>Python, MySQL, MS Office, HTML, CSS</p>
