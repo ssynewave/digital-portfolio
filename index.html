@@ -3,9 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADHI.BI // Executive Business Intelligence Portfolio</title>
+    <title>ADHI.EXE // Needy Streamer Overload Desktop</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@main/nso_ui.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #d0e8ff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .hidden { display: none !important; }
+
+        /* AUTHENTIC NSO BIOS BOOT SCREEN */
+        #boot-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000000;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 40px;
+            box-sizing: border-box;
+            z-index: 9999;
+        }
+        .bios-content p { margin: 4px 0; line-height: 1.2; }
+
+        /* EXACT DESKTOP BACKGROUND FROM NSO GAME */
+        #desktop {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: url('https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/background/bg_day.png') no-repeat center center fixed;
+            background-size: cover;
+            image-rendering: pixelated;
+        }
+
+        /* WINDOW STYLING MATCHING GAME SHENANIGANS */
+        .nso-window {
+            position: absolute;
+            background: #fcf1f7;
+            border: 2px solid #7c6fd6;
+            box-shadow: 3px 3px 0px rgba(80, 50, 120, 0.3);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+        .title-bar {
+            background: #b4a5e8;
+            color: #2b1b42;
+            padding: 3px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: move;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .window-controls button {
+            background: #8e7ec9;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 4px;
+            font-size: 10px;
+        }
+        .window-body {
+            padding: 10px;
+            color: #3b2a56;
+            font-size: 12px;
+            overflow-y: auto;
+        }
+
+        /* WEBCAM WINDOW (TOP CENTER-LEFT) */
+        #webcam-win {
+            top: 15px;
+            left: 210px;
+            width: 400px;
+        }
+        .webcam-body {
+            padding: 0;
+            background: #000;
+            text-align: center;
+        }
+        #pixel-avatar {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            image-rendering: pixelated;
+            display: block;
+        }
+
+        /* TASK MANAGER WINDOW (TOP RIGHT) */
+        #taskman-win {
+            top: 15px;
+            left: 630px;
+            width: 270px;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            font-size: 11px;
+        }
+        .stat-val {
+            color: #7c6fd6;
+            font-weight: bold;
+        }
+        .clickable-stat {
+            cursor: pointer;
+            color: #5946b9;
+        }
+        .clickable-stat:hover { text-decoration: underline; }
+
+        /* DESKTOP ICON GRID (MIDDLE) */
+        .desktop-shortcuts {
+            position: absolute;
+            top: 250px;
+            left: 220px;
+            display: flex;
+            gap: 25px;
+        }
+        .shortcut-icon {
+            width: 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .shortcut-icon span {
+            font-size: 28px;
+            display: block;
+        }
+        .shortcut-icon label {
+            color: #2b1b42;
+            font-size: 10px;
+            font-weight: bold;
+            display: block;
+            margin-top: 2px;
+            background: rgba(255,255,255,0.6);
+            padding: 1px 3px;
+        }
+
+        /* RIGHT STREAM CHAT LOGS (JINE / CHAT FEED) */
+        .chat-feed {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 50;
+        }
+        .chat-bubble {
+            background: #62c370;
+            color: white;
+            font-size: 11px;
+            padding: 5px 8px;
+            border-radius: 2px;
+            border: 1px solid #3d8a4a;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* APP WINDOWS */
+        .app-window {
+            background: #fff;
+            border: 2px solid #7c6fd6;
+        }
+        .nso-link-card {
+            display: block;
+            background: #f0ebff;
+            border: 1px solid #b4a5e8;
+            padding: 6px;
+            margin-bottom: 6px;
+            color: #2b1b42;
+            text-decoration: none;
+            font-size: 11px;
+        }
+        .nso-link-card:hover { background: #e2d9ff; }
+        .cert-list li { margin-bottom: 4px; font-size: 11px; }
+        .cert-list a { color: #5946b9; }
+
+        /* TASKBAR BOTTOM */
+        .nso-taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: #d8cceb;
+            border-top: 2px solid #7c6fd6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            box-sizing: border-box;
+            z-index: 2000;
+            color: #2b1b42;
+            font-size: 11px;
+        }
+        .start-menu-btn {
+            background: #7c6fd6;
+            border: none;
+            color: white;
+            padding: 2px 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,24 +245,10 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- WINDOW 1: CALENDAR & CLOCK -->
-        <div class="nso-window draggable-window" id="calendar-win" style="top: 20px; left: 20px; width: 280px;">
+        <!-- WINDOW 1: WEBCAM -->
+        <div class="nso-window draggable-window" id="webcam-win">
             <div class="title-bar">
-                <div class="title-bar-text">Calendar</div>
-                <div class="window-controls"><button class="close-btn" data-target="calendar-win">×</button></div>
-            </div>
-            <div class="window-body">
-                <div class="calendar-display">
-                    <span id="date-text">November 12, 2007</span>
-                    <h2 id="live-clock">00:00:00</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- WINDOW 2: WEBCAM / VISUAL NOVEL -->
-        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 320px; width: 380px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Webcam // Adhithya Suresh</div>
+                <div class="title-bar-text">Webcam</div>
                 <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
             </div>
             <div class="window-body webcam-body">
@@ -52,97 +256,85 @@
             </div>
         </div>
 
-        <!-- WINDOW 3: TASK MANAGER (BI Metrics & Resume Quicklinks) -->
-        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; left: 720px; width: 320px;">
+        <!-- WINDOW 2: TASK MANAGER -->
+        <div class="nso-window draggable-window" id="taskman-win">
             <div class="title-bar">
-                <div class="title-bar-text">Task Manager // BI Metrics</div>
+                <div class="title-bar-text">Task Manager</div>
                 <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
             </div>
             <div class="window-body">
-                <div class="stat-row"><span>Analytics Focus</span><strong>Data Automation</strong></div>
-                <hr>
-                <div class="stat-row"><span>ITM University CGPA</span><strong>9.95 / 10</strong></div>
-                <hr>
+                <div class="stat-row"><span>Screen Time</span><strong class="stat-val">03:01</strong></div>
+                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
+                <div class="stat-row"><span>ITM University CGPA</span><strong class="stat-val">9.95 / 10</strong></div>
+                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
                 <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📄 Resume.txt</span><strong>[OPEN]</strong></div>
-                <hr>
+                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
                 <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 Projects.exe</span><strong>[OPEN]</strong></div>
-                <hr>
+                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
                 <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 Certifications</span><strong>[OPEN]</strong></div>
             </div>
         </div>
 
-        <!-- WINDOW 4: JINE MESSENGER (Interactive Dialogue) -->
-        <div class="nso-window draggable-window" id="jine-win" style="top: 360px; left: 720px; width: 320px;">
-            <div class="title-bar">
-                <div class="title-bar-text">JINE // AI Assistant</div>
-                <div class="window-controls"><button class="close-btn" data-target="jine-win">×</button></div>
-            </div>
-            <div class="window-body jine-body">
-                <div class="jine-message-box">
-                    <p id="jine-dialogue">"Welcome to my elite business intelligence portfolio! Click the task manager items or press Ctrl+K to navigate~"</p>
-                </div>
-                <div class="jine-reactions">
-                    <button class="reaction-btn">LOVE</button>
-                    <button class="reaction-btn">OK</button>
-                    <button class="reaction-btn">OMG</button>
-                </div>
-            </div>
+        <!-- RIGHT SIDE STREAM CHAT LOGS -->
+        <div class="chat-feed">
+            <div class="chat-bubble">good morning it's a...</div>
+            <div class="chat-bubble">oh well anyway, sch...</div>
+            <div class="chat-bubble">but lets start snai...</div>
+            <div class="chat-bubble">and as you know, in...</div>
+            <div class="chat-bubble">so you need to tell...</div>
+            <div class="chat-bubble">so ill do everythin...</div>
+            <div class="chat-bubble">i have complete fai...</div>
+            <div class="chat-bubble">coz if not, s... i thi...</div>
         </div>
 
         <!-- APP WINDOWS -->
-        
-        <!-- RESUME WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 150px; width: 480px; height: 400px;">
+        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 180px; width: 440px; height: 350px;">
             <div class="title-bar">
                 <div class="title-bar-text">Resume.txt</div>
                 <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
             </div>
-            <div class="window-body scrollable">
-                <h3>Adhithya Suresh</h3>
-                <p><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
+            <div class="window-body scrollable" style="max-height: 300px;">
+                <h3 style="margin: 0 0 5px 0;">Adhithya Suresh</h3>
+                <p style="margin: 0 0 10px 0;"><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
                 <hr>
-                <h4>Academic Credentials</h4>
-                <ul>
-                    <li><strong>Degree:</strong> Bachelor of Business Administration (BBA) - Business Analytics</li>
-                    <li><strong>Institution:</strong> ITM Skills University</li>
-                    <li><strong>CGPA:</strong> 9.95 / 10.0</li>
+                <h4 style="margin: 5px 0;">Academic Credentials</h4>
+                <ul style="margin: 0; padding-left: 15px;">
+                    <li><strong>CGPA:</strong> 9.95 / 10.0 at ITM Skills University</li>
                 </ul>
-                <h4>Technical Qualifications</h4>
-                <p>Python, MySQL, MS Office, HTML, CSS</p>
-                <h4>Experience / NGO Project</h4>
-                <p><strong>Manapravah Foundation (2026):</strong> Planned donation drives and campus-wide mental health awareness initiatives.</p>
-                <h4>Positions of Responsibility</h4>
-                <p>General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
+                <h4 style="margin: 8px 0 3px 0;">Technical Qualifications</h4>
+                <p style="margin: 0;">Python, MySQL, MS Office, HTML, CSS</p>
+                <h4 style="margin: 8px 0 3px 0;">Experience / NGO Project</h4>
+                <p style="margin: 0;"><strong>Manapravah Foundation (2026):</strong> Planned donation drives and mental health awareness campaigns.</p>
+                <h4 style="margin: 8px 0 3px 0;">Positions of Responsibility</h4>
+                <p style="margin: 0;">General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
             </div>
         </div>
 
-        <!-- PROJECTS WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 200px; width: 450px; height: 360px;">
+        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 220px; width: 400px; height: 320px;">
             <div class="title-bar">
                 <div class="title-bar-text">Projects.exe</div>
                 <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
             </div>
-            <div class="window-body scrollable">
-                <h3>GitHub Repositories & BI Workflows</h3>
+            <div class="window-body scrollable" style="max-height: 270px;">
+                <h3 style="margin: 0 0 5px 0;">GitHub Repositories</h3>
                 <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
                     <strong>NeedyWebUI Portfolio Core</strong>
-                    <p>Interactive web UI architecture port.</p>
+                    <p style="margin: 2px 0 0 0;">Interactive web UI architecture port.</p>
                 </a>
                 <a href="https://github.com/" target="_blank" class="nso-link-card">
                     <strong>Business Analytics Data Pipelines</strong>
-                    <p>Python and MySQL automated data analysis tools.</p>
+                    <p style="margin: 2px 0 0 0;">Python and MySQL automated data analysis tools.</p>
                 </a>
             </div>
         </div>
 
-        <!-- CERTIFICATIONS WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 250px; width: 440px; height: 320px;">
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 260px; width: 380px; height: 280px;">
             <div class="title-bar">
                 <div class="title-bar-text">Certifications.url</div>
                 <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
             </div>
-            <div class="window-body scrollable">
-                <h3>Verified Credentials</h3>
+            <div class="window-body scrollable" style="max-height: 230px;">
+                <h3 style="margin: 0 0 5px 0;">Verified Credentials</h3>
                 <ul class="cert-list">
                     <li><a href="https://www.coursera.org" target="_blank">Fintech Olympiad 2025 Module Completion</a></li>
                     <li><a href="https://www.coursera.org" target="_blank">Python for Everybody - University of Michigan</a></li>
@@ -151,28 +343,40 @@
             </div>
         </div>
 
-        <!-- DESKTOP SHORTCUT ICONS -->
+        <!-- DESKTOP SHORTCUT ICONS MATCHING SCREENSHOT -->
         <div class="desktop-shortcuts">
             <div class="shortcut-icon" onclick="openApp('resume-win')">
-                <span>📄</span>
-                <label>Resume</label>
+                <span>📁</span>
+                <label>Stream</label>
             </div>
-            <div class="shortcut-icon" onclick="openApp('projects-win')">
-                <span>💻</span>
-                <label>Projects</label>
+            <div class="shortcut-icon" onclick="openApp('resume-win')">
+                <span>🎨</span>
+                <label>Hang Out</label>
             </div>
             <div class="shortcut-icon" onclick="openApp('certs-win')">
-                <span>🏆</span>
-                <label>Certificates</label>
+                <span>⏰</span>
+                <label>Sleep</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('projects-win')">
+                <span>💊</span>
+                <label>Medication</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('projects-win')">
+                <span>🌐</span>
+                <label>Internet</label>
+            </div>
+            <div class="shortcut-icon" onclick="openApp('resume-win')">
+                <span>💬</span>
+                <label>JINE</label>
             </div>
         </div>
 
         <!-- TASKBAR -->
         <div class="nso-taskbar">
             <div class="taskbar-left">
-                <button class="start-menu-btn" onclick="alert('Command Center Ready.')">Start</button>
-                <span class="taskbar-divider">|</span>
-                <span class="active-app-indicator">ACTIVE: BI_ANALYTICS_DESKTOP</span>
+                <button class="start-menu-btn">Start</button>
+                <span style="margin: 0 6px;">|</span>
+                <span>DESKTOP_READY</span>
             </div>
             <div class="taskbar-right">
                 <span id="taskbar-clock">00:00:00</span>
@@ -183,7 +387,6 @@
 
     <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
 
-    <!-- INLINE SCRIPT TO GUARANTEE EXECUTION & PREVENT LOADING ERRORS -->
     <script>
         const clickSound = document.getElementById('click-sound');
         function playSound() {
@@ -193,7 +396,7 @@
             }
         }
 
-        // Automatic 5-second boot sequence animation with bottom-left positioning & dots
+        // 5-Second Boot Animation
         const bootStatus = document.getElementById('boot-status');
         let dots = 0;
         const loadingInterval = setInterval(() => {
@@ -203,34 +406,22 @@
             }
         }, 600);
 
-        // After exactly 5 seconds, clear animation and enter desktop automatically
         setTimeout(() => {
             clearInterval(loadingInterval);
-            const bootScreen = document.getElementById('boot-screen');
-            const desktop = document.getElementById('desktop');
-            if (bootScreen) bootScreen.classList.add('hidden');
-            if (desktop) desktop.classList.remove('hidden');
+            document.getElementById('boot-screen').classList.add('hidden');
+            document.getElementById('desktop').classList.remove('hidden');
             playSound();
         }, 5000);
 
-        // Live Clocks
+        // Live Clock
         setInterval(() => {
             const now = new Date();
             const timeStr = now.toLocaleTimeString();
-            const liveClock = document.getElementById('live-clock');
             const taskbarClock = document.getElementById('taskbar-clock');
-            const dateText = document.getElementById('date-text');
-
-            if (liveClock) liveClock.innerText = timeStr;
             if (taskbarClock) taskbarClock.innerText = timeStr;
-            
-            if (dateText) {
-                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                dateText.innerText = now.toLocaleDateString('en-US', options);
-            }
         }, 1000);
 
-        // Open App function
+        // Window Handlers
         function openApp(windowId) {
             playSound();
             const win = document.getElementById(windowId);
@@ -240,7 +431,6 @@
             }
         }
 
-        // Close Window buttons
         document.querySelectorAll('.close-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 playSound();
@@ -250,7 +440,7 @@
             });
         });
 
-        // Window Dragging functionality
+        // Dragging Logic
         document.querySelectorAll('.draggable-window').forEach(windowEl => {
             const titleBar = windowEl.querySelector('.title-bar');
             if (!titleBar) return;
@@ -270,176 +460,8 @@
                 windowEl.style.top = (e.clientY - startY) + 'px';
             });
 
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
+            document.addEventListener('mouseup', () => { isDragging = false; });
         });
-
-        // JINE Dialogue cycles
-        const dialogueLines = [
-            "\"Apparently with this -credit card- thing we can buy anything we want? Let's give it a spin!\"",
-            "\"Check out my resume and projects window, senpai~\"",
-            "\"Pressing buttons releases happy chemicals!\"",
-            "\"BBA Business Analytics student ready for deployment!\""
-        ];
-
-        setInterval(() => {
-            const jineDialogue = document.getElementById('jine-dialogue');
-            if (jineDialogue) {
-                const line = dialogueLines[Math.floor(Math.random() * dialogueLines.length)];
-                jineDialogue.innerText = line;
-            }
-        }, 8000);
     </script>
-</body>
-</html>                <div class="calendar-display">
-                    <span id="date-text">November 12, 2007</span>
-                    <h2 id="live-clock">00:00:00</h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- WINDOW 2: WEBCAM / VISUAL NOVEL -->
-        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 320px; width: 380px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Webcam // Adhithya Suresh</div>
-                <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
-            </div>
-            <div class="window-body webcam-body">
-                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
-            </div>
-        </div>
-
-        <!-- WINDOW 3: TASK MANAGER (BI Metrics & Resume Quicklinks) -->
-        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; left: 720px; width: 320px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Task Manager // BI Metrics</div>
-                <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
-            </div>
-            <div class="window-body">
-                <div class="stat-row"><span>Analytics Focus</span><strong>Data Automation</strong></div>
-                <hr>
-                <div class="stat-row"><span>ITM University CGPA</span><strong>9.95 / 10</strong></div>
-                <hr>
-                <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📄 Resume.txt</span><strong>[OPEN]</strong></div>
-                <hr>
-                <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 Projects.exe</span><strong>[OPEN]</strong></div>
-                <hr>
-                <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 Certifications</span><strong>[OPEN]</strong></div>
-            </div>
-        </div>
-
-        <!-- WINDOW 4: JINE MESSENGER (Interactive Dialogue) -->
-        <div class="nso-window draggable-window" id="jine-win" style="top: 360px; left: 720px; width: 320px;">
-            <div class="title-bar">
-                <div class="title-bar-text">JINE // AI Assistant</div>
-                <div class="window-controls"><button class="close-btn" data-target="jine-win">×</button></div>
-            </div>
-            <div class="window-body jine-body">
-                <div class="jine-message-box">
-                    <p id="jine-dialogue">"Welcome to my elite business intelligence portfolio! Click the task manager items or press Ctrl+K to navigate~"</p>
-                </div>
-                <div class="jine-reactions">
-                    <button class="reaction-btn">LOVE</button>
-                    <button class="reaction-btn">OK</button>
-                    <button class="reaction-btn">OMG</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- APP WINDOWS -->
-        
-        <!-- RESUME WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 150px; width: 480px; height: 400px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Resume.txt</div>
-                <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <h3>Adhithya Suresh</h3>
-                <p><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
-                <hr>
-                <h4>Academic Credentials</h4>
-                <ul>
-                    <li><strong>Degree:</strong> Bachelor of Business Administration (BBA) - Business Analytics</li>
-                    <li><strong>Institution:</strong> ITM Skills University</li>
-                    <li><strong>CGPA:</strong> 9.95 / 10.0</li>
-                </ul>
-                <h4>Technical Qualifications</h4>
-                <p>Python, MySQL, MS Office, HTML, CSS</p>
-                <h4>Experience / NGO Project</h4>
-                <p><strong>Manapravah Foundation (2026):</strong> Planned donation drives and campus-wide mental health awareness initiatives.</p>
-                <h4>Positions of Responsibility</h4>
-                <p>General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
-            </div>
-        </div>
-
-        <!-- PROJECTS WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 200px; width: 450px; height: 360px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Projects.exe</div>
-                <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <h3>GitHub Repositories & BI Workflows</h3>
-                <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
-                    <strong>NeedyWebUI Portfolio Core</strong>
-                    <p>Interactive web UI architecture port.</p>
-                </a>
-                <a href="https://github.com/" target="_blank" class="nso-link-card">
-                    <strong>Business Analytics Data Pipelines</strong>
-                    <p>Python and MySQL automated data analysis tools.</p>
-                </a>
-            </div>
-        </div>
-
-        <!-- CERTIFICATIONS WINDOW -->
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 250px; width: 440px; height: 320px;">
-            <div class="title-bar">
-                <div class="title-bar-text">Certifications.url</div>
-                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <h3>Verified Credentials</h3>
-                <ul class="cert-list">
-                    <li><a href="https://www.coursera.org" target="_blank">Fintech Olympiad 2025 Module Completion</a></li>
-                    <li><a href="https://www.coursera.org" target="_blank">Python for Everybody - University of Michigan</a></li>
-                    <li><a href="https://www.coursera.org" target="_blank">Introduction to Data Analytics - IBM</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- DESKTOP SHORTCUT ICONS -->
-        <div class="desktop-shortcuts">
-            <div class="shortcut-icon" onclick="openApp('resume-win')">
-                <span>📄</span>
-                <label>Resume</label>
-            </div>
-            <div class="shortcut-icon" onclick="openApp('projects-win')">
-                <span>💻</span>
-                <label>Projects</label>
-            </div>
-            <div class="shortcut-icon" onclick="openApp('certs-win')">
-                <span>🏆</span>
-                <label>Certificates</label>
-            </div>
-        </div>
-
-        <!-- TASKBAR -->
-        <div class="nso-taskbar">
-            <div class="taskbar-left">
-                <button class="start-menu-btn" onclick="alert('Command Center Ready.')">Start</button>
-                <span class="taskbar-divider">|</span>
-                <span class="active-app-indicator">ACTIVE: BI_ANALYTICS_DESKTOP</span>
-            </div>
-            <div class="taskbar-right">
-                <span id="taskbar-clock">00:00:00</span>
-            </div>
-        </div>
-
-    </div>
-
-    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
-    <script src="script.js"></script>
 </body>
 </html>
