@@ -1,46 +1,46 @@
-// Sound effects handle
 const clickSound = document.getElementById('click-sound');
 function playSound() {
     clickSound.currentTime = 0;
-    clickSound.play().catch(e => console.log("Audio play blocked by browser policy"));
+    clickSound.play().catch(e => {});
 }
 
-// Boot screen sequence
+// Boot sequence
 document.getElementById('start-btn').addEventListener('click', () => {
     playSound();
     document.getElementById('boot-screen').classList.add('hidden');
     document.getElementById('desktop').classList.remove('hidden');
 });
 
-// Live clock update in taskbar
+// Live Clocks
 setInterval(() => {
     const now = new Date();
-    document.getElementById('live-clock').innerText = now.toLocaleTimeString();
+    const timeStr = now.toLocaleTimeString();
+    document.getElementById('live-clock').innerText = timeStr;
+    document.getElementById('taskbar-clock').innerText = timeStr;
+    
+    // Format calendar date dynamically
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date-text').innerText = now.toLocaleDateString('en-US', options);
 }, 1000);
 
-// Open windows from desktop shortcuts
-const desktopIcons = document.querySelectorAll('.desktop-icon');
-desktopIcons.forEach(icon => {
-    icon.addEventListener('click', () => {
-        playSound();
-        const targetID = icon.getAttribute('data-target');
-        const win = document.getElementById(targetID);
-        win.classList.remove('hidden');
-        win.style.zIndex = String(Date.now()); // Bring to front
-    });
-});
+// Open App function
+function openApp(windowId) {
+    playSound();
+    const win = document.getElementById(windowId);
+    win.classList.remove('hidden');
+    win.style.zIndex = String(Date.now());
+}
 
-// Close windows
-const closeButtons = document.querySelectorAll('.close-btn');
-closeButtons.forEach(btn => {
+// Close Window buttons
+document.querySelectorAll('.close-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         playSound();
-        const targetID = btn.getAttribute('data-target');
-        document.getElementById(targetID).classList.add('hidden');
+        const target = btn.getAttribute('data-target');
+        document.getElementById(target).classList.add('hidden');
     });
 });
 
-// Basic Dragging Logic for Windows
+// Window Dragging functionality
 document.querySelectorAll('.draggable-window').forEach(windowEl => {
     const titleBar = windowEl.querySelector('.title-bar');
     let isDragging = false;
@@ -64,15 +64,15 @@ document.querySelectorAll('.draggable-window').forEach(windowEl => {
     });
 });
 
-// VN Dialogue rotation array
-const dialogues = [
-    "\"Check out my projects file, it's totally poggers!\"",
-    "\"Make sure to click my Coursera certifications folder!\"",
-    "\"Pressing buttons releases happy chemicals~\"",
-    "\"BBA Business Analytics student reporting for duty!\""
+// JINE Dialogue cycles
+const dialogueLines = [
+    "\"Apparently with this -credit card- thing we can buy anything we want? Let's give it a spin!\"",
+    "\"Check out my resume and projects window, senpai~\"",
+    "\"Pressing buttons releases happy chemicals!\"",
+    "\"BBA Business Analytics student ready for deployment!\""
 ];
 
 setInterval(() => {
-    const randomText = dialogues[Math.floor(Math.random() * dialogues.length)];
-    document.getElementById('dialogue-text').innerText = randomText;
-}, 7000);
+    const line = dialogueLines[Math.floor(Math.random() * dialogueLines.length)];
+    document.getElementById('jine-dialogue').innerText = line;
+}, 8000);
