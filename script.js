@@ -4,36 +4,21 @@ function playSound() {
     clickSound.play().catch(e => {});
 }
 
-// Boot Sequence Animation & Timing
+// Automatic 5-second boot sequence animation with dots
 const bootStatus = document.getElementById('boot-status');
-const heartContainer = document.getElementById('heart-container');
-const clickSound = document.getElementById('click-sound');
-
-function playSound() {
-    clickSound.currentTime = 0;
-    clickSound.play().catch(e => {});
-}
-
-// Animate loading dots for 5 seconds
 let dots = 0;
 const loadingInterval = setInterval(() => {
     dots = (dots + 1) % 5;
-    bootStatus.innerText = "Booting Windose20" + ".".repeat(dots + 1);
+    bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
 }, 600);
 
-// After 5 seconds, finish booting and show the interactive heart button
+// After exactly 5 seconds, clear animation and enter desktop automatically
 setTimeout(() => {
     clearInterval(loadingInterval);
-    bootStatus.innerText = "Booting Windose20...................... [READY]";
-    heartContainer.classList.remove('hidden');
-}, 5000);
-
-// Click heart button to enter desktop
-document.getElementById('enter-heart-btn').addEventListener('click', () => {
-    playSound();
     document.getElementById('boot-screen').classList.add('hidden');
     document.getElementById('desktop').classList.remove('hidden');
-});
+    playSound();
+}, 5000);
 
 // Live Clocks
 setInterval(() => {
@@ -42,7 +27,6 @@ setInterval(() => {
     document.getElementById('live-clock').innerText = timeStr;
     document.getElementById('taskbar-clock').innerText = timeStr;
     
-    // Format calendar date dynamically
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('date-text').innerText = now.toLocaleDateString('en-US', options);
 }, 1000);
