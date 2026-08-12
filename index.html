@@ -3,226 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADHI.EXE // Needy Streamer Overload Desktop</title>
+    <title>ssynewave.exe // Business Analytics Portfolio OS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@main/nso_ui.css">
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #d0e8ff;
-            font-family: 'Courier New', Courier, monospace;
+        :root {
+            --nso-bg: #120524;
+            --nso-window-bg: #fcf1f7;
+            --nso-titlebar: #b4a5e8;
+            --nso-border: #7c6fd6;
+            --nso-text: #3b2a56;
+            --nso-accent: #ff5eb2;
         }
-
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background-color: var(--nso-bg);
+            font-family: 'Courier New', Courier, monospace; user-select: none;
+        }
         .hidden { display: none !important; }
 
-        /* AUTHENTIC NSO BIOS BOOT SCREEN */
+        /* BOOT SCREEN */
         #boot-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000000;
-            color: #ffffff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 40px;
-            box-sizing: border-box;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; color: #fff; font-family: 'Courier New', Courier, monospace;
+            font-size: 15px; display: flex; flex-direction: column;
+            justify-content: flex-start; align-items: flex-start; padding: 40px; box-sizing: border-box; z-index: 99999;
         }
-        .bios-content p { margin: 4px 0; line-height: 1.2; }
+        .bios-content p { margin: 3px 0; line-height: 1.2; }
 
-        /* EXACT DESKTOP BACKGROUND FROM NSO GAME */
+        /* DESKTOP ENVIRONMENT */
         #desktop {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
+            width: 100vw; height: 100vh; position: relative;
             background: url('https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/background/bg_day.png') no-repeat center center fixed;
-            background-size: cover;
-            image-rendering: pixelated;
+            background-size: cover; image-rendering: pixelated;
         }
 
-        /* WINDOW STYLING MATCHING GAME SHENANIGANS */
+        /* WINDOW SYSTEM */
         .nso-window {
-            position: absolute;
-            background: #fcf1f7;
-            border: 2px solid #7c6fd6;
-            box-shadow: 3px 3px 0px rgba(80, 50, 120, 0.3);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
+            position: absolute; background: var(--nso-window-bg);
+            border: 2px solid var(--nso-border); box-shadow: 4px 4px 0px rgba(80, 50, 120, 0.4);
+            z-index: 100; display: flex; flex-direction: column; min-width: 250px; min-height: 150px;
         }
         .title-bar {
-            background: #b4a5e8;
-            color: #2b1b42;
-            padding: 3px 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: move;
-            font-size: 12px;
-            font-weight: bold;
+            background: var(--nso-titlebar); color: #2b1b42; padding: 4px 8px;
+            display: flex; justify-content: space-between; align-items: center; cursor: move; font-size: 12px; font-weight: bold;
         }
         .window-controls button {
-            background: #8e7ec9;
-            color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0 4px;
-            font-size: 10px;
+            background: #8e7ec9; color: white; border: none; font-weight: bold; cursor: pointer; padding: 0 5px; font-size: 10px;
         }
-        .window-body {
-            padding: 10px;
-            color: #3b2a56;
-            font-size: 12px;
-            overflow-y: auto;
-        }
+        .window-body { padding: 12px; color: var(--nso-text); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 380px; }
 
-        /* WEBCAM WINDOW (TOP CENTER-LEFT) */
-        #webcam-win {
-            top: 15px;
-            left: 210px;
-            width: 400px;
-        }
-        .webcam-body {
-            padding: 0;
-            background: #000;
-            text-align: center;
-        }
-        #pixel-avatar {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            image-rendering: pixelated;
-            display: block;
-        }
+        /* WEBCAM WIDGET */
+        #webcam-win { top: 20px; left: 20px; width: 300px; }
+        .webcam-body { padding: 0; background: #000; text-align: center; }
+        #webcam-avatar { width: 100%; height: 180px; object-fit: cover; image-rendering: pixelated; display: block; }
+        .webcam-overlay-info { background: rgba(0,0,0,0.8); color: #ff88cb; font-size: 10px; padding: 4px; display: flex; justify-content: space-between; }
 
-        /* TASK MANAGER WINDOW (TOP RIGHT) */
-        #taskman-win {
-            top: 15px;
-            left: 630px;
-            width: 270px;
-        }
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 4px 0;
-            font-size: 11px;
-        }
-        .stat-val {
-            color: #7c6fd6;
-            font-weight: bold;
-        }
-        .clickable-stat {
-            cursor: pointer;
-            color: #5946b9;
-        }
+        /* TASK MANAGER / MOOD METER */
+        #taskman-win { top: 20px; right: 20px; width: 280px; }
+        .stat-row { display: flex; justify-content: space-between; margin: 5px 0; font-size: 11px; }
+        .stat-val { color: var(--nso-border); font-weight: bold; }
+        .clickable-stat { cursor: pointer; color: #5946b9; }
         .clickable-stat:hover { text-decoration: underline; }
+        .mood-bar-container { background: #e2d9ff; border: 1px solid var(--nso-border); height: 12px; width: 100%; margin-top: 5px; position: relative; }
+        .mood-bar-fill { background: var(--nso-accent); height: 100%; width: 72%; transition: width 0.3s ease; }
 
-        /* DESKTOP ICON GRID (MIDDLE) */
-        .desktop-shortcuts {
-            position: absolute;
-            top: 250px;
-            left: 220px;
-            display: flex;
-            gap: 25px;
-        }
-        .shortcut-icon {
-            width: 60px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .shortcut-icon span {
-            font-size: 28px;
-            display: block;
-        }
-        .shortcut-icon label {
-            color: #2b1b42;
-            font-size: 10px;
-            font-weight: bold;
-            display: block;
-            margin-top: 2px;
-            background: rgba(255,255,255,0.6);
-            padding: 1px 3px;
-        }
+        /* DESKTOP SHORTCUTS */
+        .desktop-shortcuts { position: absolute; top: 230px; left: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .shortcut-icon { width: 70px; text-align: center; cursor: pointer; }
+        .shortcut-icon span { font-size: 26px; display: block; }
+        .shortcut-icon label { color: #2b1b42; font-size: 10px; font-weight: bold; display: block; margin-top: 2px; background: rgba(255,255,255,0.7); padding: 1px; }
 
-        /* RIGHT STREAM CHAT LOGS (JINE / CHAT FEED) */
-        .chat-feed {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 50;
-        }
-        .chat-bubble {
-            background: #62c370;
-            color: white;
-            font-size: 11px;
-            padding: 5px 8px;
-            border-radius: 2px;
-            border: 1px solid #3d8a4a;
-            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* APP WINDOWS */
-        .app-window {
-            background: #fff;
-            border: 2px solid #7c6fd6;
-        }
-        .nso-link-card {
-            display: block;
-            background: #f0ebff;
-            border: 1px solid #b4a5e8;
-            padding: 6px;
-            margin-bottom: 6px;
-            color: #2b1b42;
-            text-decoration: none;
-            font-size: 11px;
-        }
-        .nso-link-card:hover { background: #e2d9ff; }
-        .cert-list li { margin-bottom: 4px; font-size: 11px; }
-        .cert-list a { color: #5946b9; }
-
-        /* TASKBAR BOTTOM */
+        /* TASKBAR */
         .nso-taskbar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: #d8cceb;
-            border-top: 2px solid #7c6fd6;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 8px;
-            box-sizing: border-box;
-            z-index: 2000;
-            color: #2b1b42;
-            font-size: 11px;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 35px;
+            background: #d8cceb; border-top: 2px solid var(--nso-border); display: flex;
+            justify-content: space-between; align-items: center; padding: 0 10px; box-sizing: border-box; z-index: 9999; color: #2b1b42; font-size: 11px;
         }
-        .start-menu-btn {
-            background: #7c6fd6;
-            border: none;
-            color: white;
-            padding: 2px 8px;
-            font-weight: bold;
-            cursor: pointer;
+        .start-menu-btn { background: var(--nso-border); border: none; color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; }
+
+        /* START MENU */
+        #start-menu {
+            position: absolute; bottom: 37px; left: 0; width: 220px; background: #fcf1f7;
+            border: 2px solid var(--nso-border); box-shadow: 3px -3px 0px rgba(80,50,120,0.3); z-index: 10000; display: none;
         }
+        .start-menu-header { background: var(--nso-border); color: white; padding: 8px; font-weight: bold; font-size: 11px; }
+        .start-menu-items { padding: 5px 0; }
+        .start-item { padding: 6px 15px; cursor: pointer; font-size: 11px; color: #2b1b42; }
+        .start-item:hover { background: #e2d9ff; color: #ff5eb2; }
+
+        /* NOTIFICATION SYSTEM */
+        #notification-container { position: fixed; bottom: 45px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99999; }
+        .nso-notification {
+            background: #1f0b36; color: #fce4ec; border: 1px solid var(--nso-accent);
+            padding: 8px 12px; font-size: 11px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3); animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* RECRUITER MODE OVERLAY */
+        #recruiter-mode-panel {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fcf1f7;
+            z-index: 999999; overflow-y: auto; padding: 40px; box-sizing: border-box; display: none; color: #2b1b42;
+        }
+        .recruiter-container { max-width: 800px; margin: 0 auto; background: white; border: 2px solid var(--nso-border); padding: 30px; box-shadow: 6px 6px 0px rgba(124,111,214,0.3); }
+
+        .nso-link-card { display: block; background: #f0ebff; border: 1px solid #b4a5e8; padding: 8px; margin-bottom: 8px; color: #2b1b42; text-decoration: none; font-size: 11px; }
+        .nso-link-card:hover { background: #e2d9ff; }
     </style>
 </head>
 <body>
@@ -230,13 +115,13 @@
     <!-- BOOT SCREEN -->
     <div id="boot-screen">
         <div class="bios-content">
-            <p>Needy Streamer Overload</p>
-            <p>Copyright (C) 2020-</p>
+            <p>Needy Streamer Overload - ssynewave.exe</p>
+            <p>Copyright (C) 2020-2026</p>
             <br>
-            <p>NSO BIOS Rev1.0</p>
+            <p>NSO BIOS Rev1.0 - Business Analytics Module</p>
             <br>
             <p>Main Processor : raincandy</p>
-            <p>Memory Testing : OK</p>
+            <p>Memory Testing : OK [9.95 CGPA Verified]</p>
             <br><br>
             <p id="boot-status">Booting Windose</p>
         </div>
@@ -245,207 +130,289 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- WINDOW 1: WEBCAM -->
+        <!-- WEBCAM APPLICATION -->
         <div class="nso-window draggable-window" id="webcam-win">
             <div class="title-bar">
-                <div class="title-bar-text">Webcam</div>
+                <div class="title-bar-text">WEBCAM.EXE</div>
                 <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
             </div>
             <div class="window-body webcam-body">
-                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
+                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="webcam-avatar" onerror="this.src='https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png'">
+                <div class="webcam-overlay-info">
+                    <span>● LIVE | ADHITHYA</span>
+                    <span id="mood-text">MOOD: 72%</span>
+                </div>
             </div>
         </div>
 
-        <!-- WINDOW 2: TASK MANAGER -->
+        <!-- TASK MANAGER & MOOD METER -->
         <div class="nso-window draggable-window" id="taskman-win">
             <div class="title-bar">
-                <div class="title-bar-text">Task Manager</div>
+                <div class="title-bar-text">STATS.EXE // Task Manager</div>
                 <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
             </div>
             <div class="window-body">
-                <div class="stat-row"><span>Screen Time</span><strong class="stat-val">03:01</strong></div>
-                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
-                <div class="stat-row"><span>ITM University CGPA</span><strong class="stat-val">9.95 / 10</strong></div>
-                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
-                <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📄 Resume.txt</span><strong>[OPEN]</strong></div>
-                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
-                <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 Projects.exe</span><strong>[OPEN]</strong></div>
-                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 4px 0;">
-                <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 Certifications</span><strong>[OPEN]</strong></div>
+                <div class="stat-row"><span>Program</span><strong class="stat-val">BBA Analytics</strong></div>
+                <div class="stat-row"><span>Institution</span><strong class="stat-val">ITM Skills Univ</strong></div>
+                <div class="stat-row"><span>CGPA Score</span><strong class="stat-val">9.95 / 10.0</strong></div>
+                <hr style="border: 0; border-top: 1px solid #d8cceb; margin: 6px 0;">
+                <div class="stat-row clickable-stat" onclick="openApp('resume-win')"><span>📁 PROFILE.EXE</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('projects-win')"><span>💻 PROJECTS.EXE</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('certs-win')"><span>🏆 CERTIFICATES</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('mission-win')"><span>🌱 MISSION CONTROL</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('guild-win')"><span>🛡️ GUILD HALL</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('achieve-win')"><span>🎖️ ACHIEVEMENTS</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="openApp('mail-win')"><span>📨 MAIL.EXE</span><strong>[OPEN]</strong></div>
+                <div class="stat-row clickable-stat" onclick="toggleRecruiterMode()"><span>💼 RECRUITER MODE</span><strong>[TOGGLE]</strong></div>
+                <div style="margin-top: 8px;">
+                    <span style="font-size: 10px; font-weight: bold;">SYSTEM MOOD METER</span>
+                    <div class="mood-bar-container"><div class="mood-bar-fill" id="mood-bar"></div></div>
+                </div>
             </div>
         </div>
 
-        <!-- RIGHT SIDE STREAM CHAT LOGS -->
-        <div class="chat-feed">
-            <div class="chat-bubble">good morning it's a...</div>
-            <div class="chat-bubble">oh well anyway, sch...</div>
-            <div class="chat-bubble">but lets start snai...</div>
-            <div class="chat-bubble">and as you know, in...</div>
-            <div class="chat-bubble">so you need to tell...</div>
-            <div class="chat-bubble">so ill do everythin...</div>
-            <div class="chat-bubble">i have complete fai...</div>
-            <div class="chat-bubble">coz if not, s... i thi...</div>
+        <!-- DESKTOP SHORTCUT ICONS -->
+        <div class="desktop-shortcuts">
+            <div class="shortcut-icon" onclick="openApp('resume-win')"><span>📁</span><label>PROFILE.EXE</label></div>
+            <div class="shortcut-icon" onclick="openApp('projects-win')"><span>💻</span><label>PROJECTS</label></div>
+            <div class="shortcut-icon" onclick="openApp('mission-win')"><span>🌱</span><label>MISSION</label></div>
+            <div class="shortcut-icon" onclick="openApp('guild-win')"><span>🛡️</span><label>GUILD</label></div>
+            <div class="shortcut-icon" onclick="openApp('achieve-win')"><span>🏆</span><label>TROPHIES</label></div>
+            <div class="shortcut-icon" onclick="openApp('mail-win')"><span>📨</span><label>MAIL.EXE</label></div>
         </div>
 
         <!-- APP WINDOWS -->
-        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 100px; left: 180px; width: 440px; height: 350px;">
+
+        <!-- PROFILE / RESUME WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 80px; left: 340px; width: 440px; height: 380px;">
             <div class="title-bar">
-                <div class="title-bar-text">Resume.txt</div>
+                <div class="title-bar-text">PROFILE.EXE - Adhithya Suresh</div>
                 <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
             </div>
-            <div class="window-body scrollable" style="max-height: 300px;">
-                <h3 style="margin: 0 0 5px 0;">Adhithya Suresh</h3>
-                <p style="margin: 0 0 10px 0;"><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">Adhithya Suresh</h3>
+                <p style="margin: 0 0 8px 0;"><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
                 <hr>
-                <h4 style="margin: 5px 0;">Academic Credentials</h4>
-                <ul style="margin: 0; padding-left: 15px;">
-                    <li><strong>CGPA:</strong> 9.95 / 10.0 at ITM Skills University</li>
-                </ul>
-                <h4 style="margin: 8px 0 3px 0;">Technical Qualifications</h4>
-                <p style="margin: 0;">Python, MySQL, MS Office, HTML, CSS</p>
-                <h4 style="margin: 8px 0 3px 0;">Experience / NGO Project</h4>
-                <p style="margin: 0;"><strong>Manapravah Foundation (2026):</strong> Planned donation drives and mental health awareness campaigns.</p>
-                <h4 style="margin: 8px 0 3px 0;">Positions of Responsibility</h4>
-                <p style="margin: 0;">General Secretary & Former Creative Director - The Phantom Opera Club.<br>Creative Director - BICAL.</p>
+                <h4 style="margin: 6px 0;">Academic Metrics</h4>
+                <p><strong>ITM Skills University:</strong> CGPA 9.95 / 10.0 (2025)</p>
+                <h4 style="margin: 6px 0;">Technical Qualifications</h4>
+                <p>Python, MySQL, MS Office, HTML, CSS</p>
+                <h4 style="margin: 6px 0;">Languages</h4>
+                <p>English, Japanese, German, French</p>
+                <h4 style="margin: 6px 0;">Traditional Resume Access</h4>
+                <a href="#" onclick="alert('Viewing original attached resume record verified.')" class="nso-link-card">📄 Download / View Official Resume PDF</a>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 130px; left: 220px; width: 400px; height: 320px;">
+        <!-- PROJECTS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 110px; left: 380px; width: 420px; height: 340px;">
             <div class="title-bar">
-                <div class="title-bar-text">Projects.exe</div>
+                <div class="title-bar-text">PROJECTS.EXE - GitHub Lab</div>
                 <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
             </div>
-            <div class="window-body scrollable" style="max-height: 270px;">
-                <h3 style="margin: 0 0 5px 0;">GitHub Repositories</h3>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">Project Database</h3>
+                <p style="font-size: 11px; color: #555;">Structured business analytics repositories & automation workflows.</p>
                 <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
-                    <strong>NeedyWebUI Portfolio Core</strong>
-                    <p style="margin: 2px 0 0 0;">Interactive web UI architecture port.</p>
+                    <strong>NeedyWebUI Portfolio Framework</strong>
+                    <p style="margin: 2px 0 0 0;">Interactive retro UI component architecture port.</p>
                 </a>
-                <a href="https://github.com/" target="_blank" class="nso-link-card">
-                    <strong>Business Analytics Data Pipelines</strong>
-                    <p style="margin: 2px 0 0 0;">Python and MySQL automated data analysis tools.</p>
-                </a>
+                <div style="background: #fdf8fc; border: 1px dashed #b4a5e8; padding: 8px; margin-top: 10px; text-align: center;">
+                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add additional GitHub projects here later ]</p>
+                </div>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 160px; left: 260px; width: 380px; height: 280px;">
+        <!-- MISSION CONTROL WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="mission-win" style="top: 140px; left: 420px; width: 420px; height: 350px;">
             <div class="title-bar">
-                <div class="title-bar-text">Certifications.url</div>
-                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
+                <div class="title-bar-text">MISSION CONTROL - Manapravah Foundation</div>
+                <div class="window-controls"><button class="close-btn" data-target="mission-win">×</button></div>
             </div>
-            <div class="window-body scrollable" style="max-height: 230px;">
-                <h3 style="margin: 0 0 5px 0;">Verified Credentials</h3>
-                <ul class="cert-list">
-                    <li><a href="https://www.coursera.org" target="_blank">Fintech Olympiad 2025 Module Completion</a></li>
-                    <li><a href="https://www.coursera.org" target="_blank">Python for Everybody - University of Michigan</a></li>
-                    <li><a href="https://www.coursera.org" target="_blank">Introduction to Data Analytics - IBM</a></li>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">NGO Internship (2026)</h3>
+                <p><strong>Objectives & Execution:</strong></p>
+                <ul style="padding-left: 15px; margin: 5px 0;">
+                    <li>Planned and executed donation drives and mental health awareness initiatives across campus and public spaces.</li>
+                    <li>Designed and conducted interactive activities for the Mindful Mela event.</li>
+                    <li>Coordinated with foundations and beneficiaries for donation distribution and field visits.</li>
+                    <li>Managed logistics, permissions, and on-ground execution under real-time constraints.</li>
+                </ul>
+                <p><strong>Associated Skills:</strong> Communication, Team Coordination, Event Execution, Problem-Solving, Adaptability.</p>
+            </div>
+        </div>
+
+        <!-- GUILD HALL WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 170px; left: 200px; width: 420px; height: 340px;">
+            <div class="title-bar">
+                <div class="title-bar-text">GUILD HALL - Positions of Responsibility</div>
+                <div class="window-controls"><button class="close-btn" data-target="guild-win">×</button></div>
+            </div>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">Leadership & Clubs</h3>
+                <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
+                    <li><strong>The Phantom Opera Club:</strong> General Secretary (Current) | Creative Director (Former)</li>
+                    <li><strong>BICAL:</strong> Creative Director - Business Intelligence and Current Affairs Lab</li>
+                    <li><strong>Alter Eco Club:</strong> Member (Environmental initiatives)</li>
+                    <li><strong>Soundscape Music Club & Dance Club:</strong> Active Member</li>
+                    <li><strong>Basketball Team:</strong> Member / Athlete</li>
                 </ul>
             </div>
         </div>
 
-        <!-- DESKTOP SHORTCUT ICONS MATCHING SCREENSHOT -->
-        <div class="desktop-shortcuts">
-            <div class="shortcut-icon" onclick="openApp('resume-win')">
-                <span>📁</span>
-                <label>Stream</label>
+        <!-- ACHIEVEMENT HALL WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 200px; left: 240px; width: 430px; height: 350px;">
+            <div class="title-bar">
+                <div class="title-bar-text">ACHIEVEMENTS.EXE - Trophy Room</div>
+                <div class="window-controls"><button class="close-btn" data-target="achieve-win">×</button></div>
             </div>
-            <div class="shortcut-icon" onclick="openApp('resume-win')">
-                <span>🎨</span>
-                <label>Hang Out</label>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">Awards & Honors</h3>
+                <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
+                    <li><strong>Bronze Medalist:</strong> Indian Hip-Hop Dance Championship 2019 with Urban Core (Qualified to represent internationally in Arizona, USA).</li>
+                    <li><strong>2nd Prize Winner:</strong> Classical Dance, Mathrubhumi Kalolsavam 2018.</li>
+                    <li><strong>2nd Place:</strong> National Art Competition, Rangotsav 2024.</li>
+                    <li><strong>Cascade 2023 & 2024 (Jamnabai Narsee School):</strong> Art-based learning and investigative courtroom trial simulations.</li>
+                    <li><strong>Guest Performer:</strong> Alegria 2020 & Awaaz Navi Mumbai 2020.</li>
+                </ul>
             </div>
-            <div class="shortcut-icon" onclick="openApp('certs-win')">
-                <span>⏰</span>
-                <label>Sleep</label>
+        </div>
+
+        <!-- CERTIFICATIONS WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 230px; left: 280px; width: 400px; height: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">CERTIFICATIONS.URL</div>
+                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
             </div>
-            <div class="shortcut-icon" onclick="openApp('projects-win')">
-                <span>💊</span>
-                <label>Medication</label>
+            <div class="window-body scrollable">
+                <h3 style="margin: 0 0 4px 0;">Certification Tower</h3>
+                <p style="font-size: 11px; color: #555;">Verified professional credentials directory.</p>
+                <ul class="cert-list" style="padding-left: 15px;">
+                    <li>Fintech Olympiad 2025 Module Completion</li>
+                </ul>
+                <div style="background: #fdf8fc; border: 1px dashed #b4a5e8; padding: 8px; margin-top: 10px; text-align: center;">
+                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add new Coursera certificates here ]</p>
+                </div>
             </div>
-            <div class="shortcut-icon" onclick="openApp('projects-win')">
-                <span>🌐</span>
-                <label>Internet</label>
+        </div>
+
+        <!-- MAIL WINDOW -->
+        <div class="nso-window draggable-window hidden app-window" id="mail-win" style="top: 150px; left: 320px; width: 380px; height: 320px;">
+            <div class="title-bar">
+                <div class="title-bar-text">MAIL.EXE - Contact Center</div>
+                <div class="window-controls"><button class="close-btn" data-target="mail-win">×</button></div>
             </div>
-            <div class="shortcut-icon" onclick="openApp('resume-win')">
-                <span>💬</span>
-                <label>JINE</label>
+            <div class="window-body">
+                <h3 style="margin: 0 0 5px 0;">Compose Message to Adhithya</h3>
+                <form onsubmit="handleSendMail(event)">
+                    <label style="font-size:10px;">YOUR EMAIL:</label><br>
+                    <input type="email" id="sender-email" required style="width:100%; margin-bottom:6px; font-family:'Courier New';"><br>
+                    <label style="font-size:10px;">MESSAGE:</label><br>
+                    <textarea id="sender-msg" rows="3" required style="width:100%; margin-bottom:6px; font-family:'Courier New';"></textarea><br>
+                    <button type="submit" class="start-menu-btn" style="width:100%;">SEND MESSAGE</button>
+                </form>
             </div>
         </div>
 
         <!-- TASKBAR -->
         <div class="nso-taskbar">
             <div class="taskbar-left">
-                <button class="start-menu-btn">Start</button>
-                <span style="margin: 0 6px;">|</span>
-                <span>DESKTOP_READY</span>
+                <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
+                <span style="margin: 0 8px;">|</span>
+                <span>ssynewave.exe // ACTIVE OS</span>
             </div>
             <div class="taskbar-right">
                 <span id="taskbar-clock">00:00:00</span>
             </div>
         </div>
 
+        <!-- START MENU -->
+        <div id="start-menu">
+            <div class="start-menu-header">ADHITHYA.EXE // LAUNCHER</div>
+            <div class="start-menu-items">
+                <div class="start-item" onclick="openApp('resume-win'); toggleStartMenu();">📁 PROFILE.EXE</div>
+                <div class="start-item" onclick="openApp('projects-win'); toggleStartMenu();">💻 PROJECTS.EXE</div>
+                <div class="start-item" onclick="openApp('mission-win'); toggleStartMenu();">🌱 MISSION CONTROL</div>
+                <div class="start-item" onclick="openApp('guild-win'); toggleStartMenu();">🛡️ GUILD HALL</div>
+                <div class="start-item" onclick="openApp('achieve-win'); toggleStartMenu();">🏆 ACHIEVEMENT HALL</div>
+                <div class="start-item" onclick="openApp('certs-win'); toggleStartMenu();">🎓 CERTIFICATION TOWER</div>
+                <div class="start-item" onclick="openApp('mail-win'); toggleStartMenu();">📨 MAIL.EXE</div>
+                <div class="start-item" onclick="toggleRecruiterMode(); toggleStartMenu();">💼 RECRUITER MODE</div>
+            </div>
+        </div>
+
     </div>
 
-    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
+    <!-- NOTIFICATION POPUPS CONTAINER -->
+    <div id="notification-container"></div>
 
+    <!-- RECRUITER MODE VIEW -->
+    <div id="recruiter-mode-panel">
+        <div class="recruiter-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #7c6fd6; padding-bottom:10px; margin-bottom:20px;">
+                <h2 style="margin:0; color:#2b1b42;">Adhithya Suresh — Professional Summary</h2>
+                <button onclick="toggleRecruiterMode()" class="start-menu-btn">EXIT RECRUITER MODE</button>
+            </div>
+            <p><strong>Field:</strong> Business Analytics | <strong>Program:</strong> BBA (ITM Skills University, 2025–2028)</p>
+            <p><strong>Academic Standing:</strong> CGPA 9.95 / 10.0</p>
+            <hr>
+            <h3>Technical Qualifications</h3>
+            <p>Python, MySQL, MS Office, HTML, CSS</p>
+            <h3>Key Leadership & Experience</h3>
+            <p>General Secretary & Former Creative Director of The Phantom Opera Club, Creative Director of BICAL, and NGO Internship Lead at Manapravah Foundation (2026).</p>
+            <div style="margin-top: 20px;">
+                <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="nso-link-card" style="display:inline-block; padding:10px 20px;">Open Professional LinkedIn Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLIENT SCRIPT LOGIC -->
     <script>
-        const clickSound = document.getElementById('click-sound');
-        function playSound() {
-            if (clickSound) {
-                clickSound.currentTime = 0;
-                clickSound.play().catch(e => {});
-            }
-        }
-
-        // 5-Second Boot Animation
-        const bootStatus = document.getElementById('boot-status');
+        // BOOT SEQUENCE ANIMATION
         let dots = 0;
-        const loadingInterval = setInterval(() => {
+        const bootStatus = document.getElementById('boot-status');
+        const bootInterval = setInterval(() => {
             dots = (dots + 1) % 5;
-            if (bootStatus) {
-                bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
-            }
-        }, 600);
+            if (bootStatus) bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
+        }, 500);
 
         setTimeout(() => {
-            clearInterval(loadingInterval);
+            clearInterval(bootInterval);
             document.getElementById('boot-screen').classList.add('hidden');
             document.getElementById('desktop').classList.remove('hidden');
-            playSound();
+            showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
         }, 5000);
 
-        // Live Clock
+        // GLOBAL CLOCK
         setInterval(() => {
             const now = new Date();
-            const timeStr = now.toLocaleTimeString();
-            const taskbarClock = document.getElementById('taskbar-clock');
-            if (taskbarClock) taskbarClock.innerText = timeStr;
+            const clock = document.getElementById('taskbar-clock');
+            if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
 
-        // Window Handlers
+        // WINDOW MANAGER
         function openApp(windowId) {
-            playSound();
             const win = document.getElementById(windowId);
             if (win) {
                 win.classList.remove('hidden');
                 win.style.zIndex = String(Date.now());
+                updateMood(3);
             }
         }
 
         document.querySelectorAll('.close-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                playSound();
                 const target = btn.getAttribute('data-target');
                 const win = document.getElementById(target);
                 if (win) win.classList.add('hidden');
             });
         });
 
-        // Dragging Logic
+        // DRAGGING SYSTEM
         document.querySelectorAll('.draggable-window').forEach(windowEl => {
             const titleBar = windowEl.querySelector('.title-bar');
             if (!titleBar) return;
-            let isDragging = false;
-            let startX, startY;
+            let isDragging = false, startX, startY;
 
             titleBar.addEventListener('mousedown', (e) => {
                 isDragging = true;
@@ -462,6 +429,51 @@
 
             document.addEventListener('mouseup', () => { isDragging = false; });
         });
+
+        // START MENU TOGGLE
+        function toggleStartMenu() {
+            const menu = document.getElementById('start-menu');
+            if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.start-menu-btn') && !e.target.closest('#start-menu')) {
+                const menu = document.getElementById('start-menu');
+                if (menu) menu.style.display = 'none';
+            }
+        });
+
+        // RECRUITER MODE TOGGLE
+        function toggleRecruiterMode() {
+            const panel = document.getElementById('recruiter-mode-panel');
+            if (panel) panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // MOOD SYSTEM & NOTIFICATIONS
+        let currentMood = 72;
+        function updateMood(amount) {
+            currentMood = Math.min(100, Math.max(0, currentMood + amount));
+            const fill = document.getElementById('mood-bar');
+            const txt = document.getElementById('mood-text');
+            if (fill) fill.style.width = currentMood + '%';
+            if (txt) txt.innerText = 'MOOD: ' + currentMood + '%';
+        }
+
+        function showNotification(text) {
+            const container = document.getElementById('notification-container');
+            if (!container) return;
+            const notif = document.createElement('div');
+            notif.className = 'nso-notification';
+            notif.innerText = text;
+            container.appendChild(notif);
+            setTimeout(() => { notif.remove(); }, 4000);
+        }
+
+        function handleSendMail(e) {
+            e.preventDefault();
+            showNotification("MESSAGE SENT ✓ Adhithya has received your transmission.");
+            updateMood(10);
+            document.getElementById('mail-win').classList.add('hidden');
+        }
     </script>
 </body>
 </html>
