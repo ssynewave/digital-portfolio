@@ -52,10 +52,10 @@
         }
         .window-body { padding: 12px; color: var(--nso-text); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 380px; }
 
-        /* WEBCAM WIDGET */
+        /* WEBCAM WIDGET LINKED TO MOOD EMOTIONS */
         #webcam-win { top: 20px; left: 20px; width: 300px; }
         .webcam-body { padding: 0; background: #000; text-align: center; }
-        #webcam-avatar { width: 100%; height: 180px; object-fit: cover; image-rendering: pixelated; display: block; }
+        #webcam-avatar { width: 100%; height: 180px; object-fit: cover; image-rendering: pixelated; display: block; cursor: pointer; }
         .webcam-overlay-info { background: rgba(0,0,0,0.8); color: #ff88cb; font-size: 10px; padding: 4px; display: flex; justify-content: space-between; }
 
         /* TASK MANAGER / MOOD METER */
@@ -91,7 +91,7 @@
         .start-item { padding: 6px 15px; cursor: pointer; font-size: 11px; color: #2b1b42; }
         .start-item:hover { background: #e2d9ff; color: #ff5eb2; }
 
-        /* NOTIFICATION SYSTEM */
+        /* NOTIFICATIONS */
         #notification-container { position: fixed; bottom: 45px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99999; }
         .nso-notification {
             background: #1f0b36; color: #fce4ec; border: 1px solid var(--nso-accent);
@@ -99,13 +99,12 @@
         }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* RECRUITER MODE OVERLAY */
+        /* RECRUITER MODE */
         #recruiter-mode-panel {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #fcf1f7;
             z-index: 999999; overflow-y: auto; padding: 40px; box-sizing: border-box; display: none; color: #2b1b42;
         }
         .recruiter-container { max-width: 800px; margin: 0 auto; background: white; border: 2px solid var(--nso-border); padding: 30px; box-shadow: 6px 6px 0px rgba(124,111,214,0.3); }
-
         .nso-link-card { display: block; background: #f0ebff; border: 1px solid #b4a5e8; padding: 8px; margin-bottom: 8px; color: #2b1b42; text-decoration: none; font-size: 11px; }
         .nso-link-card:hover { background: #e2d9ff; }
     </style>
@@ -130,14 +129,14 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- WEBCAM APPLICATION -->
+        <!-- WEBCAM APPLICATION (Linked to Mood & 6 Emotions) -->
         <div class="nso-window draggable-window" id="webcam-win">
             <div class="title-bar">
                 <div class="title-bar-text">WEBCAM.EXE</div>
                 <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
             </div>
             <div class="window-body webcam-body">
-                <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="webcam-avatar" onerror="this.src='https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png'">
+                <img src="calm_img.png" alt="Adhithya Expression" id="webcam-avatar" title="Click me to change mood!" onclick="pokeAvatar()">
                 <div class="webcam-overlay-info">
                     <span>● LIVE | ADHITHYA</span>
                     <span id="mood-text">MOOD: 72%</span>
@@ -171,7 +170,7 @@
             </div>
         </div>
 
-        <!-- DESKTOP SHORTCUT ICONS -->
+        <!-- DESKTOP SHORTCUTS -->
         <div class="desktop-shortcuts">
             <div class="shortcut-icon" onclick="openApp('resume-win')"><span>📁</span><label>PROFILE.EXE</label></div>
             <div class="shortcut-icon" onclick="openApp('projects-win')"><span>💻</span><label>PROJECTS</label></div>
@@ -182,8 +181,6 @@
         </div>
 
         <!-- APP WINDOWS -->
-
-        <!-- PROFILE / RESUME WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 80px; left: 340px; width: 440px; height: 380px;">
             <div class="title-bar">
                 <div class="title-bar-text">PROFILE.EXE - Adhithya Suresh</div>
@@ -199,12 +196,9 @@
                 <p>Python, MySQL, MS Office, HTML, CSS</p>
                 <h4 style="margin: 6px 0;">Languages</h4>
                 <p>English, Japanese, German, French</p>
-                <h4 style="margin: 6px 0;">Traditional Resume Access</h4>
-                <a href="#" onclick="alert('Viewing original attached resume record verified.')" class="nso-link-card">📄 Download / View Official Resume PDF</a>
             </div>
         </div>
 
-        <!-- PROJECTS WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 110px; left: 380px; width: 420px; height: 340px;">
             <div class="title-bar">
                 <div class="title-bar-text">PROJECTS.EXE - GitHub Lab</div>
@@ -212,18 +206,16 @@
             </div>
             <div class="window-body scrollable">
                 <h3 style="margin: 0 0 4px 0;">Project Database</h3>
-                <p style="font-size: 11px; color: #555;">Structured business analytics repositories & automation workflows.</p>
                 <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
                     <strong>NeedyWebUI Portfolio Framework</strong>
                     <p style="margin: 2px 0 0 0;">Interactive retro UI component architecture port.</p>
                 </a>
                 <div style="background: #fdf8fc; border: 1px dashed #b4a5e8; padding: 8px; margin-top: 10px; text-align: center;">
-                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add additional GitHub projects here later ]</p>
+                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add additional GitHub projects here ]</p>
                 </div>
             </div>
         </div>
 
-        <!-- MISSION CONTROL WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="mission-win" style="top: 140px; left: 420px; width: 420px; height: 350px;">
             <div class="title-bar">
                 <div class="title-bar-text">MISSION CONTROL - Manapravah Foundation</div>
@@ -233,16 +225,13 @@
                 <h3 style="margin: 0 0 4px 0;">NGO Internship (2026)</h3>
                 <p><strong>Objectives & Execution:</strong></p>
                 <ul style="padding-left: 15px; margin: 5px 0;">
-                    <li>Planned and executed donation drives and mental health awareness initiatives across campus and public spaces.</li>
-                    <li>Designed and conducted interactive activities for the Mindful Mela event.</li>
-                    <li>Coordinated with foundations and beneficiaries for donation distribution and field visits.</li>
-                    <li>Managed logistics, permissions, and on-ground execution under real-time constraints.</li>
+                    <li>Planned and executed donation drives and mental health awareness initiatives.</li>
+                    <li>Designed and conducted interactive activities for Mindful Mela.</li>
+                    <li>Coordinated with foundations and beneficiaries for donation distribution.</li>
                 </ul>
-                <p><strong>Associated Skills:</strong> Communication, Team Coordination, Event Execution, Problem-Solving, Adaptability.</p>
             </div>
         </div>
 
-        <!-- GUILD HALL WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 170px; left: 200px; width: 420px; height: 340px;">
             <div class="title-bar">
                 <div class="title-bar-text">GUILD HALL - Positions of Responsibility</div>
@@ -251,16 +240,12 @@
             <div class="window-body scrollable">
                 <h3 style="margin: 0 0 4px 0;">Leadership & Clubs</h3>
                 <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
-                    <li><strong>The Phantom Opera Club:</strong> General Secretary (Current) | Creative Director (Former)</li>
+                    <li><strong>The Phantom Opera Club:</strong> General Secretary | Creative Director</li>
                     <li><strong>BICAL:</strong> Creative Director - Business Intelligence and Current Affairs Lab</li>
-                    <li><strong>Alter Eco Club:</strong> Member (Environmental initiatives)</li>
-                    <li><strong>Soundscape Music Club & Dance Club:</strong> Active Member</li>
-                    <li><strong>Basketball Team:</strong> Member / Athlete</li>
                 </ul>
             </div>
         </div>
 
-        <!-- ACHIEVEMENT HALL WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 200px; left: 240px; width: 430px; height: 350px;">
             <div class="title-bar">
                 <div class="title-bar-text">ACHIEVEMENTS.EXE - Trophy Room</div>
@@ -269,16 +254,13 @@
             <div class="window-body scrollable">
                 <h3 style="margin: 0 0 4px 0;">Awards & Honors</h3>
                 <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
-                    <li><strong>Bronze Medalist:</strong> Indian Hip-Hop Dance Championship 2019 with Urban Core (Qualified to represent internationally in Arizona, USA).</li>
-                    <li><strong>2nd Prize Winner:</strong> Classical Dance, Mathrubhumi Kalolsavam 2018.</li>
-                    <li><strong>2nd Place:</strong> National Art Competition, Rangotsav 2024.</li>
-                    <li><strong>Cascade 2023 & 2024 (Jamnabai Narsee School):</strong> Art-based learning and investigative courtroom trial simulations.</li>
-                    <li><strong>Guest Performer:</strong> Alegria 2020 & Awaaz Navi Mumbai 2020.</li>
+                    <li>Bronze Medalist - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</li>
+                    <li>2nd Prize Winner - Classical Dance, Mathrubhumi Kalolsavam 2018</li>
+                    <li>2nd Place - National Art Competition, Rangotsav 2024</li>
                 </ul>
             </div>
         </div>
 
-        <!-- CERTIFICATIONS WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 230px; left: 280px; width: 400px; height: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">CERTIFICATIONS.URL</div>
@@ -286,17 +268,12 @@
             </div>
             <div class="window-body scrollable">
                 <h3 style="margin: 0 0 4px 0;">Certification Tower</h3>
-                <p style="font-size: 11px; color: #555;">Verified professional credentials directory.</p>
-                <ul class="cert-list" style="padding-left: 15px;">
+                <ul style="padding-left: 15px;">
                     <li>Fintech Olympiad 2025 Module Completion</li>
                 </ul>
-                <div style="background: #fdf8fc; border: 1px dashed #b4a5e8; padding: 8px; margin-top: 10px; text-align: center;">
-                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add new Coursera certificates here ]</p>
-                </div>
             </div>
         </div>
 
-        <!-- MAIL WINDOW -->
         <div class="nso-window draggable-window hidden app-window" id="mail-win" style="top: 150px; left: 320px; width: 380px; height: 320px;">
             <div class="title-bar">
                 <div class="title-bar-text">MAIL.EXE - Contact Center</div>
@@ -396,7 +373,7 @@
             if (win) {
                 win.classList.remove('hidden');
                 win.style.zIndex = String(Date.now());
-                updateMood(3);
+                updateMood(4); // Opening apps boosts mood
             }
         }
 
@@ -405,6 +382,7 @@
                 const target = btn.getAttribute('data-target');
                 const win = document.getElementById(target);
                 if (win) win.classList.add('hidden');
+                updateMood(-2); // Closing windows lowers mood slightly
             });
         });
 
@@ -448,14 +426,52 @@
             if (panel) panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
         }
 
-        // MOOD SYSTEM & NOTIFICATIONS
+        // MOOD SYSTEM & 6 EMOTIONS LINKING
         let currentMood = 72;
+
         function updateMood(amount) {
             currentMood = Math.min(100, Math.max(0, currentMood + amount));
             const fill = document.getElementById('mood-bar');
             const txt = document.getElementById('mood-text');
             if (fill) fill.style.width = currentMood + '%';
             if (txt) txt.innerText = 'MOOD: ' + currentMood + '%';
+            
+            updateAvatarExpression();
+        }
+
+        // Map 6 Mood Ranges to your 6 uploaded emotion files:
+        // 0 - 20: dizzy_img.png
+        // 21 - 40: sad2_img.png
+        // 41 - 55: sad_img.png
+        // 56 - 70: unhappy_img.png
+        // 71 - 85: calm_img.png
+        // 86 - 100: happy_img.png
+        function updateAvatarExpression() {
+            const avatar = document.getElementById('webcam-avatar');
+            if (!avatar) return;
+
+            let emotionFile = 'calm_img.png';
+            if (currentMood <= 20) {
+                emotionFile = 'dizzy_img.png';
+            } else if (currentMood <= 40) {
+                emotionFile = 'sad2_img.png';
+            } else if (currentMood <= 55) {
+                emotionFile = 'sad_img.png';
+            } else if (currentMood <= 70) {
+                emotionFile = 'unhappy_img.png';
+            } else if (currentMood <= 85) {
+                emotionFile = 'calm_img.png';
+            } else {
+                emotionFile = 'happy_img.png';
+            }
+
+            avatar.src = emotionFile;
+        }
+
+        // Poking avatar drops mood slightly and triggers reaction
+        function pokeAvatar() {
+            updateMood(-5);
+            showNotification("⚠️ Don't poke the avatar! Mood -5%");
         }
 
         function showNotification(text) {
@@ -471,7 +487,7 @@
         function handleSendMail(e) {
             e.preventDefault();
             showNotification("MESSAGE SENT ✓ Adhithya has received your transmission.");
-            updateMood(10);
+            updateMood(15); // Sending mail gives a huge mood boost
             document.getElementById('mail-win').classList.add('hidden');
         }
     </script>
