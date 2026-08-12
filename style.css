@@ -12,7 +12,7 @@ body, html {
     display: none !important;
 }
 
-/* Authentic NSO BIOS Boot Screen */
+/* Authentic BIOS Boot Screen */
 #boot-screen {
     position: fixed;
     top: 0;
@@ -24,6 +24,7 @@ body, html {
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 40px;
@@ -34,9 +35,30 @@ body, html {
     margin: 4px 0;
     line-height: 1.2;
 }
-#boot-action-text:hover {
-    color: #ff5eb2;
-    background: #ffffff;
+
+/* Floating Heart Button Animation on the Right */
+#heart-container {
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
+    animation: floatHeart 2s ease-in-out infinite alternate;
+}
+
+#enter-heart-btn {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px #ff5eb2);
+    transition: transform 0.2s ease;
+}
+
+#enter-heart-btn:hover {
+    transform: scale(1.15);
+}
+
+@keyframes floatHeart {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-12px); }
 }
 
 /* Desktop BG matching the light pink NSO grid style */
