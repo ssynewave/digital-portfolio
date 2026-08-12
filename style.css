@@ -12,34 +12,31 @@ body, html {
     display: none !important;
 }
 
-/* Boot Screen */
+/* Authentic NSO BIOS Boot Screen */
 #boot-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #0d021a;
-    color: #ff5eb2;
+    background: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 40px;
+    box-sizing: border-box;
     z-index: 9999;
 }
-.boot-content {
-    text-align: center;
-    border: 2px dashed #ff5eb2;
-    padding: 40px;
-    background: #1a0633;
+.bios-content p {
+    margin: 4px 0;
+    line-height: 1.2;
 }
-.nso-btn {
-    background: #ff5eb2;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
+#boot-action-text:hover {
+    color: #ff5eb2;
+    background: #ffffff;
 }
 
 /* Desktop BG matching the light pink NSO grid style */
