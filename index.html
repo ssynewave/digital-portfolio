@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHI.EXE - Digital Portfolio</title>
+    <!-- NeedyWebUI CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@main/nso_ui.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BOOT / START SCREEN -->
+    <div id="boot-screen">
+        <div class="boot-content">
+            <h1>JINE OS v4.0</h1>
+            <p>INITIALIZING SYSTEM ASSETS...</p>
+            <p>LOADING PROFILE: ADHITHYA SURESH...</p>
+            <button id="start-btn" class="nso-btn">PRESS START TO BOOT</button>
+        </div>
+    </div>
+
+    <!-- MAIN DESKTOP ENVIRONMENT -->
+    <div id="desktop" class="hidden">
+        
+        <!-- Taskbar -->
+        <div class="nso-taskbar">
+            <div class="taskbar-left">
+                <button class="nso-start-menu-btn" id="taskbar-start">MENU</button>
+                <span class="taskbar-title">ADHI_OS // LIVE DESKTOP</span>
+            </div>
+            <div class="taskbar-right">
+                <span id="live-clock">00:00:00</span>
+            </div>
+        </div>
+
+        <!-- Desktop Icons / Shortcuts -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" data-target="resume-window">
+                <div class="icon-img">📄</div>
+                <span>Resume.txt</span>
+            </div>
+            <div class="desktop-icon" data-target="projects-window">
+                <div class="icon-img">💻</div>
+                <span>Projects.exe</span>
+            </div>
+            <div class="desktop-icon" data-target="cert-window">
+                <div class="icon-img">🏆</div>
+                <span>Certificates.url</span>
+            </div>
+        </div>
+
+        <!-- VISUAL NOVEL WEBCAM WIDGET (Bottom Right) -->
+        <div class="vn-webcam-box">
+            <div class="title-bar">
+                <div class="title-bar-text">WEBCAM_STREAM.EXE</div>
+            </div>
+            <div class="window-body vn-body">
+                <div class="avatar-container">
+                    <img src="avatar-pixel.png" alt="Adhithya Pixel Art" id="pixel-avatar">
+                </div>
+                <div class="dialogue-box">
+                    <span id="speaker-name">ADHI-CHAN</span>
+                    <p id="dialogue-text">"Welcome to my portfolio! Check out my desktop icons, senpai~"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 1: RESUME -->
+        <div class="nso-window draggable-window hidden" id="resume-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Resume - Adhithya Suresh</div>
+                <div class="window-controls">
+                    <button class="close-btn" data-target="resume-window">X</button>
+                </div>
+            </div>
+            <div class="window-body scrollable">
+                <h2>Adhithya Suresh</h2>
+                <p><strong>BBA Business Analytics | ITM Skills University (2025-2028)</strong></p>
+                <hr>
+                <h3>Education</h3>
+                <ul>
+                    <li><strong>BBA:</strong> ITM Skills University (CGPA: 9.95 / 2025)</li>
+                    <li><strong>A-Levels:</strong> Dr. Pillai Global Academy (Grade D / 2025)</li>
+                    <li><strong>X:</strong> Mahatma International School (70% / 2023)</li>
+                </ul>
+                <h3>Technical Qualifications</h3>
+                <p>Python, MySQL, MS Office, HTML, CSS</p>
+                <h3>Languages</h3>
+                <p>English, Japanese, German, French</p>
+                <h3>Experience & NGO Project</h3>
+                <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned/executed donation drives, managed logistics, and ran mental health awareness initiatives.</p>
+                <h3>Positions of Responsibility</h3>
+                <ul>
+                    <li>General Secretary & Former Creative Director - The Phantom Opera Club</li>
+                    <li>Creative Director - Business Intelligence and Current Affairs Lab (BICAL)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- WINDOW 2: PROJECTS -->
+        <div class="nso-window draggable-window hidden" id="projects-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Projects.exe - GitHub Feed</div>
+                <div class="window-controls">
+                    <button class="close-btn" data-target="projects-window">X</button>
+                </div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>GitHub Repositories & Works</h3>
+                <p>Click below to inspect my active code bases on GitHub:</p>
+                <div class="project-list">
+                    <a href="https://github.com/ArThirtyFour" target="_blank" class="nso-project-card">
+                        <h4>NeedyWebUI Portfolio Base</h4>
+                        <p>UI port implementation exploring custom interactive web layouts.</p>
+                    </a>
+                    <a href="https://github.com/" target="_blank" class="nso-project-card">
+                        <h4>Data Analytics Toolkit</h4>
+                        <p>Python and MySQL queries built for data management workflow automation.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 3: CERTIFICATES -->
+        <div class="nso-window draggable-window hidden" id="cert-window">
+            <div class="title-bar">
+                <div class="title-bar-text">Coursera_Certifications.url</div>
+                <div class="window-controls">
+                    <button class="close-btn" data-target="cert-window">X</button>
+                </div>
+            </div>
+            <div class="window-body scrollable">
+                <h3>Verified Certifications</h3>
+                <p>Click any title to open the verified credential link directly:</p>
+                <ul class="cert-links">
+                    <li><a href="https://www.coursera.org" target="_blank"><strong>Fintech Olympiad 2025 Module Completion</strong> - Fintech Foundation</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank"><strong>Python for Everybody</strong> - University of Michigan via Coursera</a></li>
+                    <li><a href="https://www.coursera.org" target="_blank"><strong>Introduction to Data Analytics</strong> - IBM via Coursera</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Audio assets for game click sounds -->
+    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click-quirky.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
