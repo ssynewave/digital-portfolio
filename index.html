@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ssynewave.exe // Retro Portfolio OS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@main/nso_ui.css">
+    <title>ssynewave.exe // Business Analytics Portfolio OS</title>
     <style>
         :root {
             --os-bg: #120524;
-            --win-bg: #fcf1f7;
-            --title-bg: #b4a5e8;
-            --border-col: #7c6fd6;
-            --text-col: #3b2a56;
-            --accent-col: #ff5eb2;
+            --win-bg: #fdf6ff;
+            --title-bg: #d4c5f9;
+            --border-col: #8b73ce;
+            --text-col: #362459;
+            --accent-col: #ff73c2;
+            --bar-bg: #e6dcff;
         }
 
-        .dark-theme {
-            --os-bg: #05020a;
-            --win-bg: #140921;
-            --title-bg: #2d1a47;
-            --border-col: #533d8a;
-            --text-col: #f0ebff;
-            --accent-col: #ff3399;
+        body.dark-mode {
+            --os-bg: #070110;
+            --win-bg: #180c2e;
+            --title-bg: #321c59;
+            --border-col: #7552be;
+            --text-col: #f3edff;
+            --accent-col: #ff4da6;
+            --bar-bg: #271447;
         }
 
         body, html {
@@ -48,97 +49,75 @@
             background-size: cover; image-rendering: pixelated;
         }
 
-        /* WINDOW SYSTEM */
+        /* WINDOW STYLING (NSO STYLE) */
         .nso-window {
             position: absolute; background: var(--win-bg);
-            border: 2px solid var(--border-col); box-shadow: 5px 5px 0px rgba(50, 20, 90, 0.5);
-            z-index: 100; display: flex; flex-direction: column; min-width: 260px; min-height: 160px;
+            border: 2px solid var(--border-col); box-shadow: 4px 4px 0px rgba(54, 36, 89, 0.4);
+            z-index: 100; display: flex; flex-direction: column; min-width: 280px; min-height: 180px;
             animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
+            0% { transform: scale(0.85); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
         .title-bar {
-            background: var(--title-bg); color: var(--text-col); padding: 5px 10px;
+            background: var(--title-bg); color: var(--text-col); padding: 5px 8px;
             display: flex; justify-content: space-between; align-items: center; cursor: move; font-size: 12px; font-weight: bold;
         }
         .window-controls button {
-            background: var(--border-col); color: white; border: none; font-weight: bold; cursor: pointer; padding: 1px 6px; font-size: 10px;
+            background: var(--border-col); color: white; border: none; font-weight: bold; cursor: pointer; padding: 1px 5px; font-size: 10px;
         }
         .window-controls button:hover { background: var(--accent-col); }
-        .window-body { padding: 14px; color: var(--text-col); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 400px; }
-
-        /* WEBCAM WIDGET */
-        #webcam-win { top: 30px; left: 30px; width: 320px; }
-        .webcam-body { padding: 0; background: #0b0218; text-align: center; position: relative; height: 190px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px inset var(--border-col); }
-        .pixel-avatar-canvas {
-            width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: #ff88cb; font-weight: bold; cursor: pointer; position: relative;
-        }
-        .avatar-face {
-            font-size: 42px; margin-bottom: 5px; text-shadow: 2px 2px 0px #ff5eb2;
-            animation: floatFace 2s ease-in-out infinite alternate;
-        }
-        @keyframes floatFace {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-4px); }
-        }
-        .webcam-overlay-info { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.85); color: #ff88cb; font-size: 10px; padding: 5px; display: flex; justify-content: space-between; box-sizing: border-box; }
-
-        /* ADVANCED TASK MANAGER / METRICS */
-        #taskman-win { top: 30px; right: 30px; width: 300px; }
-        .stat-row { display: flex; justify-content: space-between; margin: 6px 0; font-size: 11px; }
-        .stat-val { color: var(--border-col); font-weight: bold; }
-        .perf-bar-container { background: rgba(124, 111, 214, 0.2); border: 1px solid var(--border-col); height: 8px; width: 100%; margin-top: 2px; margin-bottom: 6px; overflow: hidden; }
-        .perf-bar-fill { background: var(--accent-col); height: 100%; width: 45%; transition: width 0.4s ease; }
-
-        /* DESKTOP SHORTCUT ICONS */
-        .desktop-shortcuts { position: absolute; top: 250px; left: 30px; display: flex; flex-direction: column; gap: 15px; }
-        .shortcut-icon { width: 75px; text-align: center; cursor: pointer; transition: transform 0.1s; }
-        .shortcut-icon:hover { transform: scale(1.05); }
-        .shortcut-icon span { font-size: 28px; display: block; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.3)); }
-        .shortcut-icon label { color: var(--text-col); font-size: 10px; font-weight: bold; display: block; margin-top: 3px; background: rgba(255,255,255,0.85); border: 1px solid var(--border-col); padding: 2px; }
+        .window-body { padding: 12px; color: var(--text-col); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 420px; }
 
         /* TASKBAR */
         .nso-taskbar {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 38px;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 36px;
             background: var(--title-bg); border-top: 2px solid var(--border-col); display: flex;
-            justify-content: space-between; align-items: center; padding: 0 12px; box-sizing: border-box; z-index: 9999; color: var(--text-col); font-size: 11px;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+            justify-content: space-between; align-items: center; padding: 0 8px; box-sizing: border-box; z-index: 9999; color: var(--text-col); font-size: 11px;
         }
-        .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 4px 12px; font-weight: bold; cursor: pointer; font-family: 'Courier New'; }
+        .taskbar-left, .taskbar-right { display: flex; align-items: center; gap: 6px; }
+        .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; font-family: 'Courier New'; }
         .start-menu-btn:active { border-style: inset; }
+        .taskbar-icon-btn { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); }
+        .taskbar-icon-btn:hover { background: var(--accent-col); color: white; }
 
-        /* START MENU */
+        /* START MENU / CONTROL PANEL */
         #start-menu {
-            position: absolute; bottom: 42px; left: 0; width: 230px; background: var(--win-bg);
-            border: 2px solid var(--border-col); box-shadow: 4px -4px 0px rgba(80,50,120,0.4); z-index: 10000; display: none;
+            position: absolute; bottom: 40px; left: 0; width: 220px; background: var(--win-bg);
+            border: 2px solid var(--border-col); box-shadow: 4px -4px 0px rgba(54,36,89,0.3); z-index: 10000; display: none;
             animation: slideUp 0.15s ease-out;
         }
         @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .start-menu-header { background: var(--border-col); color: white; padding: 8px; font-weight: bold; font-size: 11px; }
-        .start-menu-items { padding: 5px 0; }
-        .start-item { padding: 7px 15px; cursor: pointer; font-size: 11px; color: var(--text-col); }
-        .start-item:hover { background: var(--border-col); color: white; padding-left: 18px; }
+        .start-menu-header { background: var(--border-col); color: white; padding: 6px 10px; font-weight: bold; font-size: 11px; }
+        .start-item { padding: 7px 12px; cursor: pointer; font-size: 11px; color: var(--text-col); border-bottom: 1px dashed var(--bar-bg); }
+        .start-item:hover { background: var(--border-col); color: white; padding-left: 15px; }
+
+        /* JINE VISUAL NOVEL CHAT WIDGET (BOTTOM RIGHT) */
+        #jine-widget {
+            position: absolute; bottom: 45px; right: 20px; width: 340px; background: var(--win-bg);
+            border: 2px solid var(--border-col); box-shadow: 4px 4px 0px rgba(54,36,89,0.3); z-index: 500;
+        }
+        .jine-bubble { background: rgba(255,255,255,0.7); border: 1px dashed var(--accent-col); padding: 8px; font-size: 11px; margin-bottom: 8px; min-height: 45px; }
+
+        /* TWEETER APP STYLING */
+        .tweet-card { background: rgba(139,115,206,0.08); border: 1px solid var(--border-col); padding: 10px; margin-bottom: 10px; }
+        .tweet-input { width: 100%; box-sizing: border-box; padding: 6px; font-family: 'Courier New'; margin-bottom: 6px; background: var(--win-bg); color: var(--text-col); border: 1px solid var(--border-col); }
 
         /* NOTIFICATIONS */
         #notification-container { position: fixed; bottom: 50px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99999; pointer-events: none; }
         .nso-notification {
             background: var(--win-bg); color: var(--text-col); border: 2px solid var(--accent-col);
-            padding: 10px 14px; font-size: 11px; box-shadow: 4px 4px 0px rgba(0,0,0,0.4); animation: slideIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 8px 12px; font-size: 11px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3); animation: slideIn 0.2s ease;
             pointer-events: auto;
         }
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* RECRUITER MODE & HELP MODAL */
-        .modal-panel {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6);
-            z-index: 999999; justify-content: center; align-items: center; box-sizing: border-box; display: none;
-        }
-        .modal-container { width: 600px; max-height: 80vh; background: var(--win-bg); border: 2px solid var(--border-col); padding: 30px; box-shadow: 8px 8px 0px rgba(0,0,0,0.4); overflow-y: auto; color: var(--text-col); }
-        .nso-link-card { display: block; background: rgba(124,111,214,0.1); border: 1px solid var(--border-col); padding: 10px; margin-bottom: 10px; color: var(--text-col); text-decoration: none; font-size: 11px; font-weight: bold; }
-        .nso-link-card:hover { background: var(--border-col); color: white; }
+        /* MODAL PANELS */
+        .modal-panel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999999; display: flex; justify-content: center; align-items: center; display: none; }
+        .modal-container { width: 550px; max-height: 80vh; background: var(--win-bg); border: 2px solid var(--border-col); padding: 25px; box-shadow: 6px 6px 0px rgba(0,0,0,0.4); overflow-y: auto; color: var(--text-col); }
+        .nso-link-card { display: block; background: var(--bar-bg); border: 1px solid var(--border-col); padding: 8px; margin-bottom: 8px; color: var(--text-col); text-decoration: none; font-size: 11px; font-weight: bold; }
+        .nso-link-card:hover { background: var(--accent-col); color: white; }
     </style>
 </head>
 <body>
@@ -161,130 +140,127 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- WEBCAM APPLICATION -->
-        <div class="nso-window draggable-window" id="webcam-win">
+        <!-- 1. WEBCAM WINDOW -->
+        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px;">
             <div class="title-bar">
-                <div class="title-bar-text">WEBCAM.EXE</div>
+                <div class="title-bar-text">webcam</div>
                 <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
             </div>
-            <div class="window-body webcam-body" onclick="pokeAvatar()">
-                <div class="pixel-avatar-canvas">
-                    <div class="avatar-face" id="avatar-emoji">(•̀ - •́)</div>
-                    <div style="font-size: 10px; color: #ff88cb; text-shadow: 1px 1px #000;" id="avatar-status-text">CLICK ME TO CHANGE MOOD</div>
+            <div class="window-body" style="padding:0; background:#0b0218; text-align:center; height:190px; position:relative;">
+                <div onclick="pokeAvatar()" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;">
+                    <div style="font-size:45px; text-shadow:2px 2px #ff5eb2;" id="avatar-face">(•̀ - •́)</div>
+                    <div style="font-size:10px; color:#ff88cb; margin-top:5px;">CLICK TO CHANGE MOOD</div>
                 </div>
-                <div class="webcam-overlay-info">
+                <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.85); color:#ff88cb; font-size:10px; padding:4px; display:flex; justify-content:space-between; box-sizing:border-box;">
                     <span>● LIVE | ADHITHYA</span>
-                    <span id="mood-text">MOOD: 72%</span>
+                    <span id="webcam-mood">MOOD: 72%</span>
                 </div>
             </div>
         </div>
 
-        <!-- ADVANCED TASK MANAGER -->
-        <div class="nso-window draggable-window" id="taskman-win">
+        <!-- 2. TASK MANAGER WINDOW -->
+        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;">
             <div class="title-bar">
-                <div class="title-bar-text">STATS.EXE // Task Manager</div>
+                <div class="title-bar-text">Task Manager</div>
                 <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
             </div>
             <div class="window-body">
-                <div class="stat-row"><span>FPS Performance</span><strong class="stat-val" id="stat-fps">60 FPS</strong></div>
-                <div class="perf-bar-container"><div class="perf-bar-fill" id="fps-fill" style="width: 100%;"></div></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                    <span style="font-size:11px; font-weight:bold;">Followers</span>
+                    <strong style="font-size:18px; color:var(--accent-col);" id="stat-followers">1001</strong>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                    <span style="font-size:11px;">Stress</span>
+                    <strong style="font-size:11px;" id="stat-stress">15 / 100</strong>
+                </div>
+                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:var(--accent-col); height:100%; width:15%;" id="stress-bar"></div></div>
 
-                <div class="stat-row"><span>Memory Allocation</span><strong class="stat-val" id="stat-mem">42.8 MB</strong></div>
-                <div class="perf-bar-container"><div class="perf-bar-fill" id="mem-fill" style="width: 42%;"></div></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                    <span style="font-size:11px;">Affection</span>
+                    <strong style="font-size:11px;" id="stat-affection">40 / 100</strong>
+                </div>
+                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:#5cd1e5; height:100%; width:40%;" id="affection-bar"></div></div>
 
-                <div class="stat-row"><span>CPU Usage (Sim)</span><strong class="stat-val" id="stat-cpu">14%</strong></div>
-                <div class="perf-bar-container"><div class="perf-bar-fill" id="cpu-fill" style="width: 14%;"></div></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                    <span style="font-size:11px;">Mental Darkness</span>
+                    <strong style="font-size:11px;" id="stat-darkness">15 / 100</strong>
+                </div>
+                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:12px;"><div style="background:#a78bfa; height:100%; width:15%;" id="darkness-bar"></div></div>
 
-                <hr style="border: 0; border-top: 1px solid var(--border-col); margin: 8px 0;">
-                <div class="stat-row"><span>Advanced Mood State</span><strong class="stat-val" id="advanced-mood-status">STABLE // FOCUSED</strong></div>
-                <div class="perf-bar-container"><div class="perf-bar-fill" id="mood-fill" style="width: 72%;"></div></div>
+                <hr style="border:0; border-top:1px solid var(--border-col); margin:6px 0;">
+                <div style="font-size:10px; display:flex; justify-content:space-between;"><span>Total Visits: <strong id="visit-count">142</strong></span><span>FPS: <strong id="sys-fps">60</strong></span></div>
+                <div style="font-size:10px; display:flex; justify-content:space-between; margin-top:2px;"><span>Memory: <strong id="sys-mem">44.2 MB</strong></span><span>Likes: <strong id="like-count">389</strong></span></div>
             </div>
         </div>
 
-        <!-- DESKTOP SHORTCUT ICONS -->
-        <div class="desktop-shortcuts">
-            <div class="shortcut-icon" onclick="openApp('resume-win')"><span>📁</span><label>PROFILE.EXE</label></div>
-            <div class="shortcut-icon" onclick="openApp('projects-win')"><span>💻</span><label>PROJECTS</label></div>
-            <div class="shortcut-icon" onclick="openApp('mission-win')"><span>🌱</span><label>MISSION</label></div>
-            <div class="shortcut-icon" onclick="openApp('guild-win')"><span>🛡️</span><label>GUILD</label></div>
-            <div class="shortcut-icon" onclick="openApp('achieve-win')"><span>🏆</span><label>TROPHIES</label></div>
-            <div class="shortcut-icon" onclick="openApp('mail-win')"><span>📨</span><label>MAIL.EXE</label></div>
+        <!-- 3. INTERNET APP (Socials: Instagram, LinkedIn, Github) -->
+        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 350px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Internet!</div>
+                <div class="window-controls"><button class="close-btn" data-target="internet-win">×</button></div>
+            </div>
+            <div class="window-body">
+                <h2 style="color:var(--accent-col); text-align:center; margin-top:0;">✨ Internet! ✨</h2>
+                <p style="text-align:center; font-size:11px;">Select a network destination below:</p>
+                <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="nso-link-card">💼 LinkedIn Profile (Professional Network)</a>
+                <a href="https://github.com/ArThirtyFour" target="_blank" class="nso-link-card">💻 GitHub Repositories & Codebase</a>
+                <a href="https://instagram.com" target="_blank" class="nso-link-card">📸 Instagram Creative Feed</a>
+            </div>
         </div>
 
-        <!-- APP WINDOWS -->
-        <div class="nso-window draggable-window hidden app-window" id="resume-win" style="top: 80px; left: 360px; width: 450px; height: 380px;">
+        <!-- 4. TWEETER APP (Public Anonymous Blog & Photo Upload) -->
+        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 460px; height: 390px;">
             <div class="title-bar">
-                <div class="title-bar-text">PROFILE.EXE - Adhithya Suresh</div>
-                <div class="window-controls"><button class="close-btn" data-target="resume-win">×</button></div>
+                <div class="title-bar-text">Tweeter</div>
+                <div class="window-controls"><button class="close-btn" data-target="tweeter-win">×</button></div>
             </div>
             <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">Adhithya Suresh</h3>
-                <p style="margin: 0 0 8px 0;"><strong>BBA Business Analytics | ITM Skills University (2025–2028)</strong></p>
-                <hr>
-                <h4 style="margin: 6px 0;">Academic Metrics</h4>
-                <p><strong>ITM Skills University:</strong> CGPA 9.95 / 10.0 (2025)</p>
-                <h4 style="margin: 6px 0;">Technical Qualifications</h4>
-                <p>Python, MySQL, MS Office, HTML, CSS</p>
-                <h4 style="margin: 6px 0;">Languages</h4>
-                <p>English, Japanese, German, French</p>
-            </div>
-        </div>
-
-        <div class="nso-window draggable-window hidden app-window" id="projects-win" style="top: 110px; left: 400px; width: 430px; height: 340px;">
-            <div class="title-bar">
-                <div class="title-bar-text">PROJECTS.EXE - GitHub Lab</div>
-                <div class="window-controls"><button class="close-btn" data-target="projects-win">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">Project Database</h3>
-                <a href="https://github.com/ArThirtyFour/NeedyWebUI" target="_blank" class="nso-link-card">
-                    <strong>NeedyWebUI Portfolio Framework</strong>
-                    <p style="margin: 2px 0 0 0;">Interactive retro UI component architecture port.</p>
-                </a>
-                <div style="background: rgba(124,111,214,0.05); border: 1px dashed var(--border-col); padding: 10px; margin-top: 10px; text-align: center;">
-                    <p style="margin: 0; font-size: 11px;">[ CONFIGURATION AREA: Add additional GitHub projects here ]</p>
+                <div style="background:var(--bar-bg); border:1px solid var(--border-col); padding:8px; margin-bottom:12px;">
+                    <h4 style="margin:0 0 5px 0; font-size:11px;">Create Public Post (Anonymous)</h4>
+                    <textarea id="tweet-text" class="tweet-input" placeholder="What's happening in your digital world?..." rows="2"></textarea>
+                    <button onclick="submitTweet()" class="start-menu-btn" style="width:100%;">Post to Tweeter</button>
+                </div>
+                <div id="tweet-feed">
+                    <div class="tweet-card">
+                        <strong style="color:var(--accent-col);">@raincandy_U</strong>
+                        <p style="margin:4px 0 6px 0; font-size:11px;">omfg i made some basic ass post on main and everyone was still really nice and commented... im so glad i was born cute. thank u god</p>
+                        <span style="font-size:10px; cursor:pointer;" onclick="likeTweet(this)">❤️ 0 Likes</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="mission-win" style="top: 140px; left: 440px; width: 430px; height: 350px;">
+        <!-- 5. HANG OUT APP (Guild, Achievements, Certifications) -->
+        <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;">
             <div class="title-bar">
-                <div class="title-bar-text">MISSION CONTROL - Manapravah Foundation</div>
-                <div class="window-controls"><button class="close-btn" data-target="mission-win">×</button></div>
+                <div class="title-bar-text">Hang Out</div>
+                <div class="window-controls"><button class="close-btn" data-target="hangout-win">×</button></div>
             </div>
             <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">NGO Internship (2026)</h3>
-                <p><strong>Objectives & Execution:</strong></p>
-                <ul style="padding-left: 15px; margin: 5px 0;">
-                    <li>Planned and executed donation drives and mental health awareness initiatives.</li>
-                    <li>Designed and conducted interactive activities for Mindful Mela.</li>
-                    <li>Coordinated with foundations and beneficiaries for donation distribution.</li>
-                </ul>
+                <h3 style="margin-top:0;">Hang Out Hub</h3>
+                <p style="font-size:11px;">Select a category to inspect credentials and records:</p>
+                <div class="nso-link-card" onclick="openApp('guild-win')">🛡️ Guild — ITM Business School, Graduation, Highschool</div>
+                <div class="nso-link-card" onclick="openApp('achieve-win')">🏆 Achievements — Trophies & Awards Database</div>
+                <div class="nso-link-card" onclick="openApp('certs-win')">📜 Certifications — Verified Coursera & Credentials</div>
+                <div class="nso-link-card" onclick="openApp('exp-win')">💼 Experiences — Internship & Leadership History</div>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 170px; left: 220px; width: 430px; height: 340px;">
-            <div class="title-bar">
-                <div class="title-bar-text">GUILD HALL - Positions of Responsibility</div>
-                <div class="window-controls"><button class="close-btn" data-target="guild-win">×</button></div>
-            </div>
+        <!-- SUB APPS ACCESSED FROM HANG OUT -->
+        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;">
+            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win">×</button></div></div>
             <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">Leadership & Clubs</h3>
-                <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
-                    <li><strong>The Phantom Opera Club:</strong> General Secretary | Creative Director</li>
-                    <li><strong>BICAL:</strong> Creative Director - Business Intelligence and Current Affairs Lab</li>
-                </ul>
+                <h3>Academic & Guild Records</h3>
+                <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
+                <p><strong>Graduation / High School:</strong> Dr. Pillai Global Academy & Mahatma International School records verified.</p>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 200px; left: 260px; width: 440px; height: 350px;">
-            <div class="title-bar">
-                <div class="title-bar-text">ACHIEVEMENTS.EXE - Trophy Room</div>
-                <div class="window-controls"><button class="close-btn" data-target="achieve-win">×</button></div>
-            </div>
+        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;">
+            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win">×</button></div></div>
             <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">Awards & Honors</h3>
-                <ul style="padding-left: 15px; margin: 5px 0; font-size: 11px;">
+                <h3>Interactive Trophy Room</h3>
+                <ul>
                     <li>Bronze Medalist - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</li>
                     <li>2nd Prize Winner - Classical Dance, Mathrubhumi Kalolsavam 2018</li>
                     <li>2nd Place - National Art Competition, Rangotsav 2024</li>
@@ -292,33 +268,74 @@
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 230px; left: 300px; width: 410px; height: 300px;">
-            <div class="title-bar">
-                <div class="title-bar-text">CERTIFICATIONS.URL</div>
-                <div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div>
-            </div>
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;">
+            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div></div>
             <div class="window-body scrollable">
-                <h3 style="margin: 0 0 4px 0;">Certification Tower</h3>
-                <ul style="padding-left: 15px;">
+                <h3>Verified Certifications</h3>
+                <ul>
                     <li>Fintech Olympiad 2025 Module Completion</li>
                 </ul>
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="mail-win" style="top: 150px; left: 340px; width: 390px; height: 320px;">
-            <div class="title-bar">
-                <div class="title-bar-text">MAIL.EXE - Contact Center</div>
-                <div class="window-controls"><button class="close-btn" data-target="mail-win">×</button></div>
+        <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;">
+            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win">×</button></div></div>
+            <div class="window-body scrollable">
+                <h3>Professional Experience & NGO</h3>
+                <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
+                <p><strong>Positions of Responsibility:</strong> General Secretary & Creative Director - The Phantom Opera Club; Creative Director - BICAL.</p>
             </div>
-            <div class="window-body">
-                <h3 style="margin: 0 0 5px 0;">Compose Message to Adhithya</h3>
-                <form onsubmit="handleSendMail(event)">
-                    <label style="font-size:10px;">YOUR EMAIL:</label><br>
-                    <input type="email" id="sender-email" required style="width:100%; margin-bottom:8px; font-family:'Courier New';"><br>
-                    <label style="font-size:10px;">MESSAGE:</label><br>
-                    <textarea id="sender-msg" rows="3" required style="width:100%; margin-bottom:8px; font-family:'Courier New';"></textarea><br>
-                    <button type="submit" class="start-menu-btn" style="width:100%;">SEND MESSAGE</button>
-                </form>
+        </div>
+
+        <!-- 6. MAP / GITHUB PROJECTS APP -->
+        <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Go Out // GitHub Project Map</div>
+                <div class="window-controls"><button class="close-btn" data-target="map-win">×</button></div>
+            </div>
+            <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
+                <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
+                <div style="position:absolute; top:120px; left:250px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com','_blank')">📍 Ikebukuro // Data Analytics Toolkit</div>
+                <p style="position:absolute; bottom:5px; left:10px; background:rgba(255,255,255,0.8); margin:0; font-size:9px; padding:2px;">Click any live project checkpoint to navigate to GitHub.</p>
+            </div>
+        </div>
+
+        <!-- 7. JINE / CHAT WIDGET (Visual Novel Style Intro) -->
+        <div id="jine-widget" class="draggable-window">
+            <div class="title-bar">
+                <div class="title-bar-text">JINE</div>
+                <div class="window-controls"><button onclick="document.getElementById('jine-widget').classList.add('hidden')">×</button></div>
+            </div>
+            <div class="window-body" style="background:var(--win-bg);">
+                <div class="jine-bubble">
+                    <strong style="color:var(--accent-col);">Adhithya-chan:</strong>
+                    <p id="jine-dialogue" style="margin:4px 0 0 0;">"Apparently with this BBA Business Analytics thing we can analyze anything we want? Let's give it a spin!"</p>
+                </div>
+                <div style="display:flex; gap:4px; justify-content:space-around;">
+                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">LOVE</span>
+                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">OK</span>
+                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">OMG</span>
+                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">Sorry</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESKTOP SHORTCUT ICONS -->
+        <div style="position:absolute; top:30px; left:380px; display:flex; flex-direction:column; gap:15px;">
+            <div onclick="openApp('internet-win')" style="cursor:pointer; text-align:center; width:60px;">
+                <span style="font-size:26px;">🌐</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Internet</label>
+            </div>
+            <div onclick="openApp('tweeter-win')" style="cursor:pointer; text-align:center; width:60px;">
+                <span style="font-size:26px;">💬</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
+            </div>
+            <div onclick="openApp('hangout-win')" style="cursor:pointer; text-align:center; width:60px;">
+                <span style="font-size:26px;">☕</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
+            </div>
+            <div onclick="openApp('map-win')" style="cursor:pointer; text-align:center; width:60px;">
+                <span style="font-size:26px;">🗺️</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
+            </div>
+            <div onclick="window.location.href='mailto:2025.adhithyas@isu.ac.in'" style="cursor:pointer; text-align:center; width:60px;">
+                <span style="font-size:26px;">📧</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Mail</label>
             </div>
         </div>
 
@@ -326,30 +343,29 @@
         <div class="nso-taskbar">
             <div class="taskbar-left">
                 <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
-                <span style="margin: 0 10px;">|</span>
-                <span>ssynewave.exe // ACTIVE OS</span>
+                <button class="taskbar-icon-btn" onclick="openApp('tweeter-win')">💬 Tweeter</button>
+                <button class="taskbar-icon-btn" onclick="openApp('jine-widget')">💚 JINE</button>
+                <button class="taskbar-icon-btn" onclick="openApp('webcam-win')">📷 Webcam</button>
+                <button class="taskbar-icon-btn" onclick="openApp('taskman-win')">📊 Task Manager</button>
+                <button class="taskbar-icon-btn" onclick="openApp('internet-win')">🌐 Internet</button>
             </div>
             <div class="taskbar-right">
+                <span style="font-size:10px;">🌤️ Panvel 28°C</span>
+                <span style="margin:0 4px;">|</span>
                 <span id="taskbar-clock">00:00:00</span>
             </div>
         </div>
 
-        <!-- START MENU -->
+        <!-- START MENU / CONTROL PANEL -->
         <div id="start-menu">
-            <div class="start-menu-header">ADHITHYA.EXE // LAUNCHER</div>
-            <div class="start-menu-items">
-                <div class="start-item" onclick="openApp('resume-win'); toggleStartMenu();">📁 PROFILE.EXE</div>
-                <div class="start-item" onclick="openApp('projects-win'); toggleStartMenu();">💻 PROJECTS.EXE</div>
-                <div class="start-item" onclick="openApp('mission-win'); toggleStartMenu();">🌱 MISSION CONTROL</div>
-                <div class="start-item" onclick="openApp('guild-win'); toggleStartMenu();">🛡️ GUILD HALL</div>
-                <div class="start-item" onclick="openApp('achieve-win'); toggleStartMenu();">🏆 ACHIEVEMENT HALL</div>
-                <div class="start-item" onclick="openApp('certs-win'); toggleStartMenu();">🎓 CERTIFICATION TOWER</div>
-                <div class="start-item" onclick="openApp('mail-win'); toggleStartMenu();">📨 MAIL.EXE</div>
-                <hr style="border: 0; border-top: 1px solid var(--border-col); margin: 3px 0;">
-                <div class="start-item" onclick="toggleRecruiterMode(); toggleStartMenu();">💼 RECRUITER MODE</div>
-                <div class="start-item" onclick="toggleTheme(); toggleStartMenu();" id="theme-toggle-label">🌙 TOGGLE DARK MODE</div>
-                <div class="start-item" onclick="openHelpModal(); toggleStartMenu();">❓ HELP.EXE</div>
-            </div>
+            <div class="start-menu-header">Control Panel</div>
+            <div class="start-item" onclick="openApp('internet-win'); toggleStartMenu();">🌐 Internet (Socials)</div>
+            <div class="start-item" onclick="openApp('tweeter-win'); toggleStartMenu();">💬 Tweeter (Public Feed)</div>
+            <div class="start-item" onclick="openApp('hangout-win'); toggleStartMenu();">☕ Hang Out (Credentials)</div>
+            <div class="start-item" onclick="openApp('map-win'); toggleStartMenu();">🗺️ Go Out (GitHub Map)</div>
+            <div class="start-item" onclick="toggleTheme(); toggleStartMenu();" id="theme-label">🌙 Toggle Dark Mode</div>
+            <div class="start-item" onclick="toggleMute(); toggleStartMenu();" id="sound-label">🔊 Sound: ON</div>
+            <div class="start-item" onclick="alert('ssynewave.exe v1.0. Running stable under NSO OS environment.')">ℹ️ About System</div>
         </div>
 
     </div>
@@ -357,80 +373,35 @@
     <!-- NOTIFICATION CONTAINER -->
     <div id="notification-container"></div>
 
-    <!-- RECRUITER MODE MODAL -->
-    <div id="recruiter-mode-panel" class="modal-panel">
-        <div class="modal-container">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--border-col); padding-bottom:12px; margin-bottom:20px;">
-                <h2 style="margin:0;">Adhithya Suresh — Professional Summary</h2>
-                <button onclick="toggleRecruiterMode()" class="start-menu-btn">X</button>
-            </div>
-            <p><strong>Field:</strong> Business Analytics | <strong>Program:</strong> BBA (ITM Skills University, 2025–2028)</p>
-            <p><strong>Academic Standing:</strong> CGPA 9.95 / 10.0</p>
-            <hr>
-            <h3>Technical Qualifications</h3>
-            <p>Python, MySQL, MS Office, HTML, CSS</p>
-            <h3>Key Leadership & Experience</h3>
-            <p>General Secretary & Former Creative Director of The Phantom Opera Club, Creative Director of BICAL, and NGO Internship Lead at Manapravah Foundation (2026).</p>
-            <div style="margin-top: 20px;">
-                <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="nso-link-card" style="display:inline-block; padding:12px 24px;">Open Professional LinkedIn Profile</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- HELP MODAL -->
-    <div id="help-modal" class="modal-panel">
-        <div class="modal-container">
-            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--border-col); padding-bottom:12px; margin-bottom:20px;">
-                <h2 style="margin:0;">HELP.EXE // System Guide</h2>
-                <button onclick="closeHelpModal()" class="start-menu-btn">X</button>
-            </div>
-            <p>Welcome to <strong>ssynewave.exe</strong>, a playable desktop environment containing Adhithya Suresh's digital portfolio.</p>
-            <ul>
-                <li><strong>Desktop Icons:</strong> Open distinct applications like Profile, Projects, Trophies, and Mail.</li>
-                <li><strong>Task Manager Metrics:</strong> Tracks real-time simulated system performance (CPU, Memory, FPS) and advanced emotional telemetry.</li>
-                <li><strong>Avatar Webcam:</strong> Click the face to test your mood system!</li>
-                <li><strong>Start Menu:</strong> Access Recruiter Mode, Dark/Light theme toggle, and System Help.</li>
-            </ul>
-            <button onclick="closeHelpModal()" class="start-menu-btn" style="width:100%; margin-top:15px;">GOT IT</button>
-        </div>
-    </div>
-
-    <!-- SOUND & CLIENT SCRIPT ENGINE -->
+    <!-- AUDIO & CLIENT LOGIC ENGINE -->
     <script>
-        // GUARANTEED BOOT SEQUENCE TIMEOUT
-        window.addEventListener('DOMContentLoaded', () => {
-            let dots = 0;
-            const bootStatus = document.getElementById('boot-status');
-            const bootInterval = setInterval(() => {
-                dots = (dots + 1) % 5;
-                if (bootStatus) bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
-            }, 400);
+        // BOOT SEQUENCE
+        let dots = 0;
+        const bootStatus = document.getElementById('boot-status');
+        const bootInterval = setInterval(() => {
+            dots = (dots + 1) % 5;
+            if (bootStatus) bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
+        }, 400);
 
-            setTimeout(() => {
-                clearInterval(bootInterval);
-                const bootScreen = document.getElementById('boot-screen');
-                const desktop = document.getElementById('desktop');
-                if (bootScreen) bootScreen.classList.add('hidden');
-                if (desktop) desktop.classList.remove('hidden');
-                showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
-            }, 4500);
-        });
+        setTimeout(() => {
+            clearInterval(bootInterval);
+            document.getElementById('boot-screen').classList.add('hidden');
+            document.getElementById('desktop').classList.remove('hidden');
+            showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
+        }, 4500);
 
-        // WEB AUDIO SYNTHESIZER
+        // WEB AUDIO SYNTHESIZER SOUND EFFECTS
+        let soundEnabled = true;
         let audioCtx = null;
-        function playCrunchSound(freq = 440, type = 'square', duration = 0.05) {
+        function playSound(freq = 440, duration = 0.05) {
+            if (!soundEnabled) return;
             try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') { 
-                    audioCtx.resume(); 
-                }
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                osc.type = type;
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
@@ -446,49 +417,27 @@
             if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
 
-        // ADVANCED TASK MANAGER STATS SIMULATION
-        setInterval(() => {
-            const cpu = Math.floor(10 + Math.random() * 15);
-            const mem = (42 + Math.random() * 2).toFixed(1);
-            const fps = Math.random() > 0.1 ? 60 : 58;
-
-            const statCpu = document.getElementById('stat-cpu');
-            const cpuFill = document.getElementById('cpu-fill');
-            const statMem = document.getElementById('stat-mem');
-            const memFill = document.getElementById('mem-fill');
-            const statFps = document.getElementById('stat-fps');
-            const fpsFill = document.getElementById('fps-fill');
-
-            if (statCpu) statCpu.innerText = cpu + '%';
-            if (cpuFill) cpuFill.style.width = cpu + '%';
-            if (statMem) statMem.innerText = mem + ' MB';
-            if (memFill) memFill.style.width = mem + '%';
-            if (statFps) statFps.innerText = fps + ' FPS';
-            if (fpsFill) fpsFill.style.width = (fps / 60) * 100 + '%';
-        }, 2000);
-
         // WINDOW MANAGER
         function openApp(windowId) {
-            playCrunchSound(500, 'square', 0.05);
+            playSound(520, 0.06);
             const win = document.getElementById(windowId);
             if (win) {
                 win.classList.remove('hidden');
                 win.style.zIndex = String(Date.now());
-                updateMood(4);
+                updateStats(2, -1, 1);
             }
         }
 
         document.querySelectorAll('.close-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                playCrunchSound(300, 'sawtooth', 0.06);
+                playSound(300, 0.05);
                 const target = btn.getAttribute('data-target');
                 const win = document.getElementById(target);
                 if (win) win.classList.add('hidden');
-                updateMood(-2);
             });
         });
 
-        // DRAGGING SYSTEM
+        // WINDOW DRAGGING SYSTEM
         document.querySelectorAll('.draggable-window').forEach(windowEl => {
             const titleBar = windowEl.querySelector('.title-bar');
             if (!titleBar) return;
@@ -499,7 +448,7 @@
                 startX = e.clientX - windowEl.offsetLeft;
                 startY = e.clientY - windowEl.offsetTop;
                 windowEl.style.zIndex = String(Date.now());
-                playCrunchSound(700, 'sine', 0.02);
+                playSound(650, 0.02);
             });
 
             document.addEventListener('mousemove', (e) => {
@@ -513,7 +462,7 @@
 
         // START MENU TOGGLE
         function toggleStartMenu() {
-            playCrunchSound(450, 'square', 0.04);
+            playSound(450, 0.04);
             const menu = document.getElementById('start-menu');
             if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
@@ -524,102 +473,94 @@
             }
         });
 
-        // RECRUITER MODE & HELP MODAL TOGGLES
-        function toggleRecruiterMode() {
-            playCrunchSound(550, 'square', 0.08);
-            const panel = document.getElementById('recruiter-mode-panel');
-            if (panel) panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function openHelpModal() {
-            playCrunchSound(600, 'square', 0.06);
-            document.getElementById('help-modal').style.display = 'flex';
-        }
-
-        function closeHelpModal() {
-            playCrunchSound(350, 'square', 0.04);
-            document.getElementById('help-modal').style.display = 'none';
-        }
-
-        // DARK MODE / LIGHT MODE TOGGLE
+        // THEME & SOUND CONTROLS
         function toggleTheme() {
-            playCrunchSound(500, 'square', 0.06);
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            const toggleLabel = document.getElementById('theme-toggle-label');
-            if (toggleLabel) toggleLabel.innerText = isDark ? '☀️ TOGGLE LIGHT MODE' : '🌙 TOGGLE DARK MODE';
-            showNotification(isDark ? "Theme switched to Dark Mode 🌙" : "Theme switched to Light Mode ☀️");
+            playSound(500, 0.05);
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            document.getElementById('theme-label').innerText = isDark ? '☀️ Toggle Light Mode' : '🌙 Toggle Dark Mode';
+            showNotification(isDark ? "Dark theme activated." : "Light theme activated.");
         }
 
-        // MOOD SYSTEM & ADVANCED TELEMETRY
-        let currentMood = 72;
-
-        function updateMood(amount) {
-            currentMood = Math.min(100, Math.max(0, currentMood + amount));
-            const moodFill = document.getElementById('mood-fill');
-            const txt = document.getElementById('mood-text');
-            if (moodFill) moodFill.style.width = currentMood + '%';
-            if (txt) txt.innerText = 'MOOD: ' + currentMood + '%';
-            
-            updateAvatarExpression();
+        function toggleMute() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-label').innerText = soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+            showNotification(soundEnabled ? "Sound enabled." : "Sound muted.");
         }
 
-        function updateAvatarExpression() {
-            const emojiEl = document.getElementById('avatar-emoji');
-            const statusEl = document.getElementById('avatar-status-text');
-            const advancedStatus = document.getElementById('advanced-mood-status');
-            if (!emojiEl) return;
+        // STATS & MOOD MANAGEMENT
+        let followers = 1001, stress = 15, affection = 40, darkness = 15, mood = 72, visits = 142, likes = 389;
 
-            if (currentMood <= 20) {
-                emojiEl.innerText = "(✖﹏✖)";
-                statusEl.innerText = "SYSTEM CRITICAL!";
-                if (advancedStatus) advancedStatus.innerText = "CRITICAL // UNSTABLE";
-            } else if (currentMood <= 40) {
-                emojiEl.innerText = "(;-_-)";
-                statusEl.innerText = "SO TIRED...";
-                if (advancedStatus) advancedStatus.innerText = "FATIGUED // LOW";
-            } else if (currentMood <= 55) {
-                emojiEl.innerText = "(¬_¬ )";
-                statusEl.innerText = "MEH...";
-                if (advancedStatus) advancedStatus.innerText = "NOMINAL // IDLE";
-            } else if (currentMood <= 70) {
-                emojiEl.innerText = "(•̀ - •́)";
-                statusEl.innerText = "FOCUSED & ANALYTICAL";
-                if (advancedStatus) advancedStatus.innerText = "STABLE // FOCUSED";
-            } else if (currentMood <= 85) {
-                emojiEl.innerText = "(｡♥‿♥｡)";
-                statusEl.innerText = "HYPE MODE ENGAGED!";
-                if (advancedStatus) advancedStatus.innerText = "OPTIMIZED // HYPE";
-            } else {
-                emojiEl.innerText = "＼(≧▽≦)／";
-                statusEl.innerText = "MAXIMUM PERFORMANCE!";
-                if (advancedStatus) advancedStatus.innerText = "OVERCLOCKED // PEAK";
-            }
+        function updateStats(fDelta, sDelta, aDelta) {
+            followers += fDelta;
+            stress = Math.min(100, Math.max(0, stress + sDelta));
+            affection = Math.min(100, Math.max(0, affection + aDelta));
+            mood = Math.min(100, Math.max(0, mood + (aDelta - sDelta)));
+
+            document.getElementById('stat-followers').innerText = followers;
+            document.getElementById('stat-stress').innerText = stress + ' / 100';
+            document.getElementById('stress-bar').style.width = stress + '%';
+            document.getElementById('stat-affection').innerText = affection + ' / 100';
+            document.getElementById('affection-bar').style.width = affection + '%';
+            document.getElementById('stat-darkness').innerText = darkness + ' / 100';
+            document.getElementById('darkness-bar').style.width = darkness + '%';
+            document.getElementById('webcam-mood').innerText = 'MOOD: ' + mood + '%';
+            document.getElementById('visit-count').innerText = visits;
+            document.getElementById('like-count').innerText = likes;
+
+            updateAvatarFace();
+        }
+
+        function updateAvatarFace() {
+            const face = document.getElementById('avatar-face');
+            if (mood > 80) face.innerText = "＼(≧▽≦)／";
+            else if (mood > 50) face.innerText = "(•̀ - •́)";
+            else if (mood > 20) face.innerText = "(;-_-)";
+            else face.innerText = "(✖﹏✖)";
         }
 
         function pokeAvatar() {
-            playCrunchSound(250, 'sawtooth', 0.08);
-            updateMood(-6);
-            showNotification("⚠️ Don't poke the avatar! Mood -6%");
+            playSound(220, 0.08);
+            updateStats(1, 10, -5);
+            showNotification("⚠️ Avatar poked! Stress increased.");
+        }
+
+        // TWEETER SUBMISSION SYSTEM
+        function submitTweet() {
+            const text = document.getElementById('tweet-text').value.trim();
+            if (!text) return;
+            playSound(700, 0.08);
+            const feed = document.getElementById('tweet-feed');
+            const card = document.createElement('div');
+            card.className = 'tweet-card';
+            card.innerHTML = `<strong style="color:var(--accent-col);">@anonymous_visitor</strong><p style="margin:4px 0 6px 0; font-size:11px;">${escapeHtml(text)}</p><span style="font-size:10px; cursor:pointer;" onclick="likeTweet(this)">❤️ 0 Likes</span>`;
+            feed.prepend(card);
+            document.getElementById('tweet-text').value = '';
+            likes++;
+            updateStats(5, 2, 3);
+            showNotification("Posted successfully to Tweeter feed!");
+        }
+
+        function likeTweet(el) {
+            playSound(600, 0.04);
+            let currentLikes = parseInt(el.innerText.replace(/[^0-9]/g, '')) + 1;
+            el.innerText = `❤️ ${currentLikes} Likes`;
+            likes++;
+            updateStats(1, 0, 2);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
 
         function showNotification(text) {
-            playCrunchSound(800, 'sine', 0.05);
+            playSound(800, 0.04);
             const container = document.getElementById('notification-container');
-            if (!container) return;
             const notif = document.createElement('div');
             notif.className = 'nso-notification';
             notif.innerText = text;
             container.appendChild(notif);
-            setTimeout(() => { notif.remove(); }, 3500);
-        }
-
-        function handleSendMail(e) {
-            e.preventDefault();
-            playCrunchSound(900, 'square', 0.1);
-            showNotification("MESSAGE SENT ✓ Adhithya has received your transmission.");
-            updateMood(15);
-            document.getElementById('mail-win').classList.add('hidden');
+            setTimeout(() => notif.remove(), 3500);
         }
     </script>
 </body>
