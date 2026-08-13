@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ssynewave.exe // Business Analytics Portfolio OS</title>
     <style>
+        @font-face {
+            font-family: 'DinkieBitmap';
+            src: url('fonts/DinkieBitmap-9px.woff2') format('woff2');
+        }
+
         :root {
             --os-bg: #120524;
             --win-bg: #fdf6ff;
@@ -28,7 +33,7 @@
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background-color: var(--os-bg);
-            font-family: 'Courier New', Courier, monospace; user-select: none;
+            font-family: 'DinkieBitmap', 'Courier New', monospace; user-select: none;
             transition: background-color 0.3s ease;
         }
         .hidden { display: none !important; }
@@ -36,7 +41,7 @@
         /* BOOT SCREEN */
         #boot-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; color: #fff; font-family: 'Courier New', Courier, monospace;
+            background: #000; color: #fff; font-family: 'DinkieBitmap', monospace;
             font-size: 15px; display: flex; flex-direction: column;
             justify-content: flex-start; align-items: flex-start; padding: 40px; box-sizing: border-box; z-index: 99999;
         }
@@ -45,7 +50,7 @@
         /* DESKTOP ENVIRONMENT */
         #desktop {
             width: 100vw; height: 100vh; position: relative;
-            background: url('https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/background/bg_day.png') no-repeat center center fixed;
+            background: url('sidebar/1.png') no-repeat center center fixed;
             background-size: cover; image-rendering: pixelated;
         }
 
@@ -77,7 +82,7 @@
             justify-content: space-between; align-items: center; padding: 0 8px; box-sizing: border-box; z-index: 9999; color: var(--text-col); font-size: 11px;
         }
         .taskbar-left, .taskbar-right { display: flex; align-items: center; gap: 6px; }
-        .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; font-family: 'Courier New'; }
+        .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; font-family: 'DinkieBitmap', monospace; }
         .start-menu-btn:active { border-style: inset; }
         .taskbar-icon-btn { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); }
         .taskbar-icon-btn:hover { background: var(--accent-col); color: white; }
@@ -93,12 +98,12 @@
         .start-item { padding: 7px 12px; cursor: pointer; font-size: 11px; color: var(--text-col); border-bottom: 1px dashed var(--bar-bg); }
         .start-item:hover { background: var(--border-col); color: white; padding-left: 15px; }
 
-        /* EXACT INTERNET WINDOW UI MATCHING REFERENCE */
+        /* INTERNET WINDOW UI */
         .internet-container {
             background: #ffb6c1; border: 2px solid #ff69b4; padding: 15px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center;
         }
         .internet-header {
-            font-family: 'Courier New', Courier, monospace; font-size: 26px; font-weight: bold; color: #d12a7d; text-shadow: 1px 1px 0px #fff; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;
+            font-size: 26px; font-weight: bold; color: #d12a7d; text-shadow: 1px 1px 0px #fff; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;
         }
         .internet-link-row {
             display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 320px; margin: 12px 0; text-decoration: none; color: #4a154b; font-weight: bold; font-size: 14px; border-bottom: 2px dotted #ff69b4; padding-bottom: 6px; transition: transform 0.1s ease;
@@ -106,22 +111,12 @@
         .internet-link-row:hover { transform: scale(1.03); color: #d12a7d; }
         .internet-icon-label { display: flex; align-items: center; gap: 10px; }
 
-        /* EXACT TWEETER APP UI MATCHING REFERENCE IMAGE */
-        .tweeter-container {
-            background: #f3e6ff; border: 2px solid #b49eff; padding: 10px; box-sizing: border-box; height: 100%; display: flex; flex-direction: column;
-        }
-        .tweeter-app-title {
-            font-size: 20px; font-weight: bold; color: #6b46c1; border-bottom: 2px solid #b49eff; padding-bottom: 5px; margin-bottom: 10px; text-shadow: 1px 1px #fff;
-        }
-        .tweeter-post-box {
-            background: #fff; border: 1px solid #8b73ce; padding: 8px; margin-bottom: 12px; box-sizing: border-box;
-        }
-        .tweeter-post-box textarea {
-            width: 100%; border: 1px dashed #b49eff; padding: 6px; box-sizing: border-box; font-family: 'Courier New'; font-size: 11px; resize: none; background: #faf5ff; color: #362459;
-        }
-        .tweet-item {
-            background: #fff; border: 1px solid #d4c5f9; padding: 10px; margin-bottom: 10px; box-shadow: 2px 2px 0px rgba(139,115,206,0.2);
-        }
+        /* TWEETER APP UI */
+        .tweeter-container { background: #f3e6ff; border: 2px solid #b49eff; padding: 10px; box-sizing: border-box; height: 100%; display: flex; flex-direction: column; }
+        .tweeter-app-title { font-size: 20px; font-weight: bold; color: #6b46c1; border-bottom: 2px solid #b49eff; padding-bottom: 5px; margin-bottom: 10px; text-shadow: 1px 1px #fff; }
+        .tweeter-post-box { background: #fff; border: 1px solid #8b73ce; padding: 8px; margin-bottom: 12px; box-sizing: border-box; }
+        .tweeter-post-box textarea { width: 100%; border: 1px dashed #b49eff; padding: 6px; box-sizing: border-box; font-family: 'DinkieBitmap', monospace; font-size: 11px; resize: none; background: #faf5ff; color: #362459; }
+        .tweet-item { background: #fff; border: 1px solid #d4c5f9; padding: 10px; margin-bottom: 10px; box-shadow: 2px 2px 0px rgba(139,115,206,0.2); }
         .tweet-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
         .tweet-avatar { width: 32px; height: 32px; background: #d4c5f9; border: 1px solid #8b73ce; border-radius: 4px; object-fit: cover; image-rendering: pixelated; }
         .tweet-meta { font-size: 10px; color: #666; }
@@ -133,7 +128,7 @@
         .tweet-action-btn:hover { text-decoration: underline; }
         .comment-section { margin-top: 6px; background: #faf5ff; padding: 6px; border-left: 2px solid #8b73ce; font-size: 10px; }
         .comment-input-row { display: flex; gap: 5px; margin-top: 4px; }
-        .comment-input-row input { flex-grow: 1; font-size: 10px; padding: 2px; font-family: 'Courier New'; border: 1px solid #b49eff; }
+        .comment-input-row input { flex-grow: 1; font-size: 10px; padding: 2px; font-family: 'DinkieBitmap', monospace; border: 1px solid #b49eff; }
 
         /* NOTIFICATIONS */
         #notification-container { position: fixed; bottom: 50px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99999; pointer-events: none; }
@@ -142,18 +137,13 @@
             padding: 8px 12px; font-size: 11px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3); animation: slideIn 0.2s ease; pointer-events: auto;
         }
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-
-        /* MODAL PANELS */
-        .modal-panel { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999999; display: flex; justify-content: center; align-items: center; display: none; }
-        .modal-container { width: 550px; max-height: 80vh; background: var(--win-bg); border: 2px solid var(--border-col); padding: 25px; box-shadow: 6px 6px 0px rgba(0,0,0,0.4); overflow-y: auto; color: var(--text-col); }
-        .nso-link-card { display: block; background: var(--bar-bg); border: 1px solid var(--border-col); padding: 8px; margin-bottom: 8px; color: var(--text-col); text-decoration: none; font-size: 11px; font-weight: bold; }
-        .nso-link-card:hover { background: var(--accent-col); color: white; }
     </style>
 </head>
 <body>
 
     <!-- BOOT SCREEN -->
     <div id="boot-screen">
+        <audio id="boot-audio" src="sound/boot.wav" preload="auto"></audio>
         <div class="bios-content">
             <p>Needy Streamer Overload - ssynewave.exe</p>
             <p>Copyright (C) 2020-2026</p>
@@ -170,16 +160,20 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
+        <!-- AUDIO ASSETS -->
+        <audio id="open-audio" src="sound/open.wav" preload="auto"></audio>
+        <audio id="close-audio" src="sound/close.wav" preload="auto"></audio>
+
         <!-- 1. WEBCAM WINDOW -->
         <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px;">
             <div class="title-bar">
                 <div class="title-bar-text">webcam</div>
-                <div class="window-controls"><button class="close-btn" data-target="webcam-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="webcam-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body" style="padding:0; background:#0b0218; text-align:center; height:190px; position:relative;">
                 <div onclick="pokeAvatar()" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;">
-                    <div style="font-size:45px; text-shadow:2px 2px #ff5eb2;" id="avatar-face">(•̀ - •́)</div>
-                    <div style="font-size:10px; color:#ff88cb; margin-top:5px;">CLICK TO CHANGE MOOD</div>
+                    <img src="icons/icon_ame.png" alt="Ame" style="width:64px; height:64px; image-rendering:pixelated; margin-bottom:5px;">
+                    <div style="font-size:10px; color:#ff88cb;">CLICK TO CHANGE MOOD</div>
                 </div>
                 <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.85); color:#ff88cb; font-size:10px; padding:4px; display:flex; justify-content:space-between; box-sizing:border-box;">
                     <span>● LIVE | ADHITHYA</span>
@@ -192,7 +186,7 @@
         <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;">
             <div class="title-bar">
                 <div class="title-bar-text">Task Manager</div>
-                <div class="window-controls"><button class="close-btn" data-target="taskman-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="taskman-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body">
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
@@ -223,11 +217,11 @@
             </div>
         </div>
 
-        <!-- 3. INTERNET APP (Exact UI Match to Reference) -->
+        <!-- 3. INTERNET APP (Exact Reference UI) -->
         <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;">
             <div class="title-bar">
                 <div class="title-bar-text">Internet</div>
-                <div class="window-controls"><button class="close-btn" data-target="internet-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="internet-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body" style="padding: 0;">
                 <div class="internet-container">
@@ -262,16 +256,15 @@
             </div>
         </div>
 
-        <!-- 4. TWEETER APP (Exact UI Match + Image Upload & Anonymous Comments) -->
+        <!-- 4. TWEETER APP (Reference UI + Uploads + Comments) -->
         <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;">
             <div class="title-bar">
                 <div class="title-bar-text">Tweeter</div>
-                <div class="window-controls"><button class="close-btn" data-target="tweeter-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="tweeter-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body scrollable">
                 <div class="tweeter-app-title">Tweeter</div>
                 
-                <!-- Admin Post Creation Box -->
                 <div class="tweeter-post-box">
                     <div style="font-size:10px; font-weight:bold; color:#6b46c1; margin-bottom:4px;">CREATE PUBLIC BLOG POST (Adhithya)</div>
                     <textarea id="admin-tweet-text" placeholder="What's happening in Business Analytics today?..." rows="3"></textarea>
@@ -281,31 +274,7 @@
                     </div>
                 </div>
 
-                <!-- Public Feed Display Container -->
-                <div id="tweeter-public-feed">
-                    <!-- Default Initial Post matching NSO style UI structure -->
-                    <div class="tweet-item">
-                        <div class="tweet-header">
-                            <img src="https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png" class="tweet-avatar" alt="Avatar">
-                            <div>
-                                <div class="tweet-name">Adhithya Suresh <span style="color:#27ae60; font-size:10px;">✔ @adhithya_bi</span></div>
-                                <div class="tweet-meta">DAY 1 &bull; 2026-08-13</div>
-                            </div>
-                        </div>
-                        <div class="tweet-body">Welcome to my professional portfolio OS stream! Initializing analytics dashboards and system resources. Stay tuned for live updates.</div>
-                        <div class="tweet-footer">
-                            <span class="tweet-action-btn" onclick="likePost(0)">🔁 14 Likes</span>
-                            <span class="tweet-action-btn" onclick="toggleCommentBox(0)">💬 0 Comments</span>
-                        </div>
-                        <div class="comment-section" id="comment-section-0">
-                            <div id="comments-list-0"></div>
-                            <div class="comment-input-row">
-                                <input type="text" id="comment-input-0" placeholder="Write anonymous comment...">
-                                <button onclick="addComment(0)" class="start-menu-btn" style="font-size:9px; padding:2px 6px;">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="tweeter-public-feed"></div>
             </div>
         </div>
 
@@ -313,7 +282,7 @@
         <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;">
             <div class="title-bar">
                 <div class="title-bar-text">Hang Out</div>
-                <div class="window-controls"><button class="close-btn" data-target="hangout-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="hangout-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body scrollable">
                 <h3 style="margin-top:0;">Hang Out Hub</h3>
@@ -327,7 +296,7 @@
 
         <!-- SUB APPS -->
         <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win">×</button></div></div>
+            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win" onclick="playCloseSound()">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Academic & Guild Records</h3>
                 <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
@@ -336,7 +305,7 @@
         </div>
 
         <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win">×</button></div></div>
+            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win" onclick="playCloseSound()">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Interactive Trophy Room</h3>
                 <ul>
@@ -348,7 +317,7 @@
         </div>
 
         <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;">
-            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win">×</button></div></div>
+            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win" onclick="playCloseSound()">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Verified Certifications</h3>
                 <ul>
@@ -358,7 +327,7 @@
         </div>
 
         <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win">×</button></div></div>
+            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win" onclick="playCloseSound()">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Professional Experience & NGO</h3>
                 <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
@@ -370,7 +339,7 @@
         <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;">
             <div class="title-bar">
                 <div class="title-bar-text">Go Out // GitHub Project Map</div>
-                <div class="window-controls"><button class="close-btn" data-target="map-win">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="map-win" onclick="playCloseSound()">×</button></div>
             </div>
             <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
                 <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
@@ -380,21 +349,15 @@
         </div>
 
         <!-- 7. JINE CHAT WIDGET -->
-        <div id="jine-widget" class="draggable-window">
+        <div id="jine-widget" class="draggable-window" style="position:absolute; bottom:45px; right:20px; width:340px; background:var(--win-bg); border:2px solid var(--border-col); box-shadow:4px 4px 0px rgba(54,36,89,0.3); z-index:500;">
             <div class="title-bar">
                 <div class="title-bar-text">JINE</div>
-                <div class="window-controls"><button onclick="document.getElementById('jine-widget').classList.add('hidden')">×</button></div>
+                <div class="window-controls"><button onclick="document.getElementById('jine-widget').classList.add('hidden'); playCloseSound();">×</button></div>
             </div>
             <div class="window-body" style="background:var(--win-bg);">
-                <div class="jine-bubble">
+                <div style="background:rgba(255,255,255,0.7); border:1px dashed var(--accent-col); padding:8px; font-size:11px; margin-bottom:8px; min-height:45px;">
                     <strong style="color:var(--accent-col);">Adhithya-chan:</strong>
-                    <p id="jine-dialogue" style="margin:4px 0 0 0;">"Apparently with this BBA Business Analytics thing we can analyze anything we want? Let's give it a spin!"</p>
-                </div>
-                <div style="display:flex; gap:4px; justify-content:space-around;">
-                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">LOVE</span>
-                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">OK</span>
-                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">OMG</span>
-                    <span style="font-size:10px; background:var(--bar-bg); padding:2px 6px; border:1px solid var(--border-col);">Sorry</span>
+                    <p style="margin:4px 0 0 0;">"Welcome to ssynewave.exe! Explore my portfolio OS using the desktop icons or Start menu~"</p>
                 </div>
             </div>
         </div>
@@ -402,16 +365,16 @@
         <!-- DESKTOP SHORTCUT ICONS -->
         <div style="position:absolute; top:30px; left:380px; display:flex; flex-direction:column; gap:15px;">
             <div onclick="openApp('internet-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <span style="font-size:26px;">🌐</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Internet</label>
+                <img src="app_icons/internet.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Internet"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Internet</label>
             </div>
             <div onclick="openApp('tweeter-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <span style="font-size:26px;">💬</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
+                <img src="app_icons/twitter.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Tweeter"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
             </div>
             <div onclick="openApp('hangout-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <span style="font-size:26px;">☕</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
+                <img src="app_icons/game.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Hang Out"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
             </div>
             <div onclick="openApp('map-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <span style="font-size:26px;">🗺️</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
+                <img src="app_icons/map.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Map"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
             </div>
             <div onclick="window.location.href='mailto:2025.adhithyas@isu.ac.in'" style="cursor:pointer; text-align:center; width:60px;">
                 <span style="font-size:26px;">📧</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Mail</label>
@@ -454,39 +417,38 @@
 
     <!-- AUDIO & CLIENT LOGIC ENGINE -->
     <script>
-        // BOOT SEQUENCE
-        let dots = 0;
-        const bootStatus = document.getElementById('boot-status');
-        const bootInterval = setInterval(() => {
-            dots = (dots + 1) % 5;
-            if (bootStatus) bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
-        }, 400);
+        // BOOT SEQUENCE WITH BOOT AUDIO
+        window.addEventListener('DOMContentLoaded', () => {
+            let dots = 0;
+            const bootStatus = document.getElementById('boot-status');
+            const bootAudio = document.getElementById('boot-audio');
+            
+            const bootInterval = setInterval(() => {
+                dots = (dots + 1) % 5;
+                if (bootStatus) bootStatus.innerText = "Booting Windose" + ".".repeat(dots + 1);
+            }, 400);
 
-        setTimeout(() => {
-            clearInterval(bootInterval);
-            document.getElementById('boot-screen').classList.add('hidden');
-            document.getElementById('desktop').classList.remove('hidden');
-            showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
-        }, 4500);
+            setTimeout(() => {
+                clearInterval(bootInterval);
+                if (bootAudio) bootAudio.play().catch(e => {});
+                document.getElementById('boot-screen').classList.add('hidden');
+                document.getElementById('desktop').classList.remove('hidden');
+                showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
+            }, 4500);
+        });
 
-        // WEB AUDIO SYNTHESIZER SOUND EFFECTS
         let soundEnabled = true;
-        let audioCtx = null;
-        function playSound(freq = 440, duration = 0.05) {
+
+        function playOpenSound() {
             if (!soundEnabled) return;
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + duration);
-            } catch(e) {}
+            const openAudio = document.getElementById('open-audio');
+            if (openAudio) { openAudio.currentTime = 0; openAudio.play().catch(e => {}); }
+        }
+
+        function playCloseSound() {
+            if (!soundEnabled) return;
+            const closeAudio = document.getElementById('close-audio');
+            if (closeAudio) { closeAudio.currentTime = 0; closeAudio.play().catch(e => {}); }
         }
 
         // GLOBAL CLOCK
@@ -498,7 +460,7 @@
 
         // WINDOW MANAGER
         function openApp(windowId) {
-            playSound(520, 0.06);
+            playOpenSound();
             const win = document.getElementById(windowId);
             if (win) {
                 win.classList.remove('hidden');
@@ -509,7 +471,7 @@
 
         document.querySelectorAll('.close-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                playSound(300, 0.05);
+                playCloseSound();
                 const target = btn.getAttribute('data-target');
                 const win = document.getElementById(target);
                 if (win) win.classList.add('hidden');
@@ -527,7 +489,6 @@
                 startX = e.clientX - windowEl.offsetLeft;
                 startY = e.clientY - windowEl.offsetTop;
                 windowEl.style.zIndex = String(Date.now());
-                playSound(650, 0.02);
             });
 
             document.addEventListener('mousemove', (e) => {
@@ -541,7 +502,7 @@
 
         // START MENU TOGGLE
         function toggleStartMenu() {
-            playSound(450, 0.04);
+            playOpenSound();
             const menu = document.getElementById('start-menu');
             if (menu) menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
@@ -554,7 +515,7 @@
 
         // THEME & SOUND CONTROLS
         function toggleTheme() {
-            playSound(500, 0.05);
+            playOpenSound();
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
             document.getElementById('theme-label').innerText = isDark ? '☀️ Toggle Light Mode' : '🌙 Toggle Dark Mode';
@@ -586,20 +547,10 @@
             document.getElementById('webcam-mood').innerText = 'MOOD: ' + mood + '%';
             document.getElementById('visit-count').innerText = visits;
             document.getElementById('like-count').innerText = likes;
-
-            updateAvatarFace();
-        }
-
-        function updateAvatarFace() {
-            const face = document.getElementById('avatar-face');
-            if (mood > 80) face.innerText = "＼(≧▽≦)／";
-            else if (mood > 50) face.innerText = "(•̀ - •́)";
-            else if (mood > 20) face.innerText = "(;-_-)";
-            else face.innerText = "(✖﹏✖)";
         }
 
         function pokeAvatar() {
-            playSound(220, 0.08);
+            playCloseSound();
             updateStats(1, 10, -5);
             showNotification("⚠️ Avatar poked! Stress increased.");
         }
@@ -610,7 +561,7 @@
                 id: 0,
                 name: "Adhithya Suresh",
                 username: "@adhithya_bi",
-                avatar: "https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png",
+                avatar: "icons/icon_ame.png",
                 date: "DAY 1",
                 text: "Welcome to my professional portfolio OS stream! Initializing analytics dashboards and system resources.",
                 image: "",
@@ -669,7 +620,7 @@
             const text = textEl.value.trim();
             if (!text && imgEl.files.length === 0) return;
 
-            playSound(700, 0.08);
+            playOpenSound();
 
             const reader = new FileReader();
             if (imgEl.files && imgEl.files[0]) {
@@ -687,7 +638,7 @@
                 id: Date.now(),
                 name: "Adhithya Suresh",
                 username: "@adhithya_bi",
-                avatar: "https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png",
+                avatar: "icons/icon_ame.png",
                 date: new Date().toLocaleDateString(),
                 text: text,
                 image: imgSrc,
@@ -704,7 +655,7 @@
         }
 
         function likePost(index) {
-            playSound(600, 0.04);
+            playOpenSound();
             postsData[index].likes++;
             renderPosts();
             likes++;
@@ -712,6 +663,7 @@
         }
 
         function toggleCommentBox(index) {
+            playOpenSound();
             const sec = document.getElementById(`comment-section-${index}`);
             if (sec) {
                 sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
@@ -723,7 +675,7 @@
             const commentText = input.value.trim();
             if (!commentText) return;
 
-            playSound(650, 0.05);
+            playOpenSound();
             if (!postsData[index].comments) postsData[index].comments = [];
             postsData[index].comments.push(commentText);
             renderPosts();
@@ -736,7 +688,6 @@
         }
 
         function showNotification(text) {
-            playSound(800, 0.04);
             const container = document.getElementById('notification-container');
             const notif = document.createElement('div');
             notif.className = 'nso-notification';
@@ -745,7 +696,6 @@
             setTimeout(() => notif.remove(), 3500);
         }
 
-        // Initialize Tweeter Feed on load
         window.addEventListener('DOMContentLoaded', () => {
             renderPosts();
         });
