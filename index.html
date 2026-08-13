@@ -84,8 +84,8 @@
         .taskbar-left, .taskbar-right { display: flex; align-items: center; gap: 6px; }
         .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; font-family: 'DinkieBitmap', monospace; }
         .start-menu-btn:active { border-style: inset; }
-        .taskbar-icon-btn { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); }
-        .taskbar-icon-btn:hover { background: var(--accent-col); color: white; }
+        .taskbar-tab { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); display: flex; align-items: center; gap: 4px; }
+        .taskbar-tab:hover { background: var(--accent-col); color: white; }
 
         /* START MENU */
         #start-menu {
@@ -165,10 +165,10 @@
         <audio id="close-audio" src="sound/close.wav" preload="auto"></audio>
 
         <!-- 1. WEBCAM WINDOW -->
-        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px;">
+        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px;" data-title="webcam">
             <div class="title-bar">
                 <div class="title-bar-text">webcam</div>
-                <div class="window-controls"><button class="close-btn" data-target="webcam-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="webcam-win" onclick="closeApp('webcam-win')">×</button></div>
             </div>
             <div class="window-body" style="padding:0; background:#0b0218; text-align:center; height:190px; position:relative;">
                 <div onclick="pokeAvatar()" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;">
@@ -183,10 +183,10 @@
         </div>
 
         <!-- 2. TASK MANAGER WINDOW -->
-        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;">
+        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;" data-title="Task Manager">
             <div class="title-bar">
                 <div class="title-bar-text">Task Manager</div>
-                <div class="window-controls"><button class="close-btn" data-target="taskman-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="taskman-win" onclick="closeApp('taskman-win')">×</button></div>
             </div>
             <div class="window-body">
                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
@@ -218,10 +218,10 @@
         </div>
 
         <!-- 3. INTERNET APP (Exact Reference UI) -->
-        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;">
+        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;" data-title="Internet">
             <div class="title-bar">
                 <div class="title-bar-text">Internet</div>
-                <div class="window-controls"><button class="close-btn" data-target="internet-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="internet-win" onclick="closeApp('internet-win')">×</button></div>
             </div>
             <div class="window-body" style="padding: 0;">
                 <div class="internet-container">
@@ -256,11 +256,11 @@
             </div>
         </div>
 
-        <!-- 4. TWEETER APP (Reference UI + Uploads + Comments) -->
-        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;">
+        <!-- 4. TWEETER APP -->
+        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;" data-title="Tweeter">
             <div class="title-bar">
                 <div class="title-bar-text">Tweeter</div>
-                <div class="window-controls"><button class="close-btn" data-target="tweeter-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="tweeter-win" onclick="closeApp('tweeter-win')">×</button></div>
             </div>
             <div class="window-body scrollable">
                 <div class="tweeter-app-title">Tweeter</div>
@@ -279,10 +279,10 @@
         </div>
 
         <!-- 5. HANG OUT APP -->
-        <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;">
+        <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;" data-title="Hang Out">
             <div class="title-bar">
                 <div class="title-bar-text">Hang Out</div>
-                <div class="window-controls"><button class="close-btn" data-target="hangout-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="hangout-win" onclick="closeApp('hangout-win')">×</button></div>
             </div>
             <div class="window-body scrollable">
                 <h3 style="margin-top:0;">Hang Out Hub</h3>
@@ -295,8 +295,8 @@
         </div>
 
         <!-- SUB APPS -->
-        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win" onclick="playCloseSound()">×</button></div></div>
+        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;" data-title="Guild // Education">
+            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win" onclick="closeApp('guild-win')">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Academic & Guild Records</h3>
                 <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
@@ -304,8 +304,8 @@
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win" onclick="playCloseSound()">×</button></div></div>
+        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;" data-title="Achievements">
+            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win" onclick="closeApp('achieve-win')">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Interactive Trophy Room</h3>
                 <ul>
@@ -316,8 +316,8 @@
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;">
-            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win" onclick="playCloseSound()">×</button></div></div>
+        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;" data-title="Certifications">
+            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win" onclick="closeApp('certs-win')">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Verified Certifications</h3>
                 <ul>
@@ -326,8 +326,8 @@
             </div>
         </div>
 
-        <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;">
-            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win" onclick="playCloseSound()">×</button></div></div>
+        <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;" data-title="Experiences">
+            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win" onclick="closeApp('exp-win')">×</button></div></div>
             <div class="window-body scrollable">
                 <h3>Professional Experience & NGO</h3>
                 <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
@@ -336,10 +336,10 @@
         </div>
 
         <!-- 6. MAP APP -->
-        <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;">
+        <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;" data-title="Go Out">
             <div class="title-bar">
                 <div class="title-bar-text">Go Out // GitHub Project Map</div>
-                <div class="window-controls"><button class="close-btn" data-target="map-win" onclick="playCloseSound()">×</button></div>
+                <div class="window-controls"><button class="close-btn" data-target="map-win" onclick="closeApp('map-win')">×</button></div>
             </div>
             <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
                 <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
@@ -349,10 +349,10 @@
         </div>
 
         <!-- 7. JINE CHAT WIDGET -->
-        <div id="jine-widget" class="draggable-window" style="position:absolute; bottom:45px; right:20px; width:340px; background:var(--win-bg); border:2px solid var(--border-col); box-shadow:4px 4px 0px rgba(54,36,89,0.3); z-index:500;">
+        <div id="jine-widget" class="draggable-window" style="position:absolute; bottom:45px; right:20px; width:340px; background:var(--win-bg); border:2px solid var(--border-col); box-shadow:4px 4px 0px rgba(54,36,89,0.3); z-index:500;" data-title="JINE">
             <div class="title-bar">
                 <div class="title-bar-text">JINE</div>
-                <div class="window-controls"><button onclick="document.getElementById('jine-widget').classList.add('hidden'); playCloseSound();">×</button></div>
+                <div class="window-controls"><button onclick="closeApp('jine-widget')">×</button></div>
             </div>
             <div class="window-body" style="background:var(--win-bg);">
                 <div style="background:rgba(255,255,255,0.7); border:1px dashed var(--accent-col); padding:8px; font-size:11px; margin-bottom:8px; min-height:45px;">
@@ -383,17 +383,10 @@
 
         <!-- TASKBAR -->
         <div class="nso-taskbar">
-            <div class="taskbar-left">
+            <div class="taskbar-left" id="taskbar-tabs-container">
                 <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
-                <button class="taskbar-icon-btn" onclick="openApp('tweeter-win')">💬 Tweeter</button>
-                <button class="taskbar-icon-btn" onclick="openApp('jine-widget')">💚 JINE</button>
-                <button class="taskbar-icon-btn" onclick="openApp('webcam-win')">📷 Webcam</button>
-                <button class="taskbar-icon-btn" onclick="openApp('taskman-win')">📊 Task Manager</button>
-                <button class="taskbar-icon-btn" onclick="openApp('internet-win')">🌐 Internet</button>
             </div>
             <div class="taskbar-right">
-                <span style="font-size:10px;">🌤️ Panvel 28°C</span>
-                <span style="margin:0 4px;">|</span>
                 <span id="taskbar-clock">00:00:00</span>
             </div>
         </div>
@@ -434,6 +427,9 @@
                 document.getElementById('boot-screen').classList.add('hidden');
                 document.getElementById('desktop').classList.remove('hidden');
                 showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
+                
+                // Initialize default open apps in taskbar
+                updateTaskbarTabs();
             }, 4500);
         });
 
@@ -458,6 +454,31 @@
             if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
 
+        // DYNAMIC TASKBAR TABS MANAGER
+        function updateTaskbarTabs() {
+            const container = document.getElementById('taskbar-tabs-container');
+            if (!container) return;
+            
+            // Keep the START button intact
+            container.innerHTML = `<button class="start-menu-btn" onclick="toggleStartMenu()">START</button>`;
+
+            // Scan all windows to see which ones are open (not hidden)
+            document.querySelectorAll('.nso-window').forEach(win => {
+                if (!win.classList.contains('hidden')) {
+                    const winId = win.id;
+                    const title = win.getAttribute('data-title') || winId;
+                    const tabBtn = document.createElement('button');
+                    tabBtn.className = 'taskbar-tab';
+                    tabBtn.innerText = title;
+                    tabBtn.onclick = () => {
+                        playOpenSound();
+                        win.style.zIndex = String(Date.now());
+                    };
+                    container.appendChild(tabBtn);
+                }
+            });
+        }
+
         // WINDOW MANAGER
         function openApp(windowId) {
             playOpenSound();
@@ -466,17 +487,18 @@
                 win.classList.remove('hidden');
                 win.style.zIndex = String(Date.now());
                 updateStats(2, -1, 1);
+                updateTaskbarTabs();
             }
         }
 
-        document.querySelectorAll('.close-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                playCloseSound();
-                const target = btn.getAttribute('data-target');
-                const win = document.getElementById(target);
-                if (win) win.classList.add('hidden');
-            });
-        });
+        function closeApp(windowId) {
+            playCloseSound();
+            const win = document.getElementById(windowId);
+            if (win) {
+                win.classList.add('hidden');
+                updateTaskbarTabs();
+            }
+        }
 
         // WINDOW DRAGGING SYSTEM
         document.querySelectorAll('.draggable-window').forEach(windowEl => {
