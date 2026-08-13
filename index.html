@@ -84,6 +84,13 @@
         .taskbar-left, .taskbar-right { display: flex; align-items: center; gap: 6px; }
         .start-menu-btn { background: var(--border-col); border: 2px outset var(--border-col); color: white; padding: 3px 10px; font-weight: bold; cursor: pointer; font-family: 'DinkieBitmap', monospace; }
         .start-menu-btn:active { border-style: inset; }
+        
+        .taskbar-quick-icon {
+            width: 22px; height: 22px; object-fit: contain; cursor: pointer; image-rendering: pixelated; padding: 2px;
+            border: 1px solid transparent;
+        }
+        .taskbar-quick-icon:hover { background: rgba(255,255,255,0.4); border-color: var(--border-col); }
+
         .taskbar-tab { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); display: flex; align-items: center; gap: 4px; }
         .taskbar-tab:hover { background: var(--accent-col); color: white; }
 
@@ -217,7 +224,7 @@
             </div>
         </div>
 
-        <!-- 3. INTERNET APP (Exact Reference UI) -->
+        <!-- 3. INTERNET APP -->
         <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;" data-title="Internet">
             <div class="title-bar">
                 <div class="title-bar-text">Internet</div>
@@ -385,6 +392,8 @@
         <div class="nso-taskbar">
             <div class="taskbar-left" id="taskbar-tabs-container">
                 <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
+                <img src="app_icons/twitter.png" class="taskbar-quick-icon" onclick="openApp('tweeter-win')" alt="Tweeter">
+                <img src="app_icons/jine.png" class="taskbar-quick-icon" onclick="openApp('jine-widget')" alt="JINE">
             </div>
             <div class="taskbar-right">
                 <span id="taskbar-clock">00:00:00</span>
@@ -428,7 +437,6 @@
                 document.getElementById('desktop').classList.remove('hidden');
                 showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
                 
-                // Initialize default open apps in taskbar
                 updateTaskbarTabs();
             }, 4500);
         });
@@ -454,15 +462,20 @@
             if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
 
-        // DYNAMIC TASKBAR TABS MANAGER
+        // DYNAMIC TASKBAR TABS MANAGER (Only Active/Open Windows pop up)
         function updateTaskbarTabs() {
             const container = document.getElementById('taskbar-tabs-container');
             if (!container) return;
             
-            // Keep the START button intact
-            container.innerHTML = `<button class="start-menu-btn" onclick="toggleStartMenu()">START</button>`;
+            // Retain START and the fixed Twitter and Jine quick launch icons as requested by reference
+            container.innerHTML = `
+                <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
+                <img src="app_icons/twitter.png" class="taskbar-quick-icon" onclick="openApp('tweeter-win')" alt="Tweeter">
+                <img src="app_icons/jine.png" class="taskbar-quick-icon" onclick="openApp('jine-widget')" alt="JINE">
+                <span style="margin:0 2px; color:var(--border-col);">|</span>
+            `;
 
-            // Scan all windows to see which ones are open (not hidden)
+            // Append open active tabs
             document.querySelectorAll('.nso-window').forEach(win => {
                 if (!win.classList.contains('hidden')) {
                     const winId = win.id;
