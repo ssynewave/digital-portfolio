@@ -68,7 +68,7 @@
             background: var(--border-col); color: white; border: none; font-weight: bold; cursor: pointer; padding: 1px 5px; font-size: 10px;
         }
         .window-controls button:hover { background: var(--accent-col); }
-        .window-body { padding: 12px; color: var(--text-col); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 420px; }
+        .window-body { padding: 12px; color: var(--text-col); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 450px; }
 
         /* TASKBAR */
         .nso-taskbar {
@@ -82,7 +82,7 @@
         .taskbar-icon-btn { background: var(--win-bg); border: 1px solid var(--border-col); padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: bold; color: var(--text-col); }
         .taskbar-icon-btn:hover { background: var(--accent-col); color: white; }
 
-        /* START MENU / CONTROL PANEL */
+        /* START MENU */
         #start-menu {
             position: absolute; bottom: 40px; left: 0; width: 220px; background: var(--win-bg);
             border: 2px solid var(--border-col); box-shadow: 4px -4px 0px rgba(54,36,89,0.3); z-index: 10000; display: none;
@@ -93,70 +93,53 @@
         .start-item { padding: 7px 12px; cursor: pointer; font-size: 11px; color: var(--text-col); border-bottom: 1px dashed var(--bar-bg); }
         .start-item:hover { background: var(--border-col); color: white; padding-left: 15px; }
 
-        /* JINE VISUAL NOVEL CHAT WIDGET (BOTTOM RIGHT) */
-        #jine-widget {
-            position: absolute; bottom: 45px; right: 20px; width: 340px; background: var(--win-bg);
-            border: 2px solid var(--border-col); box-shadow: 4px 4px 0px rgba(54,36,89,0.3); z-index: 500;
-        }
-        .jine-bubble { background: rgba(255,255,255,0.7); border: 1px dashed var(--accent-col); padding: 8px; font-size: 11px; margin-bottom: 8px; min-height: 45px; }
-
-        /* EXACT INTERNET WINDOW UI MATCHING REFERENCE IMAGE */
+        /* EXACT INTERNET WINDOW UI MATCHING REFERENCE */
         .internet-container {
-            background: #ffb6c1; /* Soft NSO pink browser window background */
-            border: 2px solid #ff69b4;
-            padding: 15px;
-            height: 100%;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: #ffb6c1; border: 2px solid #ff69b4; padding: 15px; height: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center;
         }
         .internet-header {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 26px;
-            font-weight: bold;
-            color: #d12a7d;
-            text-shadow: 1px 1px 0px #fff;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: 'Courier New', Courier, monospace; font-size: 26px; font-weight: bold; color: #d12a7d; text-shadow: 1px 1px 0px #fff; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;
         }
         .internet-link-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 320px;
-            margin: 12px 0;
-            text-decoration: none;
-            color: #4a154b;
-            font-weight: bold;
-            font-size: 14px;
-            border-bottom: 2px dotted #ff69b4;
-            padding-bottom: 6px;
-            transition: transform 0.1s ease;
+            display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 320px; margin: 12px 0; text-decoration: none; color: #4a154b; font-weight: bold; font-size: 14px; border-bottom: 2px dotted #ff69b4; padding-bottom: 6px; transition: transform 0.1s ease;
         }
-        .internet-link-row:hover {
-            transform: scale(1.03);
-            color: #d12a7d;
-        }
-        .internet-icon-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .internet-link-row:hover { transform: scale(1.03); color: #d12a7d; }
+        .internet-icon-label { display: flex; align-items: center; gap: 10px; }
 
-        /* TWEETER APP STYLING */
-        .tweet-card { background: rgba(139,115,206,0.08); border: 1px solid var(--border-col); padding: 10px; margin-bottom: 10px; }
-        .tweet-input { width: 100%; box-sizing: border-box; padding: 6px; font-family: 'Courier New'; margin-bottom: 6px; background: var(--win-bg); color: var(--text-col); border: 1px solid var(--border-col); }
+        /* EXACT TWEETER APP UI MATCHING REFERENCE IMAGE */
+        .tweeter-container {
+            background: #f3e6ff; border: 2px solid #b49eff; padding: 10px; box-sizing: border-box; height: 100%; display: flex; flex-direction: column;
+        }
+        .tweeter-app-title {
+            font-size: 20px; font-weight: bold; color: #6b46c1; border-bottom: 2px solid #b49eff; padding-bottom: 5px; margin-bottom: 10px; text-shadow: 1px 1px #fff;
+        }
+        .tweeter-post-box {
+            background: #fff; border: 1px solid #8b73ce; padding: 8px; margin-bottom: 12px; box-sizing: border-box;
+        }
+        .tweeter-post-box textarea {
+            width: 100%; border: 1px dashed #b49eff; padding: 6px; box-sizing: border-box; font-family: 'Courier New'; font-size: 11px; resize: none; background: #faf5ff; color: #362459;
+        }
+        .tweet-item {
+            background: #fff; border: 1px solid #d4c5f9; padding: 10px; margin-bottom: 10px; box-shadow: 2px 2px 0px rgba(139,115,206,0.2);
+        }
+        .tweet-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .tweet-avatar { width: 32px; height: 32px; background: #d4c5f9; border: 1px solid #8b73ce; border-radius: 4px; object-fit: cover; image-rendering: pixelated; }
+        .tweet-meta { font-size: 10px; color: #666; }
+        .tweet-name { font-weight: bold; color: #4a154b; font-size: 12px; }
+        .tweet-body { font-size: 11px; color: #362459; margin-bottom: 8px; line-height: 1.4; word-break: break-all; }
+        .tweet-img { max-width: 100%; max-height: 200px; border: 1px solid #8b73ce; margin-bottom: 8px; display: block; image-rendering: pixelated; }
+        .tweet-footer { display: flex; gap: 15px; font-size: 11px; border-top: 1px dotted #e6dcff; padding-top: 6px; color: #555; }
+        .tweet-action-btn { cursor: pointer; color: #27ae60; font-weight: bold; }
+        .tweet-action-btn:hover { text-decoration: underline; }
+        .comment-section { margin-top: 6px; background: #faf5ff; padding: 6px; border-left: 2px solid #8b73ce; font-size: 10px; }
+        .comment-input-row { display: flex; gap: 5px; margin-top: 4px; }
+        .comment-input-row input { flex-grow: 1; font-size: 10px; padding: 2px; font-family: 'Courier New'; border: 1px solid #b49eff; }
 
         /* NOTIFICATIONS */
         #notification-container { position: fixed; bottom: 50px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99999; pointer-events: none; }
         .nso-notification {
             background: var(--win-bg); color: var(--text-col); border: 2px solid var(--accent-col);
-            padding: 8px 12px; font-size: 11px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3); animation: slideIn 0.2s ease;
-            pointer-events: auto;
+            padding: 8px 12px; font-size: 11px; box-shadow: 3px 3px 0px rgba(0,0,0,0.3); animation: slideIn 0.2s ease; pointer-events: auto;
         }
         @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
@@ -240,7 +223,7 @@
             </div>
         </div>
 
-        <!-- 3. INTERNET APP (Exact UI Match to Reference Image) -->
+        <!-- 3. INTERNET APP (Exact UI Match to Reference) -->
         <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;">
             <div class="title-bar">
                 <div class="title-bar-text">Internet</div>
@@ -279,23 +262,48 @@
             </div>
         </div>
 
-        <!-- 4. TWEETER APP -->
-        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 460px; height: 390px;">
+        <!-- 4. TWEETER APP (Exact UI Match + Image Upload & Anonymous Comments) -->
+        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;">
             <div class="title-bar">
                 <div class="title-bar-text">Tweeter</div>
                 <div class="window-controls"><button class="close-btn" data-target="tweeter-win">×</button></div>
             </div>
             <div class="window-body scrollable">
-                <div style="background:var(--bar-bg); border:1px solid var(--border-col); padding:8px; margin-bottom:12px;">
-                    <h4 style="margin:0 0 5px 0; font-size:11px;">Create Public Post (Anonymous)</h4>
-                    <textarea id="tweet-text" class="tweet-input" placeholder="What's happening in your digital world?..." rows="2"></textarea>
-                    <button onclick="submitTweet()" class="start-menu-btn" style="width:100%;">Post to Tweeter</button>
+                <div class="tweeter-app-title">Tweeter</div>
+                
+                <!-- Admin Post Creation Box -->
+                <div class="tweeter-post-box">
+                    <div style="font-size:10px; font-weight:bold; color:#6b46c1; margin-bottom:4px;">CREATE PUBLIC BLOG POST (Adhithya)</div>
+                    <textarea id="admin-tweet-text" placeholder="What's happening in Business Analytics today?..." rows="3"></textarea>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+                        <input type="file" id="admin-tweet-img" accept="image/*" style="font-size:10px; width:60%;">
+                        <button onclick="publishAdminTweet()" class="start-menu-btn" style="font-size:10px; padding:4px 10px;">Post Blog</button>
+                    </div>
                 </div>
-                <div id="tweet-feed">
-                    <div class="tweet-card">
-                        <strong style="color:var(--accent-col);">@raincandy_U</strong>
-                        <p style="margin:4px 0 6px 0; font-size:11px;">omfg i made some basic ass post on main and everyone was still really nice and commented... im so glad i was born cute. thank u god</p>
-                        <span style="font-size:10px; cursor:pointer;" onclick="likeTweet(this)">❤️ 0 Likes</span>
+
+                <!-- Public Feed Display Container -->
+                <div id="tweeter-public-feed">
+                    <!-- Default Initial Post matching NSO style UI structure -->
+                    <div class="tweet-item">
+                        <div class="tweet-header">
+                            <img src="https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png" class="tweet-avatar" alt="Avatar">
+                            <div>
+                                <div class="tweet-name">Adhithya Suresh <span style="color:#27ae60; font-size:10px;">✔ @adhithya_bi</span></div>
+                                <div class="tweet-meta">DAY 1 &bull; 2026-08-13</div>
+                            </div>
+                        </div>
+                        <div class="tweet-body">Welcome to my professional portfolio OS stream! Initializing analytics dashboards and system resources. Stay tuned for live updates.</div>
+                        <div class="tweet-footer">
+                            <span class="tweet-action-btn" onclick="likePost(0)">🔁 14 Likes</span>
+                            <span class="tweet-action-btn" onclick="toggleCommentBox(0)">💬 0 Comments</span>
+                        </div>
+                        <div class="comment-section" id="comment-section-0">
+                            <div id="comments-list-0"></div>
+                            <div class="comment-input-row">
+                                <input type="text" id="comment-input-0" placeholder="Write anonymous comment...">
+                                <button onclick="addComment(0)" class="start-menu-btn" style="font-size:9px; padding:2px 6px;">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -596,28 +604,131 @@
             showNotification("⚠️ Avatar poked! Stress increased.");
         }
 
-        // TWEETER SUBMISSION SYSTEM
-        function submitTweet() {
-            const text = document.getElementById('tweet-text').value.trim();
-            if (!text) return;
-            playSound(700, 0.08);
-            const feed = document.getElementById('tweet-feed');
-            const card = document.createElement('div');
-            card.className = 'tweet-card';
-            card.innerHTML = `<strong style="color:var(--accent-col);">@anonymous_visitor</strong><p style="margin:4px 0 6px 0; font-size:11px;">${escapeHtml(text)}</p><span style="font-size:10px; cursor:pointer;" onclick="likeTweet(this)">❤️ 0 Likes</span>`;
-            feed.prepend(card);
-            document.getElementById('tweet-text').value = '';
-            likes++;
-            updateStats(5, 2, 3);
-            showNotification("Posted successfully to Tweeter feed!");
+        // TWEETER PERSISTENT STORAGE & BLOGGING ENGINE
+        let postsData = JSON.parse(localStorage.getItem('ssynewave_tweets')) || [
+            {
+                id: 0,
+                name: "Adhithya Suresh",
+                username: "@adhithya_bi",
+                avatar: "https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png",
+                date: "DAY 1",
+                text: "Welcome to my professional portfolio OS stream! Initializing analytics dashboards and system resources.",
+                image: "",
+                likes: 14,
+                comments: []
+            }
+        ];
+
+        function renderPosts() {
+            const feed = document.getElementById('tweeter-public-feed');
+            if (!feed) return;
+            feed.innerHTML = "";
+
+            postsData.forEach((post, index) => {
+                let commentsHtml = "";
+                if (post.comments && post.comments.length > 0) {
+                    post.comments.forEach(c => {
+                        commentsHtml += `<div style="margin-top:3px; border-bottom:1px dashed #d4c5f9; padding-bottom:2px;"><strong>Anonymous:</strong> ${escapeHtml(c)}</div>`;
+                    });
+                }
+
+                let imgHtml = post.image ? `<img src="${post.image}" class="tweet-img" alt="Post Image">` : "";
+
+                const item = document.createElement('div');
+                item.className = 'tweet-item';
+                item.innerHTML = `
+                    <div class="tweet-header">
+                        <img src="${post.avatar}" class="tweet-avatar" alt="Avatar">
+                        <div>
+                            <div class="tweet-name">${escapeHtml(post.name)} <span style="color:#27ae60; font-size:10px;">✔ ${escapeHtml(post.username)}</span></div>
+                            <div class="tweet-meta">${escapeHtml(post.date)}</div>
+                        </div>
+                    </div>
+                    <div class="tweet-body">${escapeHtml(post.text)}</div>
+                    ${imgHtml}
+                    <div class="tweet-footer">
+                        <span class="tweet-action-btn" onclick="likePost(${index})">🔁 ${post.likes} Likes</span>
+                        <span class="tweet-action-btn" onclick="toggleCommentBox(${index})">💬 ${post.comments ? post.comments.length : 0} Comments</span>
+                    </div>
+                    <div class="comment-section" id="comment-section-${index}" style="display:none;">
+                        <div id="comments-list-${index}">${commentsHtml}</div>
+                        <div class="comment-input-row">
+                            <input type="text" id="comment-input-${index}" placeholder="Write anonymous comment...">
+                            <button onclick="addComment(${index})" class="start-menu-btn" style="font-size:9px; padding:2px 6px;">Send</button>
+                        </div>
+                    </div>
+                `;
+                feed.appendChild(item);
+            });
+            localStorage.setItem('ssynewave_tweets', JSON.stringify(postsData));
         }
 
-        function likeTweet(el) {
+        function publishAdminTweet() {
+            const textEl = document.getElementById('admin-tweet-text');
+            const imgEl = document.getElementById('admin-tweet-img');
+            const text = textEl.value.trim();
+            if (!text && imgEl.files.length === 0) return;
+
+            playSound(700, 0.08);
+
+            const reader = new FileReader();
+            if (imgEl.files && imgEl.files[0]) {
+                reader.readAsDataURL(imgEl.files[0]);
+                reader.onload = function(e) {
+                    saveNewPost(text, e.target.result);
+                };
+            } else {
+                saveNewPost(text, "");
+            }
+        }
+
+        function saveNewPost(text, imgSrc) {
+            const newPost = {
+                id: Date.now(),
+                name: "Adhithya Suresh",
+                username: "@adhithya_bi",
+                avatar: "https://raw.githubusercontent.com/ArThirtyFour/NeedyWebUI/main/icons/icon_user.png",
+                date: new Date().toLocaleDateString(),
+                text: text,
+                image: imgSrc,
+                likes: 0,
+                comments: []
+            };
+            postsData.unshift(newPost);
+            renderPosts();
+            document.getElementById('admin-tweet-text').value = '';
+            document.getElementById('admin-tweet-img').value = '';
+            likes++;
+            updateStats(5, 2, 3);
+            showNotification("New Tweeter post published publicly!");
+        }
+
+        function likePost(index) {
             playSound(600, 0.04);
-            let currentLikes = parseInt(el.innerText.replace(/[^0-9]/g, '')) + 1;
-            el.innerText = `❤️ ${currentLikes} Likes`;
+            postsData[index].likes++;
+            renderPosts();
             likes++;
             updateStats(1, 0, 2);
+        }
+
+        function toggleCommentBox(index) {
+            const sec = document.getElementById(`comment-section-${index}`);
+            if (sec) {
+                sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
+        function addComment(index) {
+            const input = document.getElementById(`comment-input-${index}`);
+            const commentText = input.value.trim();
+            if (!commentText) return;
+
+            playSound(650, 0.05);
+            if (!postsData[index].comments) postsData[index].comments = [];
+            postsData[index].comments.push(commentText);
+            renderPosts();
+            document.getElementById(`comment-section-${index}`).style.display = 'block';
+            showNotification("Anonymous comment posted!");
         }
 
         function escapeHtml(str) {
@@ -633,6 +744,11 @@
             container.appendChild(notif);
             setTimeout(() => notif.remove(), 3500);
         }
+
+        // Initialize Tweeter Feed on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPosts();
+        });
     </script>
 </body>
 </html>
