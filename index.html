@@ -63,7 +63,7 @@
             position: relative; z-index: 5;
         }
 
-        /* WINDOW STYLING WITH FULL CONTROLS */
+        /* STANDARD WINDOW STYLING */
         .nso-window {
             position: absolute; background: var(--win-bg);
             border: 2px solid var(--border-col); box-shadow: 4px 4px 0px rgba(54, 36, 89, 0.4);
@@ -103,74 +103,113 @@
             background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%);
         }
 
-        /* JINE CHAT WINDOW */
-        #jine-widget {
-            width: 440px !important; height: 440px !important;
+        /* SPACE THEMED PIXELATED SKILLS APP */
+        .space-skills-container {
+            background: radial-gradient(circle at center, #1b0c3f 0%, #070114 100%);
+            border: 2px inset #7552be;
+            padding: 15px; height: 100%; box-sizing: border-box;
+            display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden;
         }
+        .space-skills-container::before {
+            content: '✦  ·  .  ⋆  ·  ✦  ·  .  ⋆  ·  ✦';
+            position: absolute; top: 5px; left: 10px; font-size: 9px; color: #ff73c2; opacity: 0.6; pointer-events: none;
+            letter-spacing: 12px;
+        }
+        .space-header {
+            font-size: 13px; font-weight: bold; color: #ff73c2; text-shadow: 0 0 5px rgba(255,115,194,0.6);
+            border-bottom: 1px dashed #7552be; padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; overflow-y: auto; padding-right: 4px;
+        }
+        .skill-node {
+            background: rgba(40, 20, 75, 0.8);
+            border: 2px solid #8b73ce;
+            border-radius: 4px;
+            padding: 10px;
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; color: #f3edff;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s, border-color 0.2s;
+            position: relative; overflow: hidden;
+        }
+        .skill-node:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(75, 30, 130, 0.9);
+            border-color: #ff73c2;
+            box-shadow: 2px 5px 0px rgba(255, 115, 194, 0.4);
+        }
+        .skill-icon {
+            width: 32px; height: 32px; object-fit: contain; image-rendering: pixelated;
+            background: rgba(255,255,255,0.05); padding: 4px; border: 1px solid #7552be; border-radius: 4px;
+        }
+        .skill-info { display: flex; flex-direction: column; gap: 2px; }
+        .skill-name { font-weight: bold; font-size: 12px; color: #fff; text-shadow: 0 0 3px rgba(255,255,255,0.4); }
+        .skill-level { font-size: 9px; color: #ff99dc; }
+
+        /* GAMY PIXELATED OVERWORLD MAP STYLING */
+        .rpg-map-viewport {
+            background: #5b9e55;
+            position: relative;
+            width: 100%; height: calc(100% - 24px);
+            box-sizing: border-box; overflow: hidden;
+            border: 2px inset var(--border-col);
+            background-image: 
+                radial-gradient(#4d8c47 15%, transparent 16%),
+                radial-gradient(#4d8c47 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+        .pixel-mountain {
+            position: absolute; width: 0; height: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+            border-bottom: 55px solid #7c6f64;
+            filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.3));
+            z-index: 2;
+        }
+        .pixel-mountain::after {
+            content: ''; position: absolute; top: 12px; left: -15px; width: 0; height: 0;
+            border-left: 15px solid transparent; border-right: 15px solid transparent;
+            border-bottom: 25px solid #fff; opacity: 0.85;
+        }
+        .map-roads-svg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+        }
+        .map-node-pin {
+            position: absolute; background: #fff5e6; border: 2px solid #362459;
+            padding: 6px 10px; font-size: 10px; font-weight: bold; cursor: pointer;
+            box-shadow: 3px 3px 0px rgba(54,36,89,0.5); z-index: 5;
+            display: flex; align-items: center; gap: 6px;
+            transition: transform 0.15s ease, background 0.15s ease;
+        }
+        .map-node-pin:hover {
+            transform: scale(1.08); background: #ffe6f2; border-color: var(--accent-col);
+        }
+
+        /* JINE CHAT WINDOW */
+        #jine-widget { width: 440px !important; height: 440px !important; }
         .jine-content-box {
             background: url('window/JINEBG.png') no-repeat center center;
-            background-size: cover;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%; height: 100%;
-            box-sizing: border-box;
+            background-size: cover; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; width: 100%; height: 100%; box-sizing: border-box;
         }
         .jine-message-thread {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            overflow-y: auto;
-            max-height: 300px;
-            padding-right: 4px;
+            display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 300px; padding-right: 4px;
         }
-        .jine-msg-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        .jine-msg-row.user-msg {
-            justify-content: flex-end;
-        }
-        .jine-avatar-icon {
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            border: 1px solid #8b73ce;
-            object-fit: cover;
-            image-rendering: pixelated;
-        }
+        .jine-msg-row { display: flex; align-items: flex-start; gap: 8px; }
+        .jine-msg-row.user-msg { justify-content: flex-end; }
+        .jine-avatar-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #8b73ce; object-fit: cover; image-rendering: pixelated; }
         .jine-speech-bubble {
-            background: #e8d7f7;
-            border: 2px solid #8b73ce;
-            box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
-            padding: 10px 14px;
-            font-size: 11px;
-            color: #362459;
-            max-width: 280px;
-            border-radius: 6px;
-            word-break: break-word;
-            line-height: 1.4;
+            background: #e8d7f7; border: 2px solid #8b73ce; box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
+            padding: 10px 14px; font-size: 11px; color: #362459; max-width: 280px; border-radius: 6px; word-break: break-word; line-height: 1.4;
         }
         .jine-user-bubble {
-            background: var(--title-bg);
-            border: 1px solid var(--border-col);
-            box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
-            padding: 8px 12px;
-            font-size: 11px;
-            color: var(--text-col);
-            max-width: 260px;
-            border-radius: 6px;
-            word-break: break-word;
+            background: var(--title-bg); border: 1px solid var(--border-col); box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
+            padding: 8px 12px; font-size: 11px; color: var(--text-col); max-width: 260px; border-radius: 6px; word-break: break-word;
         }
         .jine-sticker-tray {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            background: rgba(253, 246, 255, 0.9);
-            padding: 8px;
-            border: 1px dashed var(--border-col);
-            text-align: center;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: rgba(253, 246, 255, 0.9);
+            padding: 8px; border: 1px dashed var(--border-col); text-align: center;
         }
         .jine-sticker-btn {
             background: #fff; border: 1px solid var(--border-col); padding: 4px; font-size: 10px; cursor: pointer; color: #362459; font-weight: bold;
@@ -406,28 +445,63 @@
                 </div>
             </div>
 
-            <!-- HANG OUT APP -->
-            <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;" data-title="Hang Out">
+            <!-- CREDENTIALS HUB -->
+            <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 460px; height: 370px;" data-title="Credentials">
                 <div class="title-bar">
-                    <div class="title-bar-text">Hang Out</div>
+                    <div class="title-bar-text">Credentials Hub</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('hangout-win')">_</button>
                         <button onclick="maximizeApp('hangout-win')">□</button>
                         <button onclick="closeApp('hangout-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body scrollable">
-                    <h3 style="margin-top:0;">Hang Out Hub</h3>
-                    <p style="font-size:11px;">Select a category to inspect credentials and records:</p>
-                    <div class="nso-link-card" onclick="openApp('guild-win')">🛡️ Guild — ITM Business School, Graduation, Highschool</div>
-                    <div class="nso-link-card" onclick="openApp('achieve-win')">🏆 Achievements — Trophies & Awards Database</div>
-                    <div class="nso-link-card" onclick="openApp('certs-win')">📜 Certifications — Verified Coursera & Credentials</div>
-                    <div class="nso-link-card" onclick="openApp('exp-win')">💼 Experiences — Internship & Leadership History</div>
+                <div class="window-body scrollable" style="background: #faf5ff;">
+                    <div class="cred-hub-container">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <span style="font-size: 16px;">📂</span>
+                            <div>
+                                <div style="font-size: 13px; font-weight: bold; color: var(--text-col);">Professional Records & Vault</div>
+                                <div style="font-size: 10px; color: #665;">Select a category below to inspect verified credentials:</div>
+                            </div>
+                        </div>
+                        
+                        <div class="cred-card" onclick="openApp('guild-win')">
+                            <div class="cred-card-icon">🛡️</div>
+                            <div>
+                                <div class="cred-card-title">Guild // Education & Academic Dossier</div>
+                                <div class="cred-card-desc">ITM Business School BBA Analytics [9.95 CGPA] & High School</div>
+                            </div>
+                        </div>
+
+                        <div class="cred-card" onclick="openApp('achieve-win')">
+                            <div class="cred-card-icon">🏆</div>
+                            <div>
+                                <div class="cred-card-title">Achievements // Trophies & Awards Database</div>
+                                <div class="cred-card-desc">International Dance Championship, Kalolsavam & Rangotsav</div>
+                            </div>
+                        </div>
+
+                        <div class="cred-card" onclick="openApp('certs-win')">
+                            <div class="cred-card-icon">📜</div>
+                            <div>
+                                <div class="cred-card-title">Certifications // Verified Credentials</div>
+                                <div class="cred-card-desc">Fintech Olympiad 2025 & ISRO Distance Learning Modules</div>
+                            </div>
+                        </div>
+
+                        <div class="cred-card" onclick="openApp('exp-win')">
+                            <div class="cred-card-icon">💼</div>
+                            <div>
+                                <div class="cred-card-title">Experiences // Internships & Leadership</div>
+                                <div class="cred-card-desc">Manapravah Foundation NGO, Phantom Opera Club & BICAL</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- SUB APPS -->
-            <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;" data-title="Guild // Education">
+            <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 440px; height: 340px;" data-title="Guild // Education">
                 <div class="title-bar"><div class="title-bar-text">Guild // Education</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('guild-win')">_</button>
@@ -435,14 +509,24 @@
                         <button onclick="closeApp('guild-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body scrollable">
-                    <h3>Academic & Guild Records</h3>
-                    <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
-                    <p><strong>Graduation / High School:</strong> Dr. Pillai Global Academy & Mahatma International School records verified.</p>
+                <div class="window-body scrollable" style="background: #faf5ff;">
+                    <div class="subtab-content">
+                        <div style="font-weight: bold; color: var(--accent-col); font-size: 13px; margin-bottom: 2px;">🎓 Academic Dossier</div>
+                        <div class="subtab-item-box">
+                            <strong>ITM Skills University / Business School:</strong><br>
+                            Bachelor of Business Administration (BBA) - Business Analytics [BBA iConnect] (2025–2028)<br>
+                            <span style="color: #27ae60; font-weight: bold; display: inline-block; margin-top: 4px;">✨ Verified CGPA: 9.95</span>
+                        </div>
+                        <div class="subtab-item-box">
+                            <strong>Prior Education:</strong><br>
+                            Dr. Pillai Global Academy & Mahatma International School.<br>
+                            Rigorous foundation in mathematics, commerce, and analytical thinking.
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;" data-title="Achievements">
+            <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 440px; height: 340px;" data-title="Achievements">
                 <div class="title-bar"><div class="title-bar-text">Achievements</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('achieve-win')">_</button>
@@ -450,17 +534,17 @@
                         <button onclick="closeApp('achieve-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body scrollable">
-                    <h3>Interactive Trophy Room</h3>
-                    <ul>
-                        <li>Bronze Medalist - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</li>
-                        <li>2nd Prize Winner - Classical Dance, Mathrubhumi Kalolsavam 2018</li>
-                        <li>2nd Place - National Art Competition, Rangotsav 2024</li>
-                    </ul>
+                <div class="window-body scrollable" style="background: #faf5ff;">
+                    <div class="subtab-content">
+                        <div style="font-weight: bold; color: var(--accent-col); font-size: 13px; margin-bottom: 2px;">🏆 Trophies & Awards Database</div>
+                        <div class="subtab-item-box">🏅 <strong>Bronze Medalist</strong> - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</div>
+                        <div class="subtab-item-box">🥈 <strong>2nd Prize Winner</strong> - Classical Dance, Mathrubhumi Kalolsavam 2018</div>
+                        <div class="subtab-item-box">🎨 <strong>2nd Place</strong> - National Art Competition, Rangotsav 2024</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;" data-title="Certifications">
+            <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 440px; height: 320px;" data-title="Certifications">
                 <div class="title-bar"><div class="title-bar-text">Certifications</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('certs-win')">_</button>
@@ -468,15 +552,16 @@
                         <button onclick="closeApp('certs-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body scrollable">
-                    <h3>Verified Certifications</h3>
-                    <ul>
-                        <li>Fintech Olympiad 2025 Module Completion</li>
-                    </ul>
+                <div class="window-body scrollable" style="background: #faf5ff;">
+                    <div class="subtab-content">
+                        <div style="font-weight: bold; color: var(--accent-col); font-size: 13px; margin-bottom: 2px;">📜 Verified Credentials</div>
+                        <div class="subtab-item-box">📜 <strong>Fintech Olympiad 2025</strong> — Certificate of Module Completion & Assessment Excellence</div>
+                        <div class="subtab-item-box">🛰️ <strong>ISRO Dehradun (IIRS)</strong> — Enrolled in Space Science and Climate Change Distance Learning Pathways</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;" data-title="Experiences">
+            <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 440px; height: 340px;" data-title="Experiences">
                 <div class="title-bar"><div class="title-bar-text">Experiences</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('exp-win')">_</button>
@@ -484,27 +569,115 @@
                         <button onclick="closeApp('exp-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body scrollable">
-                    <h3>Professional Experience & NGO</h3>
-                    <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
-                    <p><strong>Positions of Responsibility:</strong> General Secretary & Creative Director - The Phantom Opera Club; Creative Director - BICAL.</p>
+                <div class="window-body scrollable" style="background: #faf5ff;">
+                    <div class="subtab-content">
+                        <div style="font-weight: bold; color: var(--accent-col); font-size: 13px; margin-bottom: 2px;">💼 Professional & Leadership History</div>
+                        <div class="subtab-item-box">
+                            <strong>Manapravah Foundation (NGO Internship - 2026):</strong><br>
+                            Planned donation drives, mental health awareness campaigns, and Mindful Mela community events.
+                        </div>
+                        <div class="subtab-item-box">
+                            <strong>Positions of Responsibility:</strong><br>
+                            • General Secretary & Creative Director — The Phantom Opera Club<br>
+                            • Creative Director — BICAL
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- MAP APP -->
-            <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;" data-title="Go Out">
+            <!-- SPACE THEMED SKILLS APP WINDOW -->
+            <div class="nso-window draggable-window hidden app-window" id="skills-win" style="top: 90px; left: 160px; width: 420px; height: 360px;" data-title="Skills Vault">
                 <div class="title-bar">
-                    <div class="title-bar-text">Go Out // GitHub Project Map</div>
+                    <div class="title-bar-text">Skills Vault // Space Tech</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('skills-win')">_</button>
+                        <button onclick="maximizeApp('skills-win')">□</button>
+                        <button onclick="closeApp('skills-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body" style="padding: 10px; background: #070114; box-sizing: border-box;">
+                    <div class="space-skills-container">
+                        <div class="space-header">
+                            <span>🚀 TECHNICAL ARSENAL</span>
+                            <span style="font-size: 9px; color: #a78bfa;">SYSTEM ONLINE</span>
+                        </div>
+                        <div class="skills-grid">
+                            <a href="https://www.python.org" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="skill-icon" alt="Python">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-level">Data & Backend</span>
+                                </div>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" class="skill-icon" alt="HTML">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML</span>
+                                    <span class="skill-level">Markup Language</span>
+                                </div>
+                            </a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" class="skill-icon" alt="CSS">
+                                <div class="skill-info">
+                                    <span class="skill-name">CSS</span>
+                                    <span class="skill-level">Styling & UI</span>
+                                </div>
+                            </a>
+                            <a href="https://www.mysql.com" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" class="skill-icon" alt="MySQL">
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <span class="skill-level">Database Workflows</span>
+                                </div>
+                            </a>
+                            <a href="https://www.java.com" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" class="skill-icon" alt="Java">
+                                <div class="skill-info">
+                                    <span class="skill-name">Java</span>
+                                    <span class="skill-level">Learning...</span>
+                                </div>
+                            </a>
+                            <a href="https://isocpp.org" target="_blank" class="skill-node">
+                                <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" class="skill-icon" alt="C++">
+                                <div class="skill-info">
+                                    <span class="skill-name">C++</span>
+                                    <span class="skill-level">Learning...</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE PIXELATED RPG MAP APP -->
+            <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 80px; width: 580px; height: 440px;" data-title="Go Out">
+                <div class="title-bar">
+                    <div class="title-bar-text">Go Out // Adhithya's GitHub Repos Map</div>
                     <div class="window-controls">
                         <button onclick="minimizeApp('map-win')">_</button>
                         <button onclick="maximizeApp('map-win')">□</button>
                         <button onclick="closeApp('map-win')">×</button>
                     </div>
                 </div>
-                <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
-                    <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
-                    <div style="position:absolute; top:120px; left:250px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com','_blank')">📍 Ikebukuro // Data Analytics Toolkit</div>
-                    <p style="position:absolute; bottom:5px; left:10px; background:rgba(255,255,255,0.8); margin:0; font-size:9px; padding:2px;">Click any live project checkpoint to navigate to GitHub.</p>
+                <div class="window-body" style="padding: 10px; background: #3b7a35; box-sizing: border-box;">
+                    <div class="rpg-map-viewport" id="rpg-map-viewport">
+                        <!-- Pixel Mountains -->
+                        <div class="pixel-mountain" style="top: 130px; left: 220px;"></div>
+                        <div class="pixel-mountain" style="top: 150px; left: 280px; transform: scale(0.8);"></div>
+                        <div class="pixel-mountain" style="top: 110px; left: 350px;"></div>
+
+                        <!-- Connecting Roads SVG -->
+                        <svg class="map-roads-svg" id="map-roads-svg">
+                            <path d="M 90,80 Q 200,50 310,120 T 480,260" stroke="#d4c5f9" stroke-width="4" fill="none" stroke-dasharray="6,6"/>
+                        </svg>
+
+                        <!-- Live Owner Repos Container -->
+                        <div id="github-map-nodes"></div>
+                    </div>
+                    <div style="margin-top: 6px; font-size: 9px; color: #fff; text-shadow: 1px 1px #000; display: flex; justify-content: space-between;">
+                        <span>🗺️ Owner Repositories Active</span>
+                        <span>Click any project checkpoint to visit repo</span>
+                    </div>
                 </div>
             </div>
 
@@ -538,7 +711,10 @@
                     <img src="app_icons/twitter.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Tweeter"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
                 </div>
                 <div onclick="openApp('hangout-win')" style="cursor:pointer; text-align:center; width:60px;">
-                    <img src="app_icons/game.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Hang Out"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
+                    <img src="app_icons/game.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Credentials"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Credentials</label>
+                </div>
+                <div onclick="openApp('skills-win')" style="cursor:pointer; text-align:center; width:60px;">
+                    <img src="app_icons/folder_photos.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Skills"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Skills Vault</label>
                 </div>
                 <div onclick="openApp('map-win')" style="cursor:pointer; text-align:center; width:60px;">
                     <img src="app_icons/map.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Map"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
@@ -569,7 +745,8 @@
             <div class="start-menu-header">Control Panel</div>
             <div class="start-item" onclick="openApp('internet-win'); toggleStartMenu();">🌐 Internet (Socials)</div>
             <div class="start-item" onclick="openApp('tweeter-win'); toggleStartMenu();">💬 Tweeter (Public Feed)</div>
-            <div class="start-item" onclick="openApp('hangout-win'); toggleStartMenu();">☕ Hang Out (Credentials)</div>
+            <div class="start-item" onclick="openApp('hangout-win'); toggleStartMenu();">📂 Credentials Hub</div>
+            <div class="start-item" onclick="openApp('skills-win'); toggleStartMenu();">🚀 Skills Vault</div>
             <div class="start-item" onclick="openApp('map-win'); toggleStartMenu();">🗺️ Go Out (GitHub Map)</div>
             <div class="start-item" onclick="toggleTheme(); toggleStartMenu();" id="theme-label">🌙 Toggle Dark Mode</div>
             <div class="start-item" onclick="toggleMute(); toggleStartMenu();" id="sound-label">🔊 Sound: ON</div>
@@ -605,6 +782,7 @@
                 openApp('jine-widget');
                 openApp('webcam-win');
                 initJineChat();
+                fetchLiveGitHubRepos();
             }, 4500);
         });
 
@@ -628,6 +806,57 @@
             const clock = document.getElementById('taskbar-clock');
             if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
+
+        // LIVE GITHUB REPO FETCHING (STRICTLY FILTERED FOR OWNER REPOS ONLY)
+        async function fetchLiveGitHubRepos() {
+            const container = document.getElementById('github-map-nodes');
+            if (!container) return;
+            
+            try {
+                const response = await fetch('https://api.github.com/users/ArThirtyFour/repos?sort=updated');
+                const repos = await response.json();
+                
+                const myCleanRepos = repos.filter(repo => 
+                    repo.owner && repo.owner.login.toLowerCase() === 'arthirtyfour' && 
+                    !repo.fork && 
+                    repo.name.toLowerCase() !== 'arthirtyfour'
+                );
+                
+                container.innerHTML = "";
+                let pathCoords = "";
+
+                const coords = [
+                    {top: 70, left: 60},
+                    {top: 130, left: 180},
+                    {top: 250, left: 110},
+                    {top: 90, left: 420},
+                    {top: 230, left: 390},
+                    {top: 320, left: 250}
+                ];
+
+                myCleanRepos.slice(0, 6).forEach((repo, idx) => {
+                    const pos = coords[idx] || {top: 50 + (idx * 50), left: 60 + (idx * 60)};
+                    
+                    if (idx === 0) pathCoords += `M ${pos.left + 20},${pos.top + 15}`;
+                    else pathCoords += ` L ${pos.left + 20},${pos.top + 15}`;
+
+                    const pin = document.createElement('div');
+                    pin.className = 'map-node-pin';
+                    pin.style.top = pos.top + 'px';
+                    pin.style.left = pos.left + 'px';
+                    pin.innerHTML = `📍 <span>${escapeHtml(repo.name)}</span>`;
+                    pin.onclick = () => window.open(repo.html_url, '_blank');
+                    container.appendChild(pin);
+                });
+
+                const svgPath = document.getElementById('map-roads-svg');
+                if (svgPath && pathCoords) {
+                    svgPath.innerHTML = `<path d="${pathCoords}" stroke="#f3edff" stroke-width="4" fill="none" stroke-dasharray="5,5"/>`;
+                }
+            } catch (e) {
+                console.error("Failed to load user repositories for map", e);
+            }
+        }
 
         // DYNAMIC TASKBAR TABS MANAGER
         function updateTaskbarTabs() {
@@ -693,8 +922,8 @@
             const win = document.getElementById(windowId);
             if (win) {
                 if (win.style.width === '100%') {
-                    win.style.width = windowId === 'jine-widget' ? '440px' : '450px';
-                    win.style.height = windowId === 'jine-widget' ? '440px' : '350px';
+                    win.style.width = windowId === 'jine-widget' ? '440px' : (windowId === 'hangout-win' ? '460px' : (windowId === 'map-win' ? '580px' : (windowId === 'skills-win' ? '420px' : '440px')));
+                    win.style.height = windowId === 'jine-widget' ? '440px' : (windowId === 'hangout-win' ? '370px' : (windowId === 'map-win' ? '440px' : (windowId === 'skills-win' ? '360px' : '340px')));
                 } else {
                     win.style.width = '100%';
                     win.style.height = 'calc(100% - 36px)';
@@ -886,7 +1115,7 @@
             if (!feed) return;
             feed.innerHTML = "";
 
-            postsData.forEach((post, index) => {
+      postsData.forEach((post, index) => {
                 let commentsHtml = "";
                 if (post.comments && post.comments.length > 0) {
                     post.comments.forEach(c => {
