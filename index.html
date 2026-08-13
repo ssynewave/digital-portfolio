@@ -24,9 +24,9 @@
             --os-bg: #070110;
             --win-bg: #180c2e;
             --title-bg: #321c59;
-            --border-col: #7552be;
-            --text-col: #f3edff;
-            --accent-col: #ff4da6;
+            --border-col: #533d8a;
+            --text-col: #f0ebff;
+            --accent-col: #ff3399;
             --bar-bg: #271447;
         }
 
@@ -47,14 +47,23 @@
         }
         .bios-content p { margin: 3px 0; line-height: 1.2; text-shadow: 0 0 5px rgba(255,255,255,0.4); }
 
-        /* DESKTOP ENVIRONMENT */
+        /* MULTI-PANEL WALLPAPER */
         #desktop {
             width: 100vw; height: 100vh; position: relative;
-            background: url('sidebar/1.png') no-repeat center center fixed;
+            display: flex; background: url('background.png') repeat center center;
             background-size: cover; image-rendering: pixelated;
         }
+        .wallpaper-sidebar {
+            width: 15%; height: 100%;
+            background: url('sidebar/1.png') no-repeat center center;
+            background-size: cover; image-rendering: pixelated; z-index: 10;
+        }
+        .wallpaper-center {
+            width: 70%; height: 100%;
+            position: relative; z-index: 5;
+        }
 
-        /* WINDOW STYLING (NSO STYLE) */
+        /* WINDOW STYLING WITH FULL CONTROLS */
         .nso-window {
             position: absolute; background: var(--win-bg);
             border: 2px solid var(--border-col); box-shadow: 4px 4px 0px rgba(54, 36, 89, 0.4);
@@ -69,11 +78,104 @@
             background: var(--title-bg); color: var(--text-col); padding: 5px 8px;
             display: flex; justify-content: space-between; align-items: center; cursor: move; font-size: 12px; font-weight: bold;
         }
+        .window-controls { display: flex; gap: 4px; align-items: center; }
         .window-controls button {
-            background: var(--border-col); color: white; border: none; font-weight: bold; cursor: pointer; padding: 1px 5px; font-size: 10px;
+            background: var(--border-col); border: 1px solid var(--text-col); cursor: pointer; padding: 0; width: 14px; height: 14px;
+            font-size: 9px; font-weight: bold; color: white; display: flex; justify-content: center; align-items: center;
         }
         .window-controls button:hover { background: var(--accent-col); }
+
         .window-body { padding: 12px; color: var(--text-col); font-size: 12px; overflow-y: auto; flex-grow: 1; max-height: 450px; }
+
+        /* WEBCAM AVATAR SMOOTH TRANSITION */
+        .webcam-body-container {
+            padding: 0; background: #0b0218; text-align: center; position: relative; height: calc(100% - 24px); display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;
+        }
+        .webcam-avatar-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; z-index: 1;
+            transition: opacity 0.4s ease, transform 0.3s ease;
+            opacity: 1;
+        }
+        .webcam-avatar-img.fade-out { opacity: 0; transform: scale(1.03); }
+        .webcam-click-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+            display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 28px; cursor: pointer;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%);
+        }
+
+        /* JINE CHAT WINDOW */
+        #jine-widget {
+            width: 440px !important; height: 440px !important;
+        }
+        .jine-content-box {
+            background: url('window/JINEBG.png') no-repeat center center;
+            background-size: cover;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%; height: 100%;
+            box-sizing: border-box;
+        }
+        .jine-message-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+            max-height: 300px;
+            padding-right: 4px;
+        }
+        .jine-msg-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .jine-msg-row.user-msg {
+            justify-content: flex-end;
+        }
+        .jine-avatar-icon {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 1px solid #8b73ce;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+        .jine-speech-bubble {
+            background: #e8d7f7;
+            border: 2px solid #8b73ce;
+            box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
+            padding: 10px 14px;
+            font-size: 11px;
+            color: #362459;
+            max-width: 280px;
+            border-radius: 6px;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+        .jine-user-bubble {
+            background: var(--title-bg);
+            border: 1px solid var(--border-col);
+            box-shadow: 3px 3px 0px rgba(54, 36, 89, 0.2);
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--text-col);
+            max-width: 260px;
+            border-radius: 6px;
+            word-break: break-word;
+        }
+        .jine-sticker-tray {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            background: rgba(253, 246, 255, 0.9);
+            padding: 8px;
+            border: 1px dashed var(--border-col);
+            text-align: center;
+        }
+        .jine-sticker-btn {
+            background: #fff; border: 1px solid var(--border-col); padding: 4px; font-size: 10px; cursor: pointer; color: #362459; font-weight: bold;
+        }
+        .jine-sticker-btn:hover { background: var(--accent-col); color: white; }
 
         /* TASKBAR */
         .nso-taskbar {
@@ -167,232 +269,294 @@
     <!-- MAIN DESKTOP ENVIRONMENT -->
     <div id="desktop" class="hidden">
         
-        <!-- AUDIO ASSETS -->
-        <audio id="open-audio" src="sound/open.wav" preload="auto"></audio>
-        <audio id="close-audio" src="sound/close.wav" preload="auto"></audio>
+        <div class="wallpaper-sidebar"></div>
+        <div class="wallpaper-center" id="wallpaper-center-area">
+            
+            <!-- AUDIO ASSETS -->
+            <audio id="open-audio" src="sound/open.wav" preload="auto"></audio>
+            <audio id="close-audio" src="sound/close.wav" preload="auto"></audio>
 
-        <!-- 1. WEBCAM WINDOW -->
-        <div class="nso-window draggable-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px;" data-title="webcam">
-            <div class="title-bar">
-                <div class="title-bar-text">webcam</div>
-                <div class="window-controls"><button class="close-btn" data-target="webcam-win" onclick="closeApp('webcam-win')">×</button></div>
-            </div>
-            <div class="window-body" style="padding:0; background:#0b0218; text-align:center; height:190px; position:relative;">
-                <div onclick="pokeAvatar()" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;">
-                    <img src="icons/icon_ame.png" alt="Ame" style="width:64px; height:64px; image-rendering:pixelated; margin-bottom:5px;">
-                    <div style="font-size:10px; color:#ff88cb;">CLICK TO CHANGE MOOD</div>
-                </div>
-                <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.85); color:#ff88cb; font-size:10px; padding:4px; display:flex; justify-content:space-between; box-sizing:border-box;">
-                    <span>● LIVE | ADHITHYA</span>
-                    <span id="webcam-mood">MOOD: 72%</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. TASK MANAGER WINDOW -->
-        <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;" data-title="Task Manager">
-            <div class="title-bar">
-                <div class="title-bar-text">Task Manager</div>
-                <div class="window-controls"><button class="close-btn" data-target="taskman-win" onclick="closeApp('taskman-win')">×</button></div>
-            </div>
-            <div class="window-body">
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-                    <span style="font-size:11px; font-weight:bold;">Followers</span>
-                    <strong style="font-size:18px; color:var(--accent-col);" id="stat-followers">1001</strong>
-                </div>
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                    <span style="font-size:11px;">Stress</span>
-                    <strong style="font-size:11px;" id="stat-stress">15 / 100</strong>
-                </div>
-                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:var(--accent-col); height:100%; width:15%;" id="stress-bar"></div></div>
-
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                    <span style="font-size:11px;">Affection</span>
-                    <strong style="font-size:11px;" id="stat-affection">40 / 100</strong>
-                </div>
-                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:#5cd1e5; height:100%; width:40%;" id="affection-bar"></div></div>
-
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                    <span style="font-size:11px;">Mental Darkness</span>
-                    <strong style="font-size:11px;" id="stat-darkness">15 / 100</strong>
-                </div>
-                <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:12px;"><div style="background:#a78bfa; height:100%; width:15%;" id="darkness-bar"></div></div>
-
-                <hr style="border:0; border-top:1px solid var(--border-col); margin:6px 0;">
-                <div style="font-size:10px; display:flex; justify-content:space-between;"><span>Total Visits: <strong id="visit-count">142</strong></span><span>FPS: <strong id="sys-fps">60</strong></span></div>
-                <div style="font-size:10px; display:flex; justify-content:space-between; margin-top:2px;"><span>Memory: <strong id="sys-mem">44.2 MB</strong></span><span>Likes: <strong id="like-count">389</strong></span></div>
-            </div>
-        </div>
-
-        <!-- 3. INTERNET APP -->
-        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;" data-title="Internet">
-            <div class="title-bar">
-                <div class="title-bar-text">Internet</div>
-                <div class="window-controls"><button class="close-btn" data-target="internet-win" onclick="closeApp('internet-win')">×</button></div>
-            </div>
-            <div class="window-body" style="padding: 0;">
-                <div class="internet-container">
-                    <div class="internet-header">
-                        <span>✨</span> Internet! <span>✨</span>
+            <!-- WEBCAM WINDOW -->
+            <div class="nso-window draggable-window hidden app-window" id="webcam-win" style="top: 20px; left: 20px; width: 340px; height: 260px;" data-title="webcam">
+                <div class="title-bar">
+                    <div class="title-bar-text">webcam</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('webcam-win')">_</button>
+                        <button onclick="maximizeApp('webcam-win')">□</button>
+                        <button onclick="closeApp('webcam-win')">×</button>
                     </div>
+                </div>
+                <div class="window-body webcam-body-container">
+                    <img id="webcam-avatar" src="assets/calm_img.png" class="webcam-avatar-img" alt="Webcam Expression">
+                    <div class="webcam-click-overlay" onclick="pokeAvatar()">
+                        <div style="font-size:10px; color:#ff88cb; text-shadow: 1px 1px #000;">CLICK TO CHANGE MOOD</div>
+                    </div>
+                    <div style="position:absolute; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.85); color:#ff88cb; font-size:10px; padding:4px; display:flex; justify-content:space-between; box-sizing:border-box; z-index:3;">
+                        <span>● LIVE | ADHITHYA</span>
+                        <span id="webcam-mood">MOOD: 72%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TASK MANAGER WINDOW -->
+            <div class="nso-window draggable-window" id="taskman-win" style="top: 20px; right: 20px; width: 300px;" data-title="Task Manager">
+                <div class="title-bar">
+                    <div class="title-bar-text">Task Manager</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('taskman-win')">_</button>
+                        <button onclick="maximizeApp('taskman-win')">□</button>
+                        <button onclick="closeApp('taskman-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                        <span style="font-size:11px; font-weight:bold;">Followers</span>
+                        <strong style="font-size:18px; color:var(--accent-col);" id="stat-followers">1015</strong>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                        <span style="font-size:11px;">Stress</span>
+                        <strong style="font-size:11px;" id="stat-stress">8 / 100</strong>
+                    </div>
+                    <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:var(--accent-col); height:100%; width:8%;" id="stress-bar"></div></div>
+
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                        <span style="font-size:11px;">Affection</span>
+                        <strong style="font-size:11px;" id="stat-affection">47 / 100</strong>
+                    </div>
+                    <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:8px;"><div style="background:#5cd1e5; height:100%; width:47%;" id="affection-bar"></div></div>
+
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                        <span style="font-size:11px;">Mental Darkness</span>
+                        <strong style="font-size:11px;" id="stat-darkness">15 / 100</strong>
+                    </div>
+                    <div style="background:var(--bar-bg); border:1px solid var(--border-col); height:10px; margin-bottom:12px;"><div style="background:#a78bfa; height:100%; width:15%;" id="darkness-bar"></div></div>
+
+                    <hr style="border:0; border-top:1px solid var(--border-col); margin:6px 0;">
+                    <div style="font-size:10px; display:flex; justify-content:space-between;"><span>Total Visits: <strong id="visit-count">142</strong></span><span>FPS: <strong id="sys-fps">60</strong></span></div>
+                    <div style="font-size:10px; display:flex; justify-content:space-between; margin-top:2px;"><span>Memory: <strong id="sys-mem">44.2 MB</strong></span><span>Likes: <strong id="like-count">389</strong></span></div>
+                </div>
+            </div>
+
+            <!-- INTERNET APP -->
+            <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;" data-title="Internet">
+                <div class="title-bar">
+                    <div class="title-bar-text">Internet</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('internet-win')">_</button>
+                        <button onclick="maximizeApp('internet-win')">□</button>
+                        <button onclick="closeApp('internet-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body" style="padding: 0;">
+                    <div class="internet-container">
+                        <div class="internet-header">
+                            <span>✨</span> Internet! <span>✨</span>
+                        </div>
+                        
+                        <a href="https://instagram.com" target="_blank" class="internet-link-row">
+                            <div class="internet-icon-label">
+                                <span style="font-size: 20px;">📸</span>
+                                <span>Instagram</span>
+                            </div>
+                            <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="internet-link-row">
+                            <div class="internet-icon-label">
+                                <span style="font-size: 20px;">💼</span>
+                                <span>Linkedin</span>
+                            </div>
+                            <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                        </a>
+
+                        <a href="https://github.com/ArThirtyFour" target="_blank" class="internet-link-row">
+                            <div class="internet-icon-label">
+                                <span style="font-size: 20px;">💻</span>
+                                <span>Github</span>
+                            </div>
+                            <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWEETER APP -->
+            <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;" data-title="Tweeter">
+                <div class="title-bar">
+                    <div class="title-bar-text">Tweeter</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('tweeter-win')">_</button>
+                        <button onclick="maximizeApp('tweeter-win')">□</button>
+                        <button onclick="closeApp('tweeter-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body scrollable">
+                    <div class="tweeter-app-title">Tweeter</div>
                     
-                    <a href="https://instagram.com" target="_blank" class="internet-link-row">
-                        <div class="internet-icon-label">
-                            <span style="font-size: 20px;">📸</span>
-                            <span>Instagram</span>
+                    <div class="tweeter-post-box">
+                        <div style="font-size:10px; font-weight:bold; color:#6b46c1; margin-bottom:4px;">CREATE PUBLIC BLOG POST (Adhithya)</div>
+                        <textarea id="admin-tweet-text" placeholder="What's happening in Business Analytics today?..." rows="3"></textarea>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+                            <input type="file" id="admin-tweet-img" accept="image/*" style="font-size:10px; width:60%;">
+                            <button onclick="publishAdminTweet()" class="start-menu-btn" style="font-size:10px; padding:4px 10px;">Post Blog</button>
                         </div>
-                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
-                    </a>
+                    </div>
 
-                    <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="internet-link-row">
-                        <div class="internet-icon-label">
-                            <span style="font-size: 20px;">💼</span>
-                            <span>Linkedin</span>
-                        </div>
-                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
-                    </a>
-
-                    <a href="https://github.com/ArThirtyFour" target="_blank" class="internet-link-row">
-                        <div class="internet-icon-label">
-                            <span style="font-size: 20px;">💻</span>
-                            <span>Github</span>
-                        </div>
-                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
-                    </a>
+                    <div id="tweeter-public-feed"></div>
                 </div>
             </div>
-        </div>
 
-        <!-- 4. TWEETER APP -->
-        <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 480px; height: 430px;" data-title="Tweeter">
-            <div class="title-bar">
-                <div class="title-bar-text">Tweeter</div>
-                <div class="window-controls"><button class="close-btn" data-target="tweeter-win" onclick="closeApp('tweeter-win')">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <div class="tweeter-app-title">Tweeter</div>
-                
-                <div class="tweeter-post-box">
-                    <div style="font-size:10px; font-weight:bold; color:#6b46c1; margin-bottom:4px;">CREATE PUBLIC BLOG POST (Adhithya)</div>
-                    <textarea id="admin-tweet-text" placeholder="What's happening in Business Analytics today?..." rows="3"></textarea>
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                        <input type="file" id="admin-tweet-img" accept="image/*" style="font-size:10px; width:60%;">
-                        <button onclick="publishAdminTweet()" class="start-menu-btn" style="font-size:10px; padding:4px 10px;">Post Blog</button>
+            <!-- HANG OUT APP -->
+            <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;" data-title="Hang Out">
+                <div class="title-bar">
+                    <div class="title-bar-text">Hang Out</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('hangout-win')">_</button>
+                        <button onclick="maximizeApp('hangout-win')">□</button>
+                        <button onclick="closeApp('hangout-win')">×</button>
                     </div>
                 </div>
-
-                <div id="tweeter-public-feed"></div>
-            </div>
-        </div>
-
-        <!-- 5. HANG OUT APP -->
-        <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;" data-title="Hang Out">
-            <div class="title-bar">
-                <div class="title-bar-text">Hang Out</div>
-                <div class="window-controls"><button class="close-btn" data-target="hangout-win" onclick="closeApp('hangout-win')">×</button></div>
-            </div>
-            <div class="window-body scrollable">
-                <h3 style="margin-top:0;">Hang Out Hub</h3>
-                <p style="font-size:11px;">Select a category to inspect credentials and records:</p>
-                <div class="nso-link-card" onclick="openApp('guild-win')">🛡️ Guild — ITM Business School, Graduation, Highschool</div>
-                <div class="nso-link-card" onclick="openApp('achieve-win')">🏆 Achievements — Trophies & Awards Database</div>
-                <div class="nso-link-card" onclick="openApp('certs-win')">📜 Certifications — Verified Coursera & Credentials</div>
-                <div class="nso-link-card" onclick="openApp('exp-win')">💼 Experiences — Internship & Leadership History</div>
-            </div>
-        </div>
-
-        <!-- SUB APPS -->
-        <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;" data-title="Guild // Education">
-            <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win" onclick="closeApp('guild-win')">×</button></div></div>
-            <div class="window-body scrollable">
-                <h3>Academic & Guild Records</h3>
-                <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
-                <p><strong>Graduation / High School:</strong> Dr. Pillai Global Academy & Mahatma International School records verified.</p>
-            </div>
-        </div>
-
-        <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;" data-title="Achievements">
-            <div class="title-bar"><div class="title-bar-text">Achievements</div><div class="window-controls"><button class="close-btn" data-target="achieve-win" onclick="closeApp('achieve-win')">×</button></div></div>
-            <div class="window-body scrollable">
-                <h3>Interactive Trophy Room</h3>
-                <ul>
-                    <li>Bronze Medalist - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</li>
-                    <li>2nd Prize Winner - Classical Dance, Mathrubhumi Kalolsavam 2018</li>
-                    <li>2nd Place - National Art Competition, Rangotsav 2024</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;" data-title="Certifications">
-            <div class="title-bar"><div class="title-bar-text">Certifications</div><div class="window-controls"><button class="close-btn" data-target="certs-win" onclick="closeApp('certs-win')">×</button></div></div>
-            <div class="window-body scrollable">
-                <h3>Verified Certifications</h3>
-                <ul>
-                    <li>Fintech Olympiad 2025 Module Completion</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;" data-title="Experiences">
-            <div class="title-bar"><div class="title-bar-text">Experiences</div><div class="window-controls"><button class="close-btn" data-target="exp-win" onclick="closeApp('exp-win')">×</button></div></div>
-            <div class="window-body scrollable">
-                <h3>Professional Experience & NGO</h3>
-                <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
-                <p><strong>Positions of Responsibility:</strong> General Secretary & Creative Director - The Phantom Opera Club; Creative Director - BICAL.</p>
-            </div>
-        </div>
-
-        <!-- 6. MAP APP -->
-        <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;" data-title="Go Out">
-            <div class="title-bar">
-                <div class="title-bar-text">Go Out // GitHub Project Map</div>
-                <div class="window-controls"><button class="close-btn" data-target="map-win" onclick="closeApp('map-win')">×</button></div>
-            </div>
-            <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
-                <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
-                <div style="position:absolute; top:120px; left:250px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com','_blank')">📍 Ikebukuro // Data Analytics Toolkit</div>
-                <p style="position:absolute; bottom:5px; left:10px; background:rgba(255,255,255,0.8); margin:0; font-size:9px; padding:2px;">Click any live project checkpoint to navigate to GitHub.</p>
-            </div>
-        </div>
-
-        <!-- 7. JINE CHAT WIDGET -->
-        <div id="jine-widget" class="draggable-window" style="position:absolute; bottom:45px; right:20px; width:340px; background:var(--win-bg); border:2px solid var(--border-col); box-shadow:4px 4px 0px rgba(54,36,89,0.3); z-index:500;" data-title="JINE">
-            <div class="title-bar">
-                <div class="title-bar-text">JINE</div>
-                <div class="window-controls"><button onclick="closeApp('jine-widget')">×</button></div>
-            </div>
-            <div class="window-body" style="background:var(--win-bg);">
-                <div style="background:rgba(255,255,255,0.7); border:1px dashed var(--accent-col); padding:8px; font-size:11px; margin-bottom:8px; min-height:45px;">
-                    <strong style="color:var(--accent-col);">Adhithya-chan:</strong>
-                    <p style="margin:4px 0 0 0;">"Welcome to ssynewave.exe! Explore my portfolio OS using the desktop icons or Start menu~"</p>
+                <div class="window-body scrollable">
+                    <h3 style="margin-top:0;">Hang Out Hub</h3>
+                    <p style="font-size:11px;">Select a category to inspect credentials and records:</p>
+                    <div class="nso-link-card" onclick="openApp('guild-win')">🛡️ Guild — ITM Business School, Graduation, Highschool</div>
+                    <div class="nso-link-card" onclick="openApp('achieve-win')">🏆 Achievements — Trophies & Awards Database</div>
+                    <div class="nso-link-card" onclick="openApp('certs-win')">📜 Certifications — Verified Coursera & Credentials</div>
+                    <div class="nso-link-card" onclick="openApp('exp-win')">💼 Experiences — Internship & Leadership History</div>
                 </div>
             </div>
-        </div>
 
-        <!-- DESKTOP SHORTCUT ICONS -->
-        <div style="position:absolute; top:30px; left:380px; display:flex; flex-direction:column; gap:15px;">
-            <div onclick="openApp('internet-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <img src="app_icons/internet.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Internet"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Internet</label>
+            <!-- SUB APPS -->
+            <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;" data-title="Guild // Education">
+                <div class="title-bar"><div class="title-bar-text">Guild // Education</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('guild-win')">_</button>
+                        <button onclick="maximizeApp('guild-win')">□</button>
+                        <button onclick="closeApp('guild-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body scrollable">
+                    <h3>Academic & Guild Records</h3>
+                    <p><strong>ITM Business School / Skills University:</strong> BBA Business Analytics (2025–2028) | CGPA: 9.95</p>
+                    <p><strong>Graduation / High School:</strong> Dr. Pillai Global Academy & Mahatma International School records verified.</p>
+                </div>
             </div>
-            <div onclick="openApp('tweeter-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <img src="app_icons/twitter.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Tweeter"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
+
+            <div class="nso-window draggable-window hidden app-window" id="achieve-win" style="top: 150px; left: 260px; width: 400px; height: 300px;" data-title="Achievements">
+                <div class="title-bar"><div class="title-bar-text">Achievements</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('achieve-win')">_</button>
+                        <button onclick="maximizeApp('achieve-win')">□</button>
+                        <button onclick="closeApp('achieve-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body scrollable">
+                    <h3>Interactive Trophy Room</h3>
+                    <ul>
+                        <li>Bronze Medalist - Indian Hip-Hop Dance Championship 2019 (Arizona, USA)</li>
+                        <li>2nd Prize Winner - Classical Dance, Mathrubhumi Kalolsavam 2018</li>
+                        <li>2nd Place - National Art Competition, Rangotsav 2024</li>
+                    </ul>
+                </div>
             </div>
-            <div onclick="openApp('hangout-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <img src="app_icons/game.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Hang Out"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
+
+            <div class="nso-window draggable-window hidden app-window" id="certs-win" style="top: 170px; left: 280px; width: 400px; height: 280px;" data-title="Certifications">
+                <div class="title-bar"><div class="title-bar-text">Certifications</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('certs-win')">_</button>
+                        <button onclick="maximizeApp('certs-win')">□</button>
+                        <button onclick="closeApp('certs-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body scrollable">
+                    <h3>Verified Certifications</h3>
+                    <ul>
+                        <li>Fintech Olympiad 2025 Module Completion</li>
+                    </ul>
+                </div>
             </div>
-            <div onclick="openApp('map-win')" style="cursor:pointer; text-align:center; width:60px;">
-                <img src="app_icons/map.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Map"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
+
+            <div class="nso-window draggable-window hidden app-window" id="exp-win" style="top: 190px; left: 300px; width: 400px; height: 300px;" data-title="Experiences">
+                <div class="title-bar"><div class="title-bar-text">Experiences</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('exp-win')">_</button>
+                        <button onclick="maximizeApp('exp-win')">□</button>
+                        <button onclick="closeApp('exp-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body scrollable">
+                    <h3>Professional Experience & NGO</h3>
+                    <p><strong>Manapravah Foundation (NGO Internship - 2026):</strong> Planned donation drives, mental health awareness, and Mindful Mela activities.</p>
+                    <p><strong>Positions of Responsibility:</strong> General Secretary & Creative Director - The Phantom Opera Club; Creative Director - BICAL.</p>
+                </div>
             </div>
-            <div onclick="window.location.href='mailto:2025.adhithyas@isu.ac.in'" style="cursor:pointer; text-align:center; width:60px;">
-                <span style="font-size:26px;">📧</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Mail</label>
+
+            <!-- MAP APP -->
+            <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;" data-title="Go Out">
+                <div class="title-bar">
+                    <div class="title-bar-text">Go Out // GitHub Project Map</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('map-win')">_</button>
+                        <button onclick="maximizeApp('map-win')">□</button>
+                        <button onclick="closeApp('map-win')">×</button>
+                    </div>
+                </div>
+                <div class="window-body" style="background:#8fbc8f; padding:10px; position:relative; height:calc(100% - 30px); box-sizing:border-box;">
+                    <div style="position:absolute; top:20px; left:50px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com/ArThirtyFour/NeedyWebUI','_blank')">📍 Shinjuku // NeedyWebUI Repo</div>
+                    <div style="position:absolute; top:120px; left:250px; background:#fff; border:1px solid #000; padding:4px; font-size:10px; cursor:pointer;" onclick="window.open('https://github.com','_blank')">📍 Ikebukuro // Data Analytics Toolkit</div>
+                    <p style="position:absolute; bottom:5px; left:10px; background:rgba(255,255,255,0.8); margin:0; font-size:9px; padding:2px;">Click any live project checkpoint to navigate to GitHub.</p>
+                </div>
             </div>
+
+            <!-- JINE CHAT WINDOW -->
+            <div id="jine-widget" class="nso-window draggable-window" style="position:absolute; bottom:45px; right:20px; width:440px; height:440px; z-index:500;" data-title="JINE">
+                <div class="title-bar">
+                    <div class="title-bar-text">JINE</div>
+                    <div class="window-controls">
+                        <button onclick="minimizeApp('jine-widget')">_</button>
+                        <button onclick="maximizeApp('jine-widget')">□</button>
+                        <button onclick="closeApp('jine-widget')">×</button>
+                    </div>
+                </div>
+                <div class="window-body jine-content-box">
+                    <div class="jine-message-thread" id="jine-thread"></div>
+                    <div class="jine-sticker-tray">
+                        <div class="jine-sticker-btn" onclick="sendUserReply('OK')">OK</div>
+                        <div class="jine-sticker-btn" onclick="sendUserReply('OMG')">OMG</div>
+                        <div class="jine-sticker-btn" onclick="sendUserReply(':(')>:(</div>
+                        <div class="jine-sticker-btn" onclick="sendUserReply('IDC')">IDC</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DESKTOP SHORTCUT ICONS -->
+            <div style="position:absolute; top:30px; left:30px; display:flex; flex-direction:column; gap:15px; z-index:50;">
+                <div onclick="openApp('internet-win')" style="cursor:pointer; text-align:center; width:60px;">
+                    <img src="app_icons/internet.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Internet"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Internet</label>
+                </div>
+                <div onclick="openApp('tweeter-win')" style="cursor:pointer; text-align:center; width:60px;">
+                    <img src="app_icons/twitter.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Tweeter"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Tweeter</label>
+                </div>
+                <div onclick="openApp('hangout-win')" style="cursor:pointer; text-align:center; width:60px;">
+                    <img src="app_icons/game.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Hang Out"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Hang Out</label>
+                </div>
+                <div onclick="openApp('map-win')" style="cursor:pointer; text-align:center; width:60px;">
+                    <img src="app_icons/map.png" style="width:32px; height:32px; image-rendering:pixelated;" alt="Map"><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Go Out</label>
+                </div>
+                <div onclick="window.location.href='mailto:2025.adhithyas@isu.ac.in'" style="cursor:pointer; text-align:center; width:60px;">
+                    <span style="font-size:26px;">📧</span><label style="font-size:10px; background:rgba(255,255,255,0.7); display:block;">Mail</label>
+                </div>
+            </div>
+
         </div>
+        <div class="wallpaper-sidebar"></div>
 
         <!-- TASKBAR -->
         <div class="nso-taskbar">
             <div class="taskbar-left" id="taskbar-tabs-container">
                 <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
                 <img src="app_icons/twitter.png" class="taskbar-quick-icon" onclick="openApp('tweeter-win')" alt="Tweeter">
+                <img src="app_icons/webcamicon.png" class="taskbar-quick-icon" onclick="openApp('webcam-win')" alt="Webcam">
                 <img src="app_icons/jine.png" class="taskbar-quick-icon" onclick="openApp('jine-widget')" alt="JINE">
             </div>
             <div class="taskbar-right">
@@ -437,7 +601,10 @@
                 document.getElementById('desktop').classList.remove('hidden');
                 showNotification("SYSTEM LOADED: Welcome to ssynewave.exe 💖");
                 
-                updateTaskbarTabs();
+                openApp('taskman-win');
+                openApp('jine-widget');
+                openApp('webcam-win');
+                initJineChat();
             }, 4500);
         });
 
@@ -462,20 +629,19 @@
             if (clock) clock.innerText = now.toLocaleTimeString();
         }, 1000);
 
-        // DYNAMIC TASKBAR TABS MANAGER (Only Active/Open Windows pop up)
+        // DYNAMIC TASKBAR TABS MANAGER
         function updateTaskbarTabs() {
             const container = document.getElementById('taskbar-tabs-container');
             if (!container) return;
             
-            // Retain START and the fixed Twitter and Jine quick launch icons as requested by reference
             container.innerHTML = `
                 <button class="start-menu-btn" onclick="toggleStartMenu()">START</button>
                 <img src="app_icons/twitter.png" class="taskbar-quick-icon" onclick="openApp('tweeter-win')" alt="Tweeter">
+                <img src="app_icons/webcamicon.png" class="taskbar-quick-icon" onclick="openApp('webcam-win')" alt="Webcam">
                 <img src="app_icons/jine.png" class="taskbar-quick-icon" onclick="openApp('jine-widget')" alt="JINE">
                 <span style="margin:0 2px; color:var(--border-col);">|</span>
             `;
 
-            // Append open active tabs
             document.querySelectorAll('.nso-window').forEach(win => {
                 if (!win.classList.contains('hidden')) {
                     const winId = win.id;
@@ -513,6 +679,31 @@
             }
         }
 
+        function minimizeApp(windowId) {
+            playCloseSound();
+            const win = document.getElementById(windowId);
+            if (win) {
+                win.classList.add('hidden');
+                updateTaskbarTabs();
+            }
+        }
+
+        function maximizeApp(windowId) {
+            playOpenSound();
+            const win = document.getElementById(windowId);
+            if (win) {
+                if (win.style.width === '100%') {
+                    win.style.width = windowId === 'jine-widget' ? '440px' : '450px';
+                    win.style.height = windowId === 'jine-widget' ? '440px' : '350px';
+                } else {
+                    win.style.width = '100%';
+                    win.style.height = 'calc(100% - 36px)';
+                    win.style.top = '0';
+                    win.style.left = '0';
+                }
+            }
+        }
+
         // WINDOW DRAGGING SYSTEM
         document.querySelectorAll('.draggable-window').forEach(windowEl => {
             const titleBar = windowEl.querySelector('.title-bar');
@@ -520,6 +711,7 @@
             let isDragging = false, startX, startY;
 
             titleBar.addEventListener('mousedown', (e) => {
+                if (e.target.tagName === 'BUTTON') return;
                 isDragging = true;
                 startX = e.clientX - windowEl.offsetLeft;
                 startY = e.clientY - windowEl.offsetTop;
@@ -528,8 +720,10 @@
 
             document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
-                windowEl.style.left = (e.clientX - startX) + 'px';
-                windowEl.style.top = (e.clientY - startY) + 'px';
+                let newX = e.clientX - startX;
+                let newY = e.clientY - startY;
+                windowEl.style.left = newX + 'px';
+                windowEl.style.top = newY + 'px';
             });
 
             document.addEventListener('mouseup', () => { isDragging = false; });
@@ -563,8 +757,8 @@
             showNotification(soundEnabled ? "Sound enabled." : "Sound muted.");
         }
 
-        // STATS & MOOD MANAGEMENT
-        let followers = 1001, stress = 15, affection = 40, darkness = 15, mood = 72, visits = 142, likes = 389;
+        // STATS, MOOD & DYNAMIC WEBCAM ASSETS MANAGEMENT
+        let followers = 1015, stress = 8, affection = 47, darkness = 15, mood = 72, visits = 142, likes = 389;
 
         function updateStats(fDelta, sDelta, aDelta) {
             followers += fDelta;
@@ -582,12 +776,94 @@
             document.getElementById('webcam-mood').innerText = 'MOOD: ' + mood + '%';
             document.getElementById('visit-count').innerText = visits;
             document.getElementById('like-count').innerText = likes;
+
+            updateWebcamExpression();
+        }
+
+        function updateWebcamExpression() {
+            const imgEl = document.getElementById('webcam-avatar');
+            if (!imgEl) return;
+
+            let targetImg = 'assets/calm_img.png';
+            if (mood >= 85) targetImg = 'assets/happy_img.png';
+            else if (mood >= 65) targetImg = 'assets/calm_img.png';
+            else if (mood >= 45) targetImg = 'assets/unhappy_img.png';
+            else if (mood >= 25) targetImg = 'assets/sad_img.png';
+            else if (mood >= 10) targetImg = 'assets/sad2_img.png';
+            else targetImg = 'assets/dizzy_img.png';
+
+            if (imgEl.getAttribute('src') !== targetImg) {
+                imgEl.classList.add('fade-out');
+                setTimeout(() => {
+                    imgEl.setAttribute('src', targetImg);
+                    imgEl.classList.remove('fade-out');
+                }, 300);
+            }
         }
 
         function pokeAvatar() {
             playCloseSound();
-            updateStats(1, 10, -5);
-            showNotification("⚠️ Avatar poked! Stress increased.");
+            updateStats(1, 15, -12);
+            showNotification("⚠️ Avatar poked! Mood shifted.");
+        }
+
+        // JINE CHAT AUTOMATED "ABOUT ME" STORYLINE
+        const adhithyaBioMessages = [
+            "Hey there! I'm Adhithya Suresh.",
+            "I'm currently an undergraduate student pursuing my BBA in Business Analytics under the BBA iConnect curriculum at ITM Skills University.",
+            "My academic standing is solid with a 9.95 CGPA, and I love working with Python, MySQL, and data workflows.",
+            "Beyond academics, I'm heavily involved in leadership as the General Secretary & Creative Director of The Phantom Opera Club and Creative Director of BICAL.",
+            "I also interned at Manapravah Foundation in 2026, leading donation drives and mental health awareness initiatives.",
+            "Feel free to explore my projects on GitHub or drop a message via Mail. Let's build amazing things!"
+        ];
+
+        let bioMsgIndex = 0;
+        let jineInterval = null;
+
+        function initJineChat() {
+            const thread = document.getElementById('jine-thread');
+            if (!thread) return;
+            thread.innerHTML = "";
+
+            appendIncomingMessage(adhithyaBioMessages[bioMsgIndex++]);
+
+            jineInterval = setInterval(() => {
+                if (bioMsgIndex < adhithyaBioMessages.length) {
+                    appendIncomingMessage(adhithyaBioMessages[bioMsgIndex++]);
+                } else {
+                    clearInterval(jineInterval);
+                }
+            }, 4500);
+        }
+
+        function appendIncomingMessage(text) {
+            playOpenSound();
+            const thread = document.getElementById('jine-thread');
+            if (!thread) return;
+
+            const row = document.createElement('div');
+            row.className = 'jine-msg-row';
+            row.innerHTML = `
+                <img src="icons/icon_ame.png" class="jine-avatar-icon" alt="Avatar">
+                <div class="jine-speech-bubble">${escapeHtml(text)}</div>
+            `;
+            thread.appendChild(row);
+            thread.scrollTop = thread.scrollHeight;
+        }
+
+        function sendUserReply(stickerName) {
+            playOpenSound();
+            const thread = document.getElementById('jine-thread');
+            if (!thread) return;
+
+            const row = document.createElement('div');
+            row.className = 'jine-msg-row user-msg';
+            row.innerHTML = `
+                <div class="jine-user-bubble">[ ${escapeHtml(stickerName)} ]</div>
+            `;
+            thread.appendChild(row);
+            thread.scrollTop = thread.scrollHeight;
+            showNotification(`Sent reply: ${stickerName}`);
         }
 
         // TWEETER PERSISTENT STORAGE & BLOGGING ENGINE
@@ -733,6 +1009,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             renderPosts();
+            updateWebcamExpression();
         });
     </script>
 </body>
