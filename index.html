@@ -100,6 +100,53 @@
         }
         .jine-bubble { background: rgba(255,255,255,0.7); border: 1px dashed var(--accent-col); padding: 8px; font-size: 11px; margin-bottom: 8px; min-height: 45px; }
 
+        /* EXACT INTERNET WINDOW UI MATCHING REFERENCE IMAGE */
+        .internet-container {
+            background: #ffb6c1; /* Soft NSO pink browser window background */
+            border: 2px solid #ff69b4;
+            padding: 15px;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .internet-header {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 26px;
+            font-weight: bold;
+            color: #d12a7d;
+            text-shadow: 1px 1px 0px #fff;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .internet-link-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 320px;
+            margin: 12px 0;
+            text-decoration: none;
+            color: #4a154b;
+            font-weight: bold;
+            font-size: 14px;
+            border-bottom: 2px dotted #ff69b4;
+            padding-bottom: 6px;
+            transition: transform 0.1s ease;
+        }
+        .internet-link-row:hover {
+            transform: scale(1.03);
+            color: #d12a7d;
+        }
+        .internet-icon-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* TWEETER APP STYLING */
         .tweet-card { background: rgba(139,115,206,0.08); border: 1px solid var(--border-col); padding: 10px; margin-bottom: 10px; }
         .tweet-input { width: 100%; box-sizing: border-box; padding: 6px; font-family: 'Courier New'; margin-bottom: 6px; background: var(--win-bg); color: var(--text-col); border: 1px solid var(--border-col); }
@@ -193,22 +240,46 @@
             </div>
         </div>
 
-        <!-- 3. INTERNET APP (Socials: Instagram, LinkedIn, Github) -->
-        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 350px;">
+        <!-- 3. INTERNET APP (Exact UI Match to Reference Image) -->
+        <div class="nso-window draggable-window hidden app-window" id="internet-win" style="top: 100px; left: 100px; width: 440px; height: 380px;">
             <div class="title-bar">
-                <div class="title-bar-text">Internet!</div>
+                <div class="title-bar-text">Internet</div>
                 <div class="window-controls"><button class="close-btn" data-target="internet-win">×</button></div>
             </div>
-            <div class="window-body">
-                <h2 style="color:var(--accent-col); text-align:center; margin-top:0;">✨ Internet! ✨</h2>
-                <p style="text-align:center; font-size:11px;">Select a network destination below:</p>
-                <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="nso-link-card">💼 LinkedIn Profile (Professional Network)</a>
-                <a href="https://github.com/ArThirtyFour" target="_blank" class="nso-link-card">💻 GitHub Repositories & Codebase</a>
-                <a href="https://instagram.com" target="_blank" class="nso-link-card">📸 Instagram Creative Feed</a>
+            <div class="window-body" style="padding: 0;">
+                <div class="internet-container">
+                    <div class="internet-header">
+                        <span>✨</span> Internet! <span>✨</span>
+                    </div>
+                    
+                    <a href="https://instagram.com" target="_blank" class="internet-link-row">
+                        <div class="internet-icon-label">
+                            <span style="font-size: 20px;">📸</span>
+                            <span>Instagram</span>
+                        </div>
+                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/adhithyaa-suresh/" target="_blank" class="internet-link-row">
+                        <div class="internet-icon-label">
+                            <span style="font-size: 20px;">💼</span>
+                            <span>Linkedin</span>
+                        </div>
+                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                    </a>
+
+                    <a href="https://github.com/ArThirtyFour" target="_blank" class="internet-link-row">
+                        <div class="internet-icon-label">
+                            <span style="font-size: 20px;">💻</span>
+                            <span>Github</span>
+                        </div>
+                        <span style="font-size: 11px; color: #b03060;">[ Visit Link ]</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- 4. TWEETER APP (Public Anonymous Blog & Photo Upload) -->
+        <!-- 4. TWEETER APP -->
         <div class="nso-window draggable-window hidden app-window" id="tweeter-win" style="top: 80px; left: 150px; width: 460px; height: 390px;">
             <div class="title-bar">
                 <div class="title-bar-text">Tweeter</div>
@@ -230,7 +301,7 @@
             </div>
         </div>
 
-        <!-- 5. HANG OUT APP (Guild, Achievements, Certifications) -->
+        <!-- 5. HANG OUT APP -->
         <div class="nso-window draggable-window hidden app-window" id="hangout-win" style="top: 100px; left: 200px; width: 450px; height: 350px;">
             <div class="title-bar">
                 <div class="title-bar-text">Hang Out</div>
@@ -246,7 +317,7 @@
             </div>
         </div>
 
-        <!-- SUB APPS ACCESSED FROM HANG OUT -->
+        <!-- SUB APPS -->
         <div class="nso-window draggable-window hidden app-window" id="guild-win" style="top: 130px; left: 240px; width: 400px; height: 300px;">
             <div class="title-bar"><div class="title-bar-text">Guild // Education</div><div class="window-controls"><button class="close-btn" data-target="guild-win">×</button></div></div>
             <div class="window-body scrollable">
@@ -287,7 +358,7 @@
             </div>
         </div>
 
-        <!-- 6. MAP / GITHUB PROJECTS APP -->
+        <!-- 6. MAP APP -->
         <div class="nso-window draggable-window hidden app-window" id="map-win" style="top: 60px; left: 120px; width: 520px; height: 400px;">
             <div class="title-bar">
                 <div class="title-bar-text">Go Out // GitHub Project Map</div>
@@ -300,7 +371,7 @@
             </div>
         </div>
 
-        <!-- 7. JINE / CHAT WIDGET (Visual Novel Style Intro) -->
+        <!-- 7. JINE CHAT WIDGET -->
         <div id="jine-widget" class="draggable-window">
             <div class="title-bar">
                 <div class="title-bar-text">JINE</div>
